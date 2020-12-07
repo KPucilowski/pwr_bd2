@@ -1,5 +1,5 @@
 --------------------------------------------------------
---  File created - вторник-декабря-01-2020   
+--  File created - пїЅпїЅпїЅпїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅпїЅ-01-2020   
 --------------------------------------------------------
 --------------------------------------------------------
 --  DDL for View GROUP_VIEW
@@ -19,7 +19,7 @@
 FROM
 	"GROUP" INNER JOIN
 	PROFESSOR ON "GROUP".PROFESSOR_ID = PROFESSOR.PROFESSOR_ID INNER JOIN
-	PERSONAL_DATA ON PROFESSOR.PROFESSOR_ID = PERSONAL_DATA.USER_ID
+	PERSONAL_DATA ON PROFESSOR.PROFESSOR_ID = PERSONAL_DATA.USER_ID;
 --------------------------------------------------------
 --  DDL for View PROFESSOR_VIEW
 --------------------------------------------------------
@@ -34,7 +34,7 @@ FROM
 FROM
 	PROFESSOR INNER JOIN
 	PERSONAL_DATA ON PROFESSOR.PROFESSOR_ID = PERSONAL_DATA.USER_ID INNER JOIN
-    FACULTY ON faculty.faculity_id = personal_data.faculty_id
+    FACULTY ON faculty.faculity_id = personal_data.faculty_id;
 --------------------------------------------------------
 --  DDL for View STUDENT_VIEW
 --------------------------------------------------------
@@ -56,4 +56,4 @@ FROM
 	"RECORD" ON STUDENT.STUDENT_ID = "RECORD".STUDENT_ID INNER JOIN
 	PERSONAL_DATA ON STUDENT.STUDENT_ID = PERSONAL_DATA.USER_ID INNER JOIN
 	SPECIALIZATION ON STUDENT.SPECIALIZATION_ID = SPECIALIZATION.SPECIALIZATION_ID INNER JOIN
-	FACULTY ON PERSONAL_DATA.FACULTY_ID = FACULTY.FACULITY_ID AND SPECIALIZATION.FACULTY_ID = FACULTY.FACULITY_ID
+	FACULTY ON PERSONAL_DATA.FACULTY_ID = FACULTY.FACULITY_ID AND SPECIALIZATION.FACULTY_ID = FACULTY.FACULITY_ID;
