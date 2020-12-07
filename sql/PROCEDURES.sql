@@ -1,10 +1,9 @@
 --------------------------------------------------------
---  File created - вторник-декабря-01-2020   
+--  File created - ГўГІГ®Г°Г­ГЁГЄ-Г¤ГҐГЄГ ГЎГ°Гї-01-2020   
 --------------------------------------------------------
 --------------------------------------------------------
 --  DDL for Procedure ADD_GRADE
 --------------------------------------------------------
-set define off;
 
   CREATE OR REPLACE NONEDITIONABLE PROCEDURE "ADD_GRADE" (
     student_id NUMBER,
@@ -33,7 +32,6 @@ END;
 --------------------------------------------------------
 --  DDL for Procedure ADD_STUDENT_TO_GROUP
 --------------------------------------------------------
-set define off;
 
   CREATE OR REPLACE NONEDITIONABLE PROCEDURE "ADD_STUDENT_TO_GROUP" (
     student_id_in NUMBER,
@@ -59,7 +57,6 @@ END;
 --------------------------------------------------------
 --  DDL for Procedure CLOSE_GROUP
 --------------------------------------------------------
-set define off;
 
   CREATE OR REPLACE NONEDITIONABLE PROCEDURE "CLOSE_GROUP" (group_in NUMBER)
 IS
@@ -75,7 +72,6 @@ END;
 --------------------------------------------------------
 --  DDL for Procedure REMOVE_GRADE
 --------------------------------------------------------
-set define off;
 
   CREATE OR REPLACE NONEDITIONABLE PROCEDURE "REMOVE_GRADE" (
     student_id NUMBER,
@@ -104,7 +100,6 @@ END;
 --------------------------------------------------------
 --  DDL for Procedure REMOVE_STUDENT_FROM_GROUP
 --------------------------------------------------------
-set define off;
 
   CREATE OR REPLACE NONEDITIONABLE PROCEDURE "REMOVE_STUDENT_FROM_GROUP" 
 (
