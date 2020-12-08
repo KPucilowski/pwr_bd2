@@ -9,7 +9,7 @@ public class App {
     static {
         try {
             cn = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@localhost:1521:XE", "login_only", "pass");
+                    "jdbc:oracle:thin:@146.59.17.101:1521:XE", "login_only", "pass");
         } catch (SQLException e) {
             e.printStackTrace();
         }
