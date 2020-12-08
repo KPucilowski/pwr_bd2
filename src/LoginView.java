@@ -18,7 +18,7 @@ public class LoginView implements ActionListener {
 
     private String userType;
     private final JFrame frame;
-    
+
     LoginView() {
         frame = new JFrame("Login");
         frame.setContentPane(contentPane);
@@ -46,13 +46,17 @@ public class LoginView implements ActionListener {
                 stmt.setString(3, pass);
                 stmt.execute();
                 this.userType = stmt.getString(1);
-                } catch (SQLException throwable) {
+            } catch (SQLException throwable) {
                 JOptionPane.showMessageDialog(null, throwable.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 throwable.printStackTrace();
             }
 
             App.reconnect(userType, "pass");
-            frame.dispose();
+            if(userType == "STUDENT")
+            {
+                Student student = new Student();
+                frame.dispose();
+            }
         }
     }
 }
