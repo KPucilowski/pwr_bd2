@@ -8,7 +8,7 @@ import java.sql.*;
 public class Student extends Component {
 
     private JPanel StudentPanel;
-    private static JFrame StudentFrame;
+    private JFrame StudentFrame;
     private JTextField STUDENT_IDTextField;
     private JTable table1;
 

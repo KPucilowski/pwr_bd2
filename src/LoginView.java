@@ -52,11 +52,8 @@ public class LoginView implements ActionListener {
             }
 
             App.reconnect(userType, "pass");
-            if(userType == "STUDENT")
-            {
-                Student student = new Student();
-                frame.dispose();
-            }
+            if(userType.equals("STUDENT"))
+                new Student();
         }
     }
 }
