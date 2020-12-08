@@ -17,9 +17,10 @@ public class LoginView implements ActionListener {
     private JLabel loginLabel;
 
     private String userType;
-
+    private final JFrame frame;
+    
     LoginView() {
-        JFrame frame = new JFrame("Login");
+        frame = new JFrame("Login");
         frame.setContentPane(contentPane);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -51,6 +52,7 @@ public class LoginView implements ActionListener {
             }
 
             App.reconnect(userType, "pass");
+            frame.dispose();
         }
     }
 }
