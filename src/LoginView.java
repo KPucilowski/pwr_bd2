@@ -37,7 +37,7 @@ public class LoginView implements ActionListener {
             var login = loginField.getText();
             var pass = new String(passwordField.getPassword()); // not safe, don du zis
             try {
-                stmt = App.cn.prepareCall("{? = call BDT.CHECK_LOGIN(?, ?)}");
+                stmt = App.cn.prepareCall("{? = call BD.CHECK_LOGIN(?, ?)}");
                 stmt.registerOutParameter(1, Types.VARCHAR);
                 stmt.setString(2, login);
                 stmt.setString(3, pass);
