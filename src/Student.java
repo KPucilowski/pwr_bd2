@@ -10,8 +10,7 @@ public class Student extends Component {
     private JPanel StudentPanel;
     private JFrame StudentFrame;
     private JTextField STUDENT_IDTextField;
-    private JTable table1;
-
+    private JTable table;
     private JButton zapisyButton;
     private JButton gradesButton;
     private JButton timetableButton;
@@ -20,6 +19,7 @@ public class Student extends Component {
     private JPanel zapiszPanel;
     private JButton wypiszButton;
     private JButton zapiszButton;
+    private JScrollPane scrollPane;
 
 
     public Student()
@@ -35,14 +35,22 @@ public class Student extends Component {
     }
 
     void init() {
+
         zapiszPanel.remove(zapiszButton);
         zapiszPanel.remove(wypiszButton);
         STUDENT_IDTextField.setText("fsd");
-
+        JTable table = new JTable();
         showPersonalDataButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Data();
+            }
+        });
+
+        gradesButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Grades();
             }
         });
 
@@ -60,8 +68,7 @@ public class Student extends Component {
         logOutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                LoginView loginView = new LoginView();
+                new LoginView();
                 StudentFrame.dispose();
 
             }
@@ -70,22 +77,53 @@ public class Student extends Component {
 
     void Zapisy()
     {
+
     }
 
     void Data()
     {
         try {
             Statement st = App.cn.createStatement();
-            ResultSet rs = st.executeQuery("select * from STUDENT ");
+            ResultSet rs = st.executeQuery("select STUDENT_ID from BD.STUDENT order by STUDENT_ID");
             while (rs.next()) {
                 String data = rs.getString("STUDENT_ID");
-                //System.out.println("Fetching data by column index for row " + rs.getRow() + " : " + data);
-                JOptionPane.showMessageDialog(null, data, "Error", JOptionPane.INFORMATION_MESSAGE);
+                System.out.println("Fetching data by column index for row " + rs.getRow() + " : " + data);
+                //JOptionPane.showMessageDialog(null, data, "Error", JOptionPane.INFORMATION_MESSAGE);
+                STUDENT_IDTextField.setText(data);
             }
-
         }catch(SQLException e){
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
+
+    void  Grades(){
+        DefaultTableModel model = new DefaultTableModel();
+
+        table.setAutoCreateRowSorter(true);
+        table.setFillsViewportHeight(true);
+        table.setPreferredScrollableViewportSize(new Dimension(400, 200));
+        model.setColumnIdentifiers(
+                new String[]{"Group ID", "Student ID", "RECORD DATE", "GRADE", "GRADE DATE"});
+        scrollPane.setBorder(BorderFactory.createTitledBorder("Students"));
+        table.setModel(model);
+
+
+        try {
+        Statement st = App.cn.createStatement();
+        ResultSet rs = st.executeQuery("select * from BD.RECORD ");
+        while (rs.next()) {
+
+            String group_id = Integer.toString(rs.getInt("STUDENT_ID"));
+            String student_id = rs.getString("STUDENT_ID");
+            String record_date = rs.getString("RECORD_DATE");
+            String grade = rs.getString("GRADE");
+            String grade_date = rs.getString("GRADE_DATE");
+            model.addRow(new String[]{group_id, student_id, record_date, grade, grade_date});
+        }
+
+    }catch(SQLException e){
+        JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    }
 }

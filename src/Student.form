@@ -73,14 +73,6 @@
           <text value="Log out"/>
         </properties>
       </component>
-      <component id="99e5a" class="javax.swing.JTable" binding="table1" default-binding="true">
-        <constraints>
-          <grid row="2" column="0" row-span="1" col-span="5" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="50"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
       <grid id="6b1a4" binding="zapiszPanel" layout-manager="GridBagLayout">
         <constraints>
           <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -120,6 +112,19 @@
           </component>
         </children>
       </grid>
+      <scrollpane id="e634f" binding="scrollPane">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="5" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="99e5a" class="javax.swing.JTable" binding="table">
+            <constraints/>
+            <properties/>
+          </component>
+        </children>
+      </scrollpane>
     </children>
   </grid>
 </form>
