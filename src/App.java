@@ -15,6 +15,15 @@ public class App {
         }
     }
 
+    public static void reconnect(String user, String pass) {
+        try {
+            cn = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@146.59.17.101:1521:XE", user, pass);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
 
         /* Set OS default look and feel */

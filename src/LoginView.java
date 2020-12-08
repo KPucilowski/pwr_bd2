@@ -16,6 +16,8 @@ public class LoginView implements ActionListener {
     private JLabel passwordLabel;
     private JLabel loginLabel;
 
+    private String userType;
+
     LoginView() {
         JFrame frame = new JFrame("Login");
         frame.setContentPane(contentPane);
@@ -42,11 +44,13 @@ public class LoginView implements ActionListener {
                 stmt.setString(2, login);
                 stmt.setString(3, pass);
                 stmt.execute();
-                JOptionPane.showMessageDialog(null, stmt.getString(1), "Error", JOptionPane.INFORMATION_MESSAGE);
-            } catch (SQLException throwable) {
+                this.userType = stmt.getString(1);
+                } catch (SQLException throwable) {
                 JOptionPane.showMessageDialog(null, throwable.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 throwable.printStackTrace();
             }
+
+            App.reconnect(userType, "pass");
         }
     }
 }
