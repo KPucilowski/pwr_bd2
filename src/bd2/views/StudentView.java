@@ -1,3 +1,7 @@
+package bd2.views;
+
+import bd2.App;
+
 import javax.swing.*;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -5,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
-public class Student extends Component {
+public class StudentView extends Component {
 
     private JPanel StudentPanel;
     private JFrame StudentFrame;
@@ -22,7 +26,7 @@ public class Student extends Component {
     private JScrollPane scrollPane;
 
 
-    public Student()
+    public StudentView()
     {
         StudentFrame = new JFrame("StudentMain");
         StudentFrame.setContentPane(StudentPanel);

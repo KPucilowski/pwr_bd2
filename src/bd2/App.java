@@ -1,7 +1,14 @@
+package bd2;
+import bd2.controllers.LoginController;
+import bd2.models.UserModel;
+import bd2.views.LoginView;
+import oracle.jdbc.logging.annotations.Log;
+
 import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
 
 public class App {
     public static Connection cn;
@@ -35,6 +42,7 @@ public class App {
         }
 
         /* Start app */
-        new LoginView();
+        LoginController controller = new LoginController(new LoginView(), new UserModel(null));
+        controller.init();
     }
 }
