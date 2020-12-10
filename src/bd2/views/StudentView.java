@@ -12,7 +12,7 @@ import java.sql.*;
 public class StudentView extends Component {
 
     private JPanel StudentPanel;
-    private JFrame StudentFrame;
+    private final JFrame StudentFrame;
     private JTextField STUDENT_IDTextField;
     private JTable table;
     private JButton zapisyButton;
@@ -36,6 +36,10 @@ public class StudentView extends Component {
         StudentFrame.setSize(new Dimension(1366, 750));
 
         init();
+    }
+
+    public JTextField getSTUDENT_IDTextField() {
+        return STUDENT_IDTextField;
     }
 
     void init() {

@@ -1,8 +1,10 @@
 package bd2;
+
 import bd2.controllers.LoginController;
+import bd2.controllers.StudentController;
 import bd2.models.UserModel;
 import bd2.views.LoginView;
-import oracle.jdbc.logging.annotations.Log;
+import bd2.views.StudentView;
 
 import javax.swing.*;
 import java.sql.Connection;
@@ -22,12 +24,16 @@ public class App {
         }
     }
 
-    public static void reconnect(String user, String pass) {
+    public static void reconnect(UserModel model, String pass) {
         try {
             cn = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@146.59.17.101:1521:XE", user, pass);
+                    "jdbc:oracle:thin:@146.59.17.101:1521:XE", model.getType(), pass);
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+
+        if(model.getType().equals("STUDENT")) {
+            new StudentController(new StudentView(), model);
         }
     }
 

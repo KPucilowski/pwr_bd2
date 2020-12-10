@@ -1,12 +1,7 @@
 package bd2.views;
 
-import bd2.App;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.*;
 
 public class LoginView {
     private JPanel contentPane;
@@ -19,6 +14,18 @@ public class LoginView {
     private JPanel dataPane;
     private JLabel passwordLabel;
     private JLabel loginLabel;
+    private String userType;
+    private JFrame frame;
+
+    public LoginView() {
+        frame = new JFrame("Login");
+        frame.setContentPane(contentPane);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setSize(new Dimension(350, 250));
+        frame.setVisible(true);
+    }
 
     public JButton getLoginButton() {
         return loginButton;
@@ -32,16 +39,7 @@ public class LoginView {
         return passwordField;
     }
 
-    private String userType;
-    private final JFrame frame;
-
-    public LoginView() {
-        frame = new JFrame("Login");
-        frame.setContentPane(contentPane);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setSize(new Dimension(350, 250));
-        frame.setVisible(true);
+    public void dispose() {
+        frame.dispose();
     }
 }
