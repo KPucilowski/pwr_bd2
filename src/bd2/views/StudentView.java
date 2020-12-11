@@ -11,14 +11,14 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 public class StudentView extends Component {
 
-    private JPanel StudentPanel;
-    private final JFrame StudentFrame;
-    private JTextField STUDENT_IDTextField;
+    private JPanel studentPanel;
+    private final JFrame studentFrame;
+    private JTextField idField;
     private JTable table;
     private JButton zapisyButton;
     private JButton gradesButton;
     private JButton timetableButton;
-    private JButton showPersonalDataButton;
+    private JButton personalDataButton;
     private JButton logOutButton;
     private JPanel zapiszPanel;
     private JButton wypiszButton;
@@ -28,32 +28,29 @@ public class StudentView extends Component {
 
     public StudentView()
     {
-        StudentFrame = new JFrame("StudentMain");
-        StudentFrame.setContentPane(StudentPanel);
-        StudentFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        StudentFrame.pack();
-        StudentFrame.setVisible(true);
-        StudentFrame.setSize(new Dimension(1366, 750));
+        studentFrame = new JFrame("StudentMain");
+        studentFrame.setContentPane(studentPanel);
+        studentFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        studentFrame.pack();
+        studentFrame.setVisible(true);
+        studentFrame.setSize(new Dimension(1366, 750));
 
         init();
     }
 
-    public JTextField getSTUDENT_IDTextField() {
-        return STUDENT_IDTextField;
+    public JTextField getIdField() {
+        return idField;
+    }
+
+    public JButton getPersonalDataButton() {
+        return personalDataButton;
     }
 
     void init() {
 
         zapiszPanel.remove(zapiszButton);
         zapiszPanel.remove(wypiszButton);
-        STUDENT_IDTextField.setText("fsd");
         JTable table = new JTable();
-        showPersonalDataButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Data();
-            }
-        });
 
         gradesButton.addActionListener(new ActionListener() {
             @Override
@@ -77,7 +74,7 @@ public class StudentView extends Component {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new LoginView();
-                StudentFrame.dispose();
+                studentFrame.dispose();
 
             }
         });
@@ -87,23 +84,6 @@ public class StudentView extends Component {
     {
 
     }
-
-    void Data()
-    {
-        try {
-            Statement st = App.cn.createStatement();
-            ResultSet rs = st.executeQuery("select STUDENT_ID from BD.STUDENT order by STUDENT_ID");
-            while (rs.next()) {
-                String data = rs.getString("STUDENT_ID");
-                System.out.println("Fetching data by column index for row " + rs.getRow() + " : " + data);
-                //JOptionPane.showMessageDialog(null, data, "Error", JOptionPane.INFORMATION_MESSAGE);
-                STUDENT_IDTextField.setText(data);
-            }
-        }catch(SQLException e){
-            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
 
     void  Grades(){
         DefaultTableModel model = new DefaultTableModel();

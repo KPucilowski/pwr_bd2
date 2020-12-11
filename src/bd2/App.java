@@ -2,7 +2,7 @@ package bd2;
 
 import bd2.controllers.LoginController;
 import bd2.controllers.StudentController;
-import bd2.models.UserModel;
+import bd2.models.LoginModel;
 import bd2.views.LoginView;
 import bd2.views.StudentView;
 
@@ -24,7 +24,7 @@ public class App {
         }
     }
 
-    public static void reconnect(UserModel model, String pass) {
+    public static void reconnect(LoginModel model, String pass) {
         try {
             cn = DriverManager.getConnection(
                     "jdbc:oracle:thin:@146.59.17.101:1521:XE", model.getType(), pass);
@@ -32,7 +32,7 @@ public class App {
             e.printStackTrace();
         }
 
-        if(model.getType().equals("STUDENT")) {
+        if (model.getType().equals("STUDENT")) {
             new StudentController(new StudentView(), model);
         }
     }
@@ -48,7 +48,7 @@ public class App {
         }
 
         /* Start app */
-        LoginController controller = new LoginController(new LoginView(), new UserModel(null));
+        LoginController controller = new LoginController(new LoginView(), new LoginModel(null));
         controller.init();
     }
 }

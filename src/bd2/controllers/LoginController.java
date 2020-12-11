@@ -1,7 +1,7 @@
 package bd2.controllers;
 
 import bd2.App;
-import bd2.models.UserModel;
+import bd2.models.LoginModel;
 import bd2.views.LoginView;
 
 import javax.swing.*;
@@ -11,9 +11,9 @@ import java.sql.Types;
 
 public class LoginController implements IController {
     private final LoginView view;
-    private final UserModel model;
+    private final LoginModel model;
 
-    public LoginController(LoginView view, UserModel model) {
+    public LoginController(LoginView view, LoginModel model) {
         this.view = view;
         this.model = model;
     }
@@ -27,11 +27,14 @@ public class LoginController implements IController {
         var login = view.getLoginField().getText();
         var pass = new String(view.getPasswordField().getPassword()); // not safe, don du zis
 
-        model.setType(checkLogin(login, pass));
-        model.setId(findId(login, pass));
+        var type = checkLogin(login, pass);
+        if (type != null) {
+            model.setType(type);
+            model.setId(findId(login, pass));
 
-        App.reconnect(model, "pass");
-        view.dispose();
+            App.reconnect(model, "pass");
+            view.dispose();
+        }
     }
 
     private String checkLogin(String login, String pass) {
@@ -41,7 +44,7 @@ public class LoginController implements IController {
             stmt.setString(2, login);
             stmt.setString(3, pass);
             stmt.execute();
-
+            var temp = stmt.getString(1);
             return stmt.getString(1);
         } catch (SQLException throwable) {
             JOptionPane.showMessageDialog(null, throwable.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
