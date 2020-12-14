@@ -44,10 +44,10 @@ public class StudentController implements IController {
         try {
             var rs = model.getGrades();
             while (rs.next()) {
-                String group_id = Integer.toString(rs.getInt("GROUP_ID"));
-                String record_date = rs.getString("RECORD_DATE");
-                String grade = rs.getString("GRADE");
-                String grade_date = rs.getString("GRADE_DATE");
+                var group_id = Integer.toString(rs.getInt("GROUP_ID"));
+                var record_date = rs.getString("RECORD_DATE");
+                var grade = rs.getString("GRADE");
+                var grade_date = rs.getString("GRADE_DATE");
                 view.getTableModel().addRow(new String[]{group_id, record_date, grade, grade_date});
             }
         } catch (SQLException e) {
@@ -61,14 +61,24 @@ public class StudentController implements IController {
             model.fetchPersonalData();
 
         view.getTableModel().setRowCount(0);
-        view.getTableModel().setColumnIdentifiers(new String[]{"First name", "Last name", "Email", "Faculty"});
-
-        var data = model.getPersonalData();
-        var first_name = data.firstName;
-        var last_name = data.lastName;
-        var email = data.email;
-        var faculty = data.facultyName;
-        view.getTableModel().addRow(new String[]{first_name, last_name, email, faculty});
+        view.getTableModel().setColumnIdentifiers(new String[]{"First name", "Last name", "Email", "Faculty", "PESEL", "Year", "Semester", "Specialization"});
+        try {
+            var rs = model.getPersonalData();
+            while (rs.next()) {
+                var first_name = rs.getString("FIRST_NAME");
+                var last_name = rs.getString("LAST_NAME");
+                var email = rs.getString("EMAIL");
+                var faculty = rs.getString("FACULTY_ID");
+                var year = rs.getString("YEAR");
+                var pesel = rs.getString("PESEL");
+                var semester = rs.getString("SEMESTER");
+                var specialization = rs.getString("SPECIALIZATION_ID");
+                view.getTableModel().addRow(new String[]{first_name, last_name, email, faculty, pesel, year, semester, specialization});
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
     }
 
     private void logOut() {
