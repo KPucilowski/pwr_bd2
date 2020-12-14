@@ -10,16 +10,14 @@ public class StudentView extends Component {
     DefaultTableModel tableModel = new DefaultTableModel();
     private JPanel contentPane;
     private JTextField idField;
-    private JTable table;
-    private JButton zapisyButton;
+    private JTable dataTable;
+    private JButton enrollButton;
     private JButton gradesButton;
     private JButton timetableButton;
     private JButton personalDataButton;
     private JButton logOutButton;
-    private JPanel zapiszPanel;
-    private JButton wypiszButton;
-    private JButton zapiszButton;
     private JScrollPane scrollPane;
+    private JLabel loggedAsLabel;
 
     public StudentView() {
         frame = new JFrame("Student menu");
@@ -29,7 +27,7 @@ public class StudentView extends Component {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        table.setModel(tableModel);
+        dataTable.setModel(tableModel);
     }
 
     public JButton getLogOutButton() {
