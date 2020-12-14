@@ -3,7 +3,6 @@ package bd2;
 import bd2.controllers.LoginController;
 import bd2.controllers.StudentController;
 import bd2.models.LoginModel;
-import bd2.views.LoginView;
 import bd2.views.StudentView;
 
 import javax.swing.*;
@@ -48,7 +47,6 @@ public class App {
         }
 
         /* Start app */
-        LoginController controller = new LoginController(new LoginView(), new LoginModel(null));
-        controller.init();
+        new LoginController();
     }
 }

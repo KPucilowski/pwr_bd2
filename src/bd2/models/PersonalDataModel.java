@@ -10,7 +10,7 @@ public class PersonalDataModel {
     public String facultyName;
 
     PersonalDataModel(ResultSet rs) throws SQLException {
-        while(rs.next()) {
+        while (rs.next()) {
             this.firstName = rs.getString(2);
             this.lastName = rs.getString(3);
             this.email = rs.getString(4);

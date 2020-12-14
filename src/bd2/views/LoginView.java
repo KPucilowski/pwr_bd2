@@ -14,8 +14,11 @@ public class LoginView {
     private JPanel dataPane;
     private JLabel passwordLabel;
     private JLabel loginLabel;
+    private JLabel systemLabel;
+    private JLabel descLabel;
+    private JPanel systemNamePane;
     private String userType;
-    private JFrame frame;
+    private final JFrame frame;
 
     public LoginView() {
         frame = new JFrame("Login");
@@ -23,8 +26,8 @@ public class LoginView {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(null);
-        frame.setSize(new Dimension(350, 250));
         frame.setVisible(true);
+        systemLabel.setFont(new Font("Calibri", Font.BOLD, 24));
     }
 
     public JButton getLoginButton() {
