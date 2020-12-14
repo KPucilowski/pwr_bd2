@@ -68,11 +68,11 @@ public class StudentController implements IController {
                 var first_name = rs.getString("FIRST_NAME");
                 var last_name = rs.getString("LAST_NAME");
                 var email = rs.getString("EMAIL");
-                var faculty = rs.getString("FACULTY_ID");
+                var faculty = rs.getString("FACULTY");
                 var year = rs.getString("YEAR");
                 var pesel = rs.getString("PESEL");
                 var semester = rs.getString("SEMESTER");
-                var specialization = rs.getString("SPECIALIZATION_ID");
+                var specialization = rs.getString("SPECIALIZATION");
                 view.getTableModel().addRow(new String[]{first_name, last_name, email, faculty, pesel, year, semester, specialization});
             }
         } catch (SQLException e) {

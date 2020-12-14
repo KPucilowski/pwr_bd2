@@ -21,10 +21,8 @@ public abstract class UserModel extends LoginModel {
 
     public void fetchPersonalData() {
         try {
-            // for some reason PreparedStatement doesn't work
-            String sql_st = String.format("select * from BD.%s join BD.PERSONAL_DATA on user_id = %s_id where user_id = %d", getType(), getType(), getId());
             Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            personalData = st.executeQuery(sql_st);
+            personalData = st.executeQuery("SELECT * FROM BD." + getType() + "_VIEW WHERE STUDENT_ID = " + getId());
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
