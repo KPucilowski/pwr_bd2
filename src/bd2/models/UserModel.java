@@ -15,6 +15,14 @@ public abstract class UserModel extends LoginModel {
     }
 
     public ResultSet getPersonalData() {
+        if (personalData != null) {
+            try {
+                personalData.beforeFirst();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
         return personalData;
     }
 
