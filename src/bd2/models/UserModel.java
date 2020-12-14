@@ -3,7 +3,6 @@ package bd2.models;
 import bd2.App;
 
 import javax.swing.*;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;

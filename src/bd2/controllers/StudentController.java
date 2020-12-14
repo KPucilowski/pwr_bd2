@@ -30,8 +30,14 @@ public class StudentController implements IController {
         showPersonalData();
         view.getIdField().setText(String.valueOf(model.getId()));
         view.getPersonalDataButton().addActionListener(e -> showPersonalData());
-        view.getLogOutButton().addActionListener(e -> logOut());
+        view.getLogOutButton().addActionListener(e -> dispose());
         view.getGradesButton().addActionListener(e -> showGrades());
+    }
+
+    @Override
+    public void dispose() {
+        view.dispose();
+        new LoginController();
     }
 
     private void showGrades() {
@@ -61,7 +67,7 @@ public class StudentController implements IController {
             model.fetchPersonalData();
 
         view.getTableModel().setRowCount(0);
-        view.getTableModel().setColumnIdentifiers(new String[]{"First name", "Last name", "Email", "Faculty", "PESEL", "Year", "Semester", "Specialization"});
+        view.getTableModel().setColumnIdentifiers(new String[]{"First name", "Last name", "Email", "Faculty", "PESEL", "Year", "Semester", "Specialization", "Average grade"});
         try {
             var rs = model.getPersonalData();
             while (rs.next()) {
@@ -73,16 +79,12 @@ public class StudentController implements IController {
                 var pesel = rs.getString("PESEL");
                 var semester = rs.getString("SEMESTER");
                 var specialization = rs.getString("SPECIALIZATION");
-                view.getTableModel().addRow(new String[]{first_name, last_name, email, faculty, pesel, year, semester, specialization});
+                var avg_grade = String.valueOf(rs.getDouble("AVG_GRADE"));
+                view.getTableModel().addRow(new String[]{first_name, last_name, email, faculty, pesel, year, semester, specialization, avg_grade});
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
-    }
-
-    private void logOut() {
-        view.dispose();
-        new LoginController();
     }
 }

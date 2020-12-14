@@ -32,6 +32,11 @@ public class LoginController implements IController {
         view.getLoginButton().addActionListener(e -> logIn());
     }
 
+    @Override
+    public void dispose() {
+        view.dispose();
+    }
+
     private void logIn() {
         var login = view.getLoginField().getText();
         var pass = new String(view.getPasswordField().getPassword()); // not safe, don du zis
@@ -42,7 +47,7 @@ public class LoginController implements IController {
             model.setId(findId(login, pass));
 
             App.reconnect(model, "pass");
-            view.dispose();
+            dispose();
         }
     }
 
