@@ -61,7 +61,7 @@ public class LoginController implements IController {
             var temp = stmt.getString(1);
             return stmt.getString(1);
         } catch (SQLException throwable) {
-            JOptionPane.showMessageDialog(null, throwable.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Wrong login/password or user does not exist.", "Error", JOptionPane.ERROR_MESSAGE);
             throwable.printStackTrace();
         }
 
