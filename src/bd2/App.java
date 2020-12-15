@@ -13,7 +13,7 @@ import java.sql.SQLException;
 
 public class App {
     public static Connection cn;
-    
+
     public static void reconnect() {
         try {
             cn = DriverManager.getConnection(

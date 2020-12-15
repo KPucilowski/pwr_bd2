@@ -86,3 +86,26 @@ from
     "GROUP" grp on grp."GROUP_ID" = rec."GROUP_ID" join
     subject sbj on grp.subject_id = sbj.subject_id join
     personal_data pd on grp.professor_id = pd.user_id;
+--------------------------------------------------------
+--  DDL for View RECORD_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE NONEDITIONABLE VIEW "RECORD_VIEW" ("STUDENT_ID", "PROFESSOR", "SUBJECT_NAME", "PARITY", "TIME", "FORM", "DAY", "STUDENT_LIMIT", "GRADE") AS
+SELECT
+    "RECORD".STUDENT_ID,
+    PROFESSOR.DEGREE || ' ' ||
+    PERSONAL_DATA.FIRST_NAME || ' ' ||
+    PERSONAL_DATA.LAST_NAME as PROFESSOR,
+    SUBJECT.SUBJECT_NAME,
+    "GROUP".PARITY,
+    "GROUP".TIME,
+    "GROUP".FORM,
+    "GROUP".DAY,
+    "GROUP".STUDENT_LIMIT,
+    "RECORD".GRADE
+FROM
+    "GROUP" INNER JOIN
+    "RECORD" ON "RECORD"."GROUP_ID" = "GROUP"."GROUP_ID" INNER JOIN
+    SUBJECT ON SUBJECT.SUBJECT_ID = "GROUP".SUBJECT_ID INNER JOIN
+    PROFESSOR ON "GROUP".PROFESSOR_ID = PROFESSOR.PROFESSOR_ID INNER JOIN
+    PERSONAL_DATA ON PROFESSOR.PROFESSOR_ID = PERSONAL_DATA.USER_ID;

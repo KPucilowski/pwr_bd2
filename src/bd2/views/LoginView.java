@@ -21,7 +21,7 @@ public class LoginView {
     private final JFrame frame;
 
     public LoginView() {
-        frame = new JFrame("Login");
+        frame = new JFrame("SBO");
         frame.setContentPane(contentPane);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

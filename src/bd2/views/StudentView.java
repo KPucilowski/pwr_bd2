@@ -53,4 +53,8 @@ public class StudentView extends Component {
     public JButton getGradesButton() {
         return gradesButton;
     }
+
+    public JButton getEnrollButton() {
+        return enrollButton;
+    }
 }

@@ -33,6 +33,33 @@ public class StudentController implements IController {
         view.getPersonalDataButton().addActionListener(e -> showPersonalData());
         view.getLogOutButton().addActionListener(e -> dispose());
         view.getGradesButton().addActionListener(e -> showGrades());
+        view.getEnrollButton().addActionListener(e -> showRecords());
+    }
+
+    private void showRecords() {
+        if (model.getRecords() == null)
+            model.fetchRecords();
+
+        view.getTableModel().setRowCount(0);
+        view.getTableModel().setColumnIdentifiers(new String[]{"Professor", "Subject", "Parity", "Time", "Day", "Form", "Student limit", "Grade"});
+
+        try {
+            var rs = model.getRecords();
+            while (rs.next()) {
+                var professor = rs.getString("PROFESSOR");
+                var subject_name = rs.getString("SUBJECT_NAME");
+                var parity = rs.getString("PARITY");
+                var time = rs.getTime("TIME").toString();
+                var day = String.valueOf(rs.getInt("DAY"));
+                var form = rs.getString("FORM");
+                var student_limit = String.valueOf(rs.getInt("STUDENT_LIMIT"));
+                var grade = rs.getString("GRADE");
+                view.getTableModel().addRow(new String[]{professor, subject_name, parity, time, day, form, student_limit, grade});
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -47,7 +74,7 @@ public class StudentController implements IController {
             model.fetchGrades();
 
         view.getTableModel().setRowCount(0);
-        view.getTableModel().setColumnIdentifiers(new String[]{"Subject", "Form", "Grade", "Professor"});
+        view.getTableModel().setColumnIdentifiers(new String[]{"Year", "Semester", "Subject", "Form", "Grade", "Professor"});
 
         try {
             var rs = model.getGrades();
@@ -56,12 +83,29 @@ public class StudentController implements IController {
                 var form = rs.getString("FORM");
                 var grade = rs.getString("GRADE");
                 var professor = rs.getString("PROFESSOR");
-                view.getTableModel().addRow(new String[]{subject_name, form, grade, professor});
+                var total_months = rs.getInt("TOTAL_MONTHS");
+                var year = String.valueOf(calcYear(total_months));
+                var semester = String.valueOf(calcSemester(total_months));
+                view.getTableModel().addRow(new String[]{year, semester, subject_name, form, grade, professor});
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
+    }
+
+    private int calcYear(int months) {
+        float year = months / 12f;
+        if (year == 0)
+            return 1;
+        return (int) Math.ceil(year);
+    }
+
+    private int calcSemester(int months) {
+        float sem = months / 6f;
+        if (sem == 0)
+            return 1;
+        return (int) Math.ceil(sem);
     }
 
     private void showPersonalData() {
