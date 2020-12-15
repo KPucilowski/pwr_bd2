@@ -74,13 +74,15 @@ GROUP BY
 --  DDL for View STUDENT_GRADES_VIEW
 --------------------------------------------------------
 
-CREATE OR REPLACE NONEDITIONABLE VIEW "STUDENT_GRADES_VIEW" ("STUDENT_ID", "SUBJECT_NAME", "FORM", "GRADE") AS
+CREATE OR REPLACE NONEDITIONABLE VIEW "STUDENT_GRADES_VIEW" ("STUDENT_ID", "SUBJECT_NAME", "FORM", "GRADE", "PROFESSOR") AS
 select
     rec.student_id,
     sbj.subject_name,
     grp."FORM",
-    rec.grade
+    rec.grade,
+    pd.first_name || ' ' || pd.last_name as PROFESSOR
 from
     "RECORD" rec join
     "GROUP" grp on grp."GROUP_ID" = rec."GROUP_ID" join
-    subject sbj on grp.subject_id = sbj.subject_id;
+    subject sbj on grp.subject_id = sbj.subject_id join
+    personal_data pd on grp.professor_id = pd.user_id;

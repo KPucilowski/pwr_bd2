@@ -45,16 +45,16 @@ public class StudentController implements IController {
             model.fetchGrades();
 
         view.getTableModel().setRowCount(0);
-        view.getTableModel().setColumnIdentifiers(new String[]{"Group ID", "Record date", "Grade", "Grade date"});
+        view.getTableModel().setColumnIdentifiers(new String[]{"Subject", "Form", "Grade", "Professor"});
 
         try {
             var rs = model.getGrades();
             while (rs.next()) {
-                var group_id = Integer.toString(rs.getInt("GROUP_ID"));
-                var record_date = rs.getString("RECORD_DATE");
+                var subject_name = rs.getString("SUBJECT_NAME");
+                var form = rs.getString("FORM");
                 var grade = rs.getString("GRADE");
-                var grade_date = rs.getString("GRADE_DATE");
-                view.getTableModel().addRow(new String[]{group_id, record_date, grade, grade_date});
+                var professor = rs.getString("PROFESSOR");
+                view.getTableModel().addRow(new String[]{subject_name, form, grade, professor});
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

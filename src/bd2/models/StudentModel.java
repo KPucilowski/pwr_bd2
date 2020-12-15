@@ -17,7 +17,7 @@ public class StudentModel extends UserModel {
     public void fetchGrades() {
         try {
             Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            grades = st.executeQuery("select * from BD.RECORD rec where rec.student_id = " + this.id);
+            grades = st.executeQuery("select * from BD.STUDENT_GRADES_VIEW where student_id = " + this.id);
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
