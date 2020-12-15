@@ -13,8 +13,8 @@ import java.sql.SQLException;
 
 public class App {
     public static Connection cn;
-
-    static {
+    
+    public static void reconnect() {
         try {
             cn = DriverManager.getConnection(
                     "jdbc:oracle:thin:@146.59.17.101:1521:XE", "login_only", "pass");
@@ -47,6 +47,7 @@ public class App {
         }
 
         /* Start app */
+        reconnect();
         new LoginController();
     }
 }

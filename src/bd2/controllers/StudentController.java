@@ -1,5 +1,6 @@
 package bd2.controllers;
 
+import bd2.App;
 import bd2.models.LoginModel;
 import bd2.models.StudentModel;
 import bd2.views.StudentView;
@@ -37,6 +38,7 @@ public class StudentController implements IController {
     @Override
     public void dispose() {
         view.dispose();
+        App.reconnect();
         new LoginController();
     }
 
