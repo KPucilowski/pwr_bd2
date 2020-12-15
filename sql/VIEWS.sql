@@ -70,3 +70,17 @@ GROUP BY
     PERSONAL_DATA.EMAIL,
     SPECIALIZATION.NAME,
     FACULTY.NAME;
+--------------------------------------------------------
+--  DDL for View STUDENT_GRADES_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE NONEDITIONABLE VIEW "STUDENT_GRADES_VIEW" ("STUDENT_ID", "SUBJECT_NAME", "FORM", "GRADE") AS
+select
+    rec.student_id,
+    sbj.subject_name,
+    grp."FORM",
+    rec.grade
+from
+    "RECORD" rec join
+    "GROUP" grp on grp."GROUP_ID" = rec."GROUP_ID" join
+    subject sbj on grp.subject_id = sbj.subject_id;
