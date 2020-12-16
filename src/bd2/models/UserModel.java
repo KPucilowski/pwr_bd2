@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public abstract class UserModel extends LoginModel {
-    private ResultSet personalData;
+    protected ResultSet personalData;
 
     public UserModel(int id, String type) {
         super(id, type);

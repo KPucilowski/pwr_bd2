@@ -31,9 +31,61 @@ public class StudentController implements IController {
         showPersonalData();
         view.getIdField().setText(String.valueOf(model.getId()));
         view.getPersonalDataButton().addActionListener(e -> showPersonalData());
-        view.getLogOutButton().addActionListener(e -> dispose());
         view.getGradesButton().addActionListener(e -> showGrades());
         view.getEnrollButton().addActionListener(e -> showRecords());
+        view.getLogOutButton().addActionListener(e -> dispose());
+    }
+
+    @Override
+    public void dispose() {
+        view.dispose();
+        App.reconnect();
+        new LoginController();
+    }
+
+    private void showPersonalData() {
+        view.getTableModel().setRowCount(0);
+        view.getTableModel().setColumnIdentifiers(new String[]{"First name", "Last name", "Email", "Faculty", "PESEL", "Year", "Semester", "Specialization", "Average grade"});
+        try {
+            var rs = model.getPersonalData();
+            while (rs.next()) {
+                var first_name = rs.getString("FIRST_NAME");
+                var last_name = rs.getString("LAST_NAME");
+                var email = rs.getString("EMAIL");
+                var faculty = rs.getString("FACULTY");
+                var year = rs.getString("YEAR");
+                var pesel = rs.getString("PESEL");
+                var semester = rs.getString("SEMESTER");
+                var specialization = rs.getString("SPECIALIZATION");
+                var avg_grade = String.valueOf(rs.getDouble("AVG_GRADE"));
+                view.getTableModel().addRow(new String[]{first_name, last_name, email, faculty, pesel, year, semester, specialization, avg_grade});
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }
+
+    private void showGrades() {
+        view.getTableModel().setRowCount(0);
+        view.getTableModel().setColumnIdentifiers(new String[]{"Year", "Semester", "Subject", "Form", "Grade", "Professor"});
+
+        try {
+            var rs = model.getGrades();
+            while (rs.next()) {
+                var subject_name = rs.getString("SUBJECT_NAME");
+                var form = rs.getString("FORM");
+                var grade = rs.getString("GRADE");
+                var professor = rs.getString("PROFESSOR");
+                var total_months = rs.getInt("TOTAL_MONTHS");
+                var year = String.valueOf(calcYear(total_months));
+                var semester = String.valueOf(calcSemester(total_months));
+                view.getTableModel().addRow(new String[]{year, semester, subject_name, form, grade, professor});
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
     }
 
     private void showRecords() {
@@ -59,35 +111,6 @@ public class StudentController implements IController {
         }
     }
 
-    @Override
-    public void dispose() {
-        view.dispose();
-        App.reconnect();
-        new LoginController();
-    }
-
-    private void showGrades() {
-        view.getTableModel().setRowCount(0);
-        view.getTableModel().setColumnIdentifiers(new String[]{"Year", "Semester", "Subject", "Form", "Grade", "Professor"});
-
-        try {
-            var rs = model.getGrades();
-            while (rs.next()) {
-                var subject_name = rs.getString("SUBJECT_NAME");
-                var form = rs.getString("FORM");
-                var grade = rs.getString("GRADE");
-                var professor = rs.getString("PROFESSOR");
-                var total_months = rs.getInt("TOTAL_MONTHS");
-                var year = String.valueOf(calcYear(total_months));
-                var semester = String.valueOf(calcSemester(total_months));
-                view.getTableModel().addRow(new String[]{year, semester, subject_name, form, grade, professor});
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
-        }
-    }
-
     private int calcYear(int months) {
         float year = months / 12f;
         if (year == 0)
@@ -100,28 +123,5 @@ public class StudentController implements IController {
         if (sem == 0)
             return 1;
         return (int) Math.ceil(sem);
-    }
-
-    private void showPersonalData() {
-        view.getTableModel().setRowCount(0);
-        view.getTableModel().setColumnIdentifiers(new String[]{"First name", "Last name", "Email", "Faculty", "PESEL", "Year", "Semester", "Specialization", "Average grade"});
-        try {
-            var rs = model.getPersonalData();
-            while (rs.next()) {
-                var first_name = rs.getString("FIRST_NAME");
-                var last_name = rs.getString("LAST_NAME");
-                var email = rs.getString("EMAIL");
-                var faculty = rs.getString("FACULTY");
-                var year = rs.getString("YEAR");
-                var pesel = rs.getString("PESEL");
-                var semester = rs.getString("SEMESTER");
-                var specialization = rs.getString("SPECIALIZATION");
-                var avg_grade = String.valueOf(rs.getDouble("AVG_GRADE"));
-                view.getTableModel().addRow(new String[]{first_name, last_name, email, faculty, pesel, year, semester, specialization, avg_grade});
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
-        }
     }
 }
