@@ -37,9 +37,6 @@ public class StudentController implements IController {
     }
 
     private void showRecords() {
-        if (model.getRecords() == null)
-            model.fetchRecords();
-
         view.getTableModel().setRowCount(0);
         view.getTableModel().setColumnIdentifiers(new String[]{"Professor", "Subject", "Parity", "Time", "Day", "Form", "Student limit", "Grade"});
 
@@ -70,9 +67,6 @@ public class StudentController implements IController {
     }
 
     private void showGrades() {
-        if (model.getGrades() == null)
-            model.fetchGrades();
-
         view.getTableModel().setRowCount(0);
         view.getTableModel().setColumnIdentifiers(new String[]{"Year", "Semester", "Subject", "Form", "Grade", "Professor"});
 
@@ -109,9 +103,6 @@ public class StudentController implements IController {
     }
 
     private void showPersonalData() {
-        if (model.getPersonalData() == null)
-            model.fetchPersonalData();
-
         view.getTableModel().setRowCount(0);
         view.getTableModel().setColumnIdentifiers(new String[]{"First name", "Last name", "Email", "Faculty", "PESEL", "Year", "Semester", "Specialization", "Average grade"});
         try {

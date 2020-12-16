@@ -1,8 +1,8 @@
 package bd2.models;
 
 public class LoginModel {
-    public int id;
-    public String type;
+    protected int id;
+    protected String type;
 
     public LoginModel(int id, String type) {
         this.id = id;
