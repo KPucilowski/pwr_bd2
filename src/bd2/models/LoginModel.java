@@ -24,7 +24,7 @@ public class LoginModel {
     }
 
     public String getType() {
-        return type;
+        return this.type;
     }
 
     public void login(String login, String pass) throws SQLException {
