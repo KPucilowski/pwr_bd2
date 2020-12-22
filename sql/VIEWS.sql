@@ -1,7 +1,4 @@
 --------------------------------------------------------
---  File created - �������-�������-01-2020   
---------------------------------------------------------
---------------------------------------------------------
 --  DDL for View GROUP_VIEW
 --------------------------------------------------------
 
@@ -20,6 +17,24 @@ FROM
 	"GROUP" INNER JOIN
 	PROFESSOR ON "GROUP".PROFESSOR_ID = PROFESSOR.PROFESSOR_ID INNER JOIN
 	PERSONAL_DATA ON PROFESSOR.PROFESSOR_ID = PERSONAL_DATA.USER_ID;
+--------------------------------------------------------
+--  DDL for View GROUP_STUDENTS_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE NONEDITIONABLE VIEW "GROUP_STUDENTS_VIEW" ("PROFESSOR_ID", "GROUP_ID", "STUDENT_ID", "STUDENT", "EMAIL", "GRADE", "GRADE_DATE", "RECORD_DATE") AS
+SELECT
+    grp.professor_id,
+    grp."GROUP_ID",
+    rec.student_id,
+    pd.first_name || ' ' || pd.last_name as "STUDENT",
+    pd.email,
+    rec.grade,
+    rec.grade_date,
+    rec.record_date
+FROM
+    "GROUP" grp inner join
+    "RECORD" rec on grp."GROUP_ID" = rec."GROUP_ID" inner join
+    PERSONAL_DATA pd on rec.student_id = pd.user_id;
 --------------------------------------------------------
 --  DDL for View PROFESSOR_VIEW
 --------------------------------------------------------
