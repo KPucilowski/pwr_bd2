@@ -1,5 +1,11 @@
 package bd2.models;
 
+import bd2.App;
+
+import java.sql.CallableStatement;
+import java.sql.SQLException;
+import java.sql.Types;
+
 public class LoginModel {
     protected int id;
     protected String type;
@@ -17,15 +23,30 @@ public class LoginModel {
         return this.id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void login(String login, String pass) throws SQLException {
+        CallableStatement stmt = App.cn.prepareCall("{? = call BD.CHECK_LOGIN(?, ?)}");
+        stmt.registerOutParameter(1, Types.VARCHAR);
+        stmt.setString(2, login);
+        stmt.setString(3, pass);
+        stmt.execute();
+        this.type = stmt.getString(1);
+
+        if (type != null && !type.equals("")) {
+            this.id = findId(login, pass);
+        }
+    }
+
+    private int findId(String login, String pass) throws SQLException {
+        CallableStatement stmt = App.cn.prepareCall("{? = call BD.GET_ID(?, ?)}");
+        stmt.registerOutParameter(1, Types.NUMERIC);
+        stmt.setString(2, login);
+        stmt.setString(3, pass);
+        stmt.execute();
+
+        return stmt.getInt(1);
     }
 }
