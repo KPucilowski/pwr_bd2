@@ -27,13 +27,22 @@ public class ProfessorModel extends UserModel {
         stmt.execute();
     }
 
-    private void fetchGroups() throws SQLException {
-        Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        groups = st.executeQuery("select * from BD.STUDENT_GRADES_VIEW where student_id = " + this.id);
-    }
-
     public ResultSet getGroupStudents(int group_id) throws SQLException {
         Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         return st.executeQuery("select * from BD.GROUP_STUDENT_VIEW where professor_id = " + this.id + " group_id = " + group_id);
+    }
+
+    public ResultSet getGroups() throws SQLException {
+        if (groups != null)
+            groups.beforeFirst();
+        else
+            fetchGroups();
+
+        return personalData;
+    }
+
+    private void fetchGroups() throws SQLException {
+        Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        groups = st.executeQuery("select * from BD.STUDENT_GRADES_VIEW where student_id = " + this.id);
     }
 }
