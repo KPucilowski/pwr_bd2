@@ -24,6 +24,6 @@ public abstract class UserModel extends LoginModel {
 
     private void fetchPersonalData() throws SQLException {
         Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        personalData = st.executeQuery("SELECT * FROM BD." + getType() + "_VIEW WHERE STUDENT_ID = " + getId());
+        personalData = st.executeQuery("SELECT * FROM BD." + getType() + "_VIEW WHERE " + getType() + "_ID = " + getId());
     }
 }
