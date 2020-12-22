@@ -27,7 +27,7 @@ public class LoginController implements IController {
 
     @Override
     public void init() {
-        view.getLoginButton().addActionListener(e -> logIn());
+        view.getLoginButton().addActionListener(e -> login());
     }
 
     @Override
@@ -35,7 +35,7 @@ public class LoginController implements IController {
         view.dispose();
     }
 
-    private void logIn() {
+    private void login() {
         var login = view.getLoginField().getText();
         var pass = new String(view.getPasswordField().getPassword()); // not safe, don du zis
 
