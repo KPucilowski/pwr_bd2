@@ -5,7 +5,7 @@
 --  DDL for Procedure ADD_GRADE
 --------------------------------------------------------
 
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "ADD_GRADE" (
+CREATE OR REPLACE NONEDITIONABLE PROCEDURE "ADD_GRADE" (
     student_id NUMBER,
     group_id_n NUMBER,
     grade_in DOUBLE PRECISION)
@@ -33,7 +33,7 @@ END;
 --  DDL for Procedure ADD_STUDENT_TO_GROUP
 --------------------------------------------------------
 
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "ADD_STUDENT_TO_GROUP" (
+CREATE OR REPLACE NONEDITIONABLE PROCEDURE "ADD_STUDENT_TO_GROUP" (
     student_id_in NUMBER,
     group_in NUMBER
     )
@@ -58,7 +58,7 @@ END;
 --  DDL for Procedure CLOSE_GROUP
 --------------------------------------------------------
 
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "CLOSE_GROUP" (group_in NUMBER)
+CREATE OR REPLACE NONEDITIONABLE PROCEDURE "CLOSE_GROUP" (group_in NUMBER)
 IS
 BEGIN
     DELETE FROM "RECORD" rec
@@ -73,7 +73,7 @@ END;
 --  DDL for Procedure REMOVE_GRADE
 --------------------------------------------------------
 
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "REMOVE_GRADE" (
+CREATE OR REPLACE NONEDITIONABLE PROCEDURE "REMOVE_GRADE" (
     student_id NUMBER,
     group_id_n NUMBER)
 IS
@@ -101,7 +101,7 @@ END;
 --  DDL for Procedure REMOVE_STUDENT_FROM_GROUP
 --------------------------------------------------------
 
-  CREATE OR REPLACE NONEDITIONABLE PROCEDURE "REMOVE_STUDENT_FROM_GROUP" 
+CREATE OR REPLACE NONEDITIONABLE PROCEDURE "REMOVE_STUDENT_FROM_GROUP"
 (
   STUDENT_IN IN NUMBER 
 , GROUP_IN IN NUMBER 
@@ -113,3 +113,55 @@ BEGIN
     student_in = rec.student_id;
     
 END REMOVE_STUDENT_FROM_GROUP;
+--------------------------------------------------------
+--  DDL for Procedure ADD_STUDENT
+--------------------------------------------------------
+
+CREATE OR REPLACE NONEDITIONABLE PROCEDURE "ADD_STUDENT"
+(
+    FIRST_NAME_IN IN VARCHAR2
+, LAST_NAME_IN IN VARCHAR2
+, FACULTY_ID_IN IN VARCHAR2
+, PESEL_IN IN VARCHAR2
+, LOGIN_IN IN VARCHAR2
+, PASSWORD_IN IN VARCHAR2
+) AS
+    TEMP_ID NUMBER;
+
+BEGIN
+    TEMP_ID := STUDENT_SEQ.NEXTVAL;
+
+    insert into "USER" (user_id, login, "PASSWORD", "TYPE")
+    values (TEMP_ID, LOGIN_IN, PASSWORD_IN, 'STUDENT');
+
+    insert into PERSONAL_DATA (user_id, first_name, last_name, email, faculty_id)
+    values (TEMP_ID, FIRST_NAME_IN, LAST_NAME_IN, TEMP_ID || '@edu.meme', FACULTY_ID_IN);
+
+    insert into STUDENT (student_id, pesel, admission_date, year, semester, specialization_id)
+    values (TEMP_ID, PESEL_IN, SYSDATE, 1, 1, null);
+END ADD_STUDENT;
+--------------------------------------------------------
+--  DDL for Procedure REMOVE_STUDENT
+--------------------------------------------------------
+
+CREATE OR REPLACE NONEDITIONABLE PROCEDURE "REMOVE_STUDENT"
+(
+    STUDENT_ID_IN IN NUMBER
+) AS
+BEGIN
+    DELETE FROM "RECORD" rec
+    WHERE
+            STUDENT_ID_IN = rec.student_id;
+
+    DELETE FROM STUDENT st
+    WHERE
+            STUDENT_ID_IN = st.student_id;
+
+    DELETE FROM "USER" usr
+    WHERE
+            STUDENT_ID_IN = usr.user_id;
+
+    DELETE FROM PERSONAL_DATA pd
+    WHERE
+            STUDENT_ID_IN = pd.user_id;
+END REMOVE_STUDENT;
