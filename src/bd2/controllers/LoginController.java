@@ -5,6 +5,9 @@ import bd2.models.LoginModel;
 import bd2.views.LoginView;
 
 import javax.swing.*;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 public class LoginController implements IController {
@@ -36,18 +39,31 @@ public class LoginController implements IController {
     }
 
     private void login() {
-        var login = view.getLoginField().getText();
-        var pass = new String(view.getPasswordField().getPassword()); // not safe, don du zis
-
         try {
+            var login = view.getLoginField().getText();
+            var pass = charToSha256(view.getPasswordField().getPassword());
+
             model.login(login, pass);
             if (model.getType() != null) {
                 App.reconnect(model, "pass");
                 dispose();
             }
-        } catch (SQLException e) {
+        } catch (SQLException | NoSuchAlgorithmException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
+    }
+
+    public static String charToSha256(char[] hash) throws NoSuchAlgorithmException {
+        byte[] res = new byte[hash.length];
+        for (int i = 0; i < hash.length; i++) {
+            res[i] = (byte) hash[i];
+        }
+
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        md.update(res);
+        byte[] digest = md.digest();
+
+        return String.format("%064x", new BigInteger(1, digest));
     }
 }
