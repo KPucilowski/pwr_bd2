@@ -20,7 +20,7 @@ DROP TABLE "DEANS_WORKER" CASCADE CONSTRAINTS;
 --------------------------------------------------------
 
   CREATE TABLE "FACULTY" 
-   (	"FACULITY_ID" VARCHAR2(6), 
+   (	"FACULTY_ID" VARCHAR2(6), 
 	"NAME" VARCHAR2(20), 
 	"DEAN_ID" NUMBER(6,0)
    ) ;
@@ -150,11 +150,11 @@ DROP TABLE "DEANS_WORKER" CASCADE CONSTRAINTS;
 --  Constraints for Table FACULTY
 --------------------------------------------------------
 
-  ALTER TABLE "FACULTY" MODIFY ("FACULITY_ID" NOT NULL ENABLE);
+  ALTER TABLE "FACULTY" MODIFY ("FACULTY_ID" NOT NULL ENABLE);
   ALTER TABLE "FACULTY" MODIFY ("NAME" NOT NULL ENABLE);
   ALTER TABLE "FACULTY" MODIFY ("DEAN_ID" NOT NULL ENABLE);
-  ALTER TABLE "FACULTY" ADD CONSTRAINT "FACULTY_ID_PK" PRIMARY KEY ("FACULITY_ID")
-  USING INDEX (CREATE UNIQUE INDEX "FACULTY_INDEX" ON "FACULTY" ("FACULITY_ID") 
+  ALTER TABLE "FACULTY" ADD CONSTRAINT "FACULTY_ID_PK" PRIMARY KEY ("FACULTY_ID")
+  USING INDEX (CREATE UNIQUE INDEX "FACULTY_INDEX" ON "FACULTY" ("FACULTY_ID") 
   )  ENABLE;
 --------------------------------------------------------
 --  Constraints for Table GROUP
@@ -271,7 +271,7 @@ DROP TABLE "DEANS_WORKER" CASCADE CONSTRAINTS;
 --------------------------------------------------------
 
   ALTER TABLE "PERSONAL_DATA" ADD CONSTRAINT "PERSONAL_DATA_FACULTY_ID_FK" FOREIGN KEY ("FACULTY_ID")
-	  REFERENCES "FACULTY" ("FACULITY_ID") ENABLE;
+	  REFERENCES "FACULTY" ("FACULTY_ID") ENABLE;
 --------------------------------------------------------
 --  Ref Constraints for Table PROFESSOR
 --------------------------------------------------------
@@ -293,7 +293,7 @@ DROP TABLE "DEANS_WORKER" CASCADE CONSTRAINTS;
 --------------------------------------------------------
 
   ALTER TABLE "SPECIALIZATION" ADD CONSTRAINT "SPECIALIZATION_FACULTY_ID_FK" FOREIGN KEY ("FACULTY_ID")
-	  REFERENCES "FACULTY" ("FACULITY_ID") ENABLE;
+	  REFERENCES "FACULTY" ("FACULTY_ID") ENABLE;
 --------------------------------------------------------
 --  Ref Constraints for Table STUDENT
 --------------------------------------------------------
@@ -309,4 +309,4 @@ DROP TABLE "DEANS_WORKER" CASCADE CONSTRAINTS;
 --------------------------------------------------------
 
   ALTER TABLE "SUBJECT" ADD CONSTRAINT "SUBJECT_FACULTY_FK" FOREIGN KEY ("FACULTY_ID")
-	  REFERENCES "FACULTY" ("FACULITY_ID") ENABLE;
+	  REFERENCES "FACULTY" ("FACULTY_ID") ENABLE;

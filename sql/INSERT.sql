@@ -13,11 +13,11 @@ alter sequence deans_worker_seq restart start with 1 minvalue 1;
 alter sequence professor_seq restart start with 100001 minvalue 100001;
 alter sequence student_seq restart start with 200001 minvalue 200001;
 
-insert into FACULTY (faculity_id, name, dean_id) values ('W1', 'Wydział 1', 000001);
-insert into FACULTY (faculity_id, name, dean_id) values ('W2', 'Wydział 2', 000002);
-insert into FACULTY (faculity_id, name, dean_id) values ('W3', 'Wydział 3', 000003);
-insert into FACULTY (faculity_id, name, dean_id) values ('W4', 'Wydział 4', 000004);
-insert into FACULTY (faculity_id, name, dean_id) values ('W5', 'Wydział 5', 000005);
+insert into FACULTY (faculty_id, name, dean_id) values ('W1', 'Wydział 1', 000001);
+insert into FACULTY (faculty_id, name, dean_id) values ('W2', 'Wydział 2', 000002);
+insert into FACULTY (faculty_id, name, dean_id) values ('W3', 'Wydział 3', 000003);
+insert into FACULTY (faculty_id, name, dean_id) values ('W4', 'Wydział 4', 000004);
+insert into FACULTY (faculty_id, name, dean_id) values ('W5', 'Wydział 5', 000005);
 
 insert into SPECIALIZATION (specialization_id, name, faculty_id) values (000001, 'S1', 'W1');
 insert into SPECIALIZATION (specialization_id, name, faculty_id) values (000002, 'S2', 'W2');
