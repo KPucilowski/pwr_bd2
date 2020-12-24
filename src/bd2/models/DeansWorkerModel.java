@@ -4,15 +4,38 @@ import bd2.App;
 import bd2.tools.LoginTools;
 
 import java.security.NoSuchAlgorithmException;
-import java.sql.*;
+import java.sql.CallableStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.DayOfWeek;
 
-public class DeansWorkerModel extends UserModel{
+
+public class DeansWorkerModel extends UserModel {
     public DeansWorkerModel(int id, String type) {
         super(id, type);
     }
 
-    private void openGroup(int group_id, int subject_id, int professor_id, char parity, int day, Time time, String form, int student_limit) {
-
+    private void addGroup(
+            int group_id,
+            int subject_id,
+            int professor_id,
+            String parity,
+            DayOfWeek day,
+            String time,
+            String form,
+            int student_limit
+    ) throws SQLException {
+        CallableStatement stmt = App.cn.prepareCall("{call BD.ADD_GROUP(?, ?, ?, ?, ?, ?, ?, ?)}");
+        stmt.setInt(1, group_id);
+        stmt.setInt(2, subject_id);
+        stmt.setInt(3, professor_id);
+        stmt.setString(4, parity);
+        stmt.setInt(5, day.getValue());
+        stmt.setString(6, time);
+        stmt.setString(7, form);
+        stmt.setInt(8, student_limit);
+        stmt.execute();
     }
 
     public ResultSet getGroups() throws SQLException {
