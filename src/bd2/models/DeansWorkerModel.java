@@ -4,17 +4,14 @@ import bd2.App;
 import bd2.tools.LoginTools;
 
 import java.security.NoSuchAlgorithmException;
-import java.sql.CallableStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class DeansWorkerModel extends UserModel{
     public DeansWorkerModel(int id, String type) {
         super(id, type);
     }
 
-    private void openGroup() {
+    private void openGroup(int group_id, int subject_id, int professor_id, char parity, int day, Time time, String form, int student_limit) {
 
     }
 
