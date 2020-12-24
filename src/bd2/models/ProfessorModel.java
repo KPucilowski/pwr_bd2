@@ -2,7 +2,10 @@ package bd2.models;
 
 import bd2.App;
 
-import java.sql.*;
+import java.sql.CallableStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class ProfessorModel extends UserModel {
     private ResultSet groups;

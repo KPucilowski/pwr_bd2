@@ -16,7 +16,7 @@ public class DeansWorkerModel extends UserModel {
         super(id, type);
     }
 
-    private void addGroup(
+    public void addGroup(
             int group_id,
             int subject_id,
             int professor_id,
@@ -38,23 +38,7 @@ public class DeansWorkerModel extends UserModel {
         stmt.execute();
     }
 
-    public ResultSet getGroups() throws SQLException {
-        Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        return st.executeQuery("select * from BD.GROUP_VIEW");
-    }
-
-    public ResultSet getSubjects() throws SQLException {
-        Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        return st.executeQuery("select * from BD.SUBJECT");
-    }
-
-    /* Use to find professors that you can assign to subject/group */
-    public ResultSet getProfessorsOfFaculty(String faculty_id) throws SQLException {
-        Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        return st.executeQuery("select * from BD.PROFESSOR_VIEW where FACULTY_ID = " + faculty_id);
-    }
-
-    private void addStudent(
+    public void addStudent(
             String first_name,
             String last_name,
             String faculty_id,
@@ -74,22 +58,22 @@ public class DeansWorkerModel extends UserModel {
         stmt.execute();
     }
 
-    private void removeStudent(int student_id) throws SQLException {
-        CallableStatement stmt = App.cn.prepareCall("{call BD.REMOVE_STUDENT(?)}");
+    private void addStudentToGroup(int student_id, int group_id) throws SQLException {
+        CallableStatement stmt = App.cn.prepareCall("{call BD.ADD_STUDENT_TO_GROUP(?, ?)}");
         stmt.setInt(1, student_id);
+        stmt.setInt(2, group_id);
         stmt.execute();
     }
 
-    private void closeGroup(int group_id) throws SQLException {
+    private void removeGroup(int group_id) throws SQLException {
         CallableStatement stmt = App.cn.prepareCall("{call BD.REMOVE_GROUP(?)}");
         stmt.setInt(1, group_id);
         stmt.execute();
     }
 
-    private void addStudentToGroup(int student_id, int group_id) throws SQLException {
-        CallableStatement stmt = App.cn.prepareCall("{call BD.ADD_STUDENT_TO_GROUP(?, ?)}");
+    private void removeStudent(int student_id) throws SQLException {
+        CallableStatement stmt = App.cn.prepareCall("{call BD.REMOVE_STUDENT(?)}");
         stmt.setInt(1, student_id);
-        stmt.setInt(2, group_id);
         stmt.execute();
     }
 
@@ -98,5 +82,21 @@ public class DeansWorkerModel extends UserModel {
         stmt.setInt(1, student_id);
         stmt.setInt(2, group_id);
         stmt.execute();
+    }
+
+    public ResultSet getGroups() throws SQLException {
+        Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        return st.executeQuery("select * from BD.GROUP_VIEW");
+    }
+
+    /* Use to find professors that you can assign to subject/group */
+    public ResultSet getProfessorsOfFaculty(String faculty_id) throws SQLException {
+        Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        return st.executeQuery("select * from BD.PROFESSOR_VIEW where FACULTY_ID = " + faculty_id);
+    }
+
+    public ResultSet getSubjects() throws SQLException {
+        Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        return st.executeQuery("select * from BD.SUBJECT");
     }
 }
