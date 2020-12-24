@@ -43,6 +43,6 @@ public class ProfessorModel extends UserModel {
 
     private void fetchGroups() throws SQLException {
         Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        groups = st.executeQuery("select * from BD.STUDENT_GRADES_VIEW where student_id = " + this.id);
+        groups = st.executeQuery("select * from BD.GROUP_VIEW where professor_id = " + this.id);
     }
 }
