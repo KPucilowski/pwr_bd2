@@ -81,7 +81,7 @@ public class DeansWorkerModel extends UserModel {
     }
 
     private void closeGroup(int group_id) throws SQLException {
-        CallableStatement stmt = App.cn.prepareCall("{call BD.CLOSE_GROUP(?)}");
+        CallableStatement stmt = App.cn.prepareCall("{call BD.REMOVE_GROUP(?)}");
         stmt.setInt(1, group_id);
         stmt.execute();
     }
