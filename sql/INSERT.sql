@@ -31,7 +31,7 @@ insert into SUBJECT (subject_id, subject_name, faculty_id) values (000003, 'Blac
 insert into SUBJECT (subject_id, subject_name, faculty_id) values (000004, 'Coille''s Rush', 'W4');
 insert into SUBJECT (subject_id, subject_name, faculty_id) values (000005, 'Ruth''s Sedge', 'W4');
 
-insert into "USER" (user_id, login, password, type) values (STUDENT_SEQ.NEXTVAL, 'hhazeman0', 'sqyXQd', 'STUDENT');
+insert into "USER" (user_id, login, password, type) values (STUDENT_SEQ.NEXTVAL, '1', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'STUDENT');
 insert into "USER" (user_id, login, password, type) values (STUDENT_SEQ.NEXTVAL, 'cguymer1', '5Kx5yb', 'STUDENT');
 insert into "USER" (user_id, login, password, type) values (STUDENT_SEQ.NEXTVAL, 'astanney2', 'nzUm97YKX', 'STUDENT');
 insert into "USER" (user_id, login, password, type) values (STUDENT_SEQ.NEXTVAL, 'amanilove3', 'H2skaHM0uC', 'STUDENT');

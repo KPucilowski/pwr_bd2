@@ -8,7 +8,7 @@ public class StudentView extends Component {
 
     private final JFrame frame;
     DefaultTableModel tableModel = new DefaultTableModel();
-    private JPanel contentPane;
+    private JPanel studentPanel;
     private JTextField idField;
     private JTable dataTable;
     private JButton enrollButton;
@@ -21,7 +21,7 @@ public class StudentView extends Component {
 
     public StudentView() {
         frame = new JFrame("Student menu");
-        frame.setContentPane(contentPane);
+        frame.setContentPane(studentPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(null);
