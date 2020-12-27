@@ -14,6 +14,10 @@ public class ProfessorModel extends UserModel {
         super(id, type);
     }
 
+    public ProfessorModel(LoginModel loginModel) {
+        super(loginModel.getId(), loginModel.getType());
+    }
+
     private void removeGrade(int student_id, int group_id) throws SQLException {
         CallableStatement stmt = App.cn.prepareCall("{call BD.REMOVE_GRADE(?, ?)}");
         stmt.setInt(1, student_id);
