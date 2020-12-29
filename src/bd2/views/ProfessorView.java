@@ -16,9 +16,8 @@ public class ProfessorView extends Component {
     private JTable dataTable;
     private JScrollPane scrollPane;
     private JLabel loggedAsLabel;
-    private JButton saveButton;
     DefaultTableModel tableModel = new DefaultTableModel();
-
+    
     public ProfessorView() {
 
         frame = new JFrame("Professor menu");

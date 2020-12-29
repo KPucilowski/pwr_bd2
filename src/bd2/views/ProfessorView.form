@@ -82,16 +82,6 @@
           <text value="Groups"/>
         </properties>
       </component>
-      <component id="a9177" class="javax.swing.JButton" binding="saveButton" default-binding="true">
-        <constraints>
-          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="120" height="24"/>
-          </grid>
-        </constraints>
-        <properties>
-          <text value="Save"/>
-        </properties>
-      </component>
     </children>
   </grid>
 </form>

@@ -30,7 +30,7 @@ public class ProfessorController implements IController {
         showPersonalData();
         view.getIdField().setText(String.valueOf(model.getId()));
         view.getPersonalDataButton().addActionListener(e -> showPersonalData());
-        view.getTimetableButton().addActionListener(e -> showTimeTable());
+        view.getTimetableButton().addActionListener(e -> showTimetable());
         view.getGroupsButton().addActionListener(e -> showGroups());
         view.getLogOutButton().addActionListener(e -> dispose());
     }
@@ -61,7 +61,7 @@ public class ProfessorController implements IController {
         }
     }
 
-    private void showTimeTable() {
+    private void showTimetable() {
         view.getTableModel().setRowCount(0);
         view.getTableModel().setColumnIdentifiers(new String[]{"Subject ID", "Subject name", "Day", "Time", "Parity", "Form", "Students limit"});
         try {
