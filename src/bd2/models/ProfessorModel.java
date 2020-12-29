@@ -25,6 +25,7 @@ public class ProfessorModel extends UserModel {
         stmt.execute();
     }
 
+
     /* Can also use to edit grade */
     private void addGrade(int student_id, int group_id, double grade) throws SQLException {
         CallableStatement stmt = App.cn.prepareCall("{call BD.ADD_GRADE(?, ?, ?)}");
@@ -45,7 +46,7 @@ public class ProfessorModel extends UserModel {
         else
             fetchGroups();
 
-        return personalData;
+        return groups;
     }
 
     private void fetchGroups() throws SQLException {

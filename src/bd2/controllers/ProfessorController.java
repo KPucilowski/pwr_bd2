@@ -6,6 +6,7 @@ import bd2.models.ProfessorModel;
 import bd2.views.ProfessorView;
 
 import javax.swing.*;
+import java.awt.*;
 import java.sql.SQLException;
 
 public class ProfessorController implements IController {
@@ -31,6 +32,7 @@ public class ProfessorController implements IController {
         showPersonalData();
         view.getIdField().setText(String.valueOf(model.getId()));
         view.getPersonalDataButton().addActionListener(e -> showPersonalData());
+        view.getTimetableButton().addActionListener(e -> showTimeTable());
         view.getLogOutButton().addActionListener(e -> dispose());
     }
 
@@ -60,5 +62,24 @@ public class ProfessorController implements IController {
         }
     }
 
-
+    private void showTimeTable() {
+        view.getTableModel().setRowCount(0);
+        view.getTableModel().setColumnIdentifiers(new String[]{"Subject ID", "Subject name", "Day", "Time", "Parity", "Form", "Students limit"});
+        try {
+            var rs = model.getGroups();
+            while (rs.next()) {
+                var subject_id = rs.getString("SUBJECT_ID");
+                var subject_name = rs.getString("SUBJECT_NAME");
+                var day = rs.getString("DAY");
+                var time = rs.getString("TIME");
+                var parity = rs.getString("PARITY");
+                var form = rs.getString("FORM");
+                var student_limit = rs.getString("STUDENT_LIMIT");
+                view.getTableModel().addRow(new String[]{subject_id, subject_name, day, time, parity, form, student_limit});
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }
 }

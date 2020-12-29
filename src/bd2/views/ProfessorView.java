@@ -7,7 +7,6 @@ import java.awt.*;
 public class ProfessorView extends Component {
 
     private final JFrame frame;
-    DefaultTableModel tableModel = new DefaultTableModel();
     private JPanel professorPanel;
     private JTextField idField;
     private JTable dataTable;
@@ -18,6 +17,7 @@ public class ProfessorView extends Component {
     private JButton logOutButton;
     private JScrollPane scrollPane;
     private JLabel loggedAsLabel;
+    DefaultTableModel tableModel = new DefaultTableModel();
 
     public ProfessorView() {
         frame = new JFrame("Professor menu");
@@ -50,6 +50,10 @@ public class ProfessorView extends Component {
         return personalDataButton;
     }
 
+    public JButton getTimetableButton() {
+        return timetableButton;
+    }
+    
     public JButton getGradesButton() {
         return gradesButton;
     }
