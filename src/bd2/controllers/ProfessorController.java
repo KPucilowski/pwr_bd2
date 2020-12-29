@@ -33,9 +33,11 @@ public class ProfessorController implements IController {
         view.getPersonalDataButton().addActionListener(e -> showPersonalData());
         view.getTimetableButton().addActionListener(e -> showTimetable());
         view.getGroupsButton().addActionListener(e -> showStudents());
-
+        view.getSaveButton().addActionListener(e -> updateGrades());
         view.getLogOutButton().addActionListener(e -> dispose());
     }
+
+
 
     @Override
     public void dispose() {
@@ -46,7 +48,7 @@ public class ProfessorController implements IController {
 
     private void showPersonalData() {
         view.dataTable.setModel(view.tableModel);
-
+        view.saveButton.setVisible(false);
         view.getTableModel().setRowCount(0);
         view.getTableModel().setColumnIdentifiers(new String[]{"First name", "Last name", "Email", "Faculty", "Degree"});
         try {
@@ -67,7 +69,7 @@ public class ProfessorController implements IController {
 
     private void showTimetable() {
         view.dataTable.setModel(view.tableModel);
-
+        view.saveButton.setVisible(false);
         view.getTableModel().setRowCount(0);
         view.getTableModel().setColumnIdentifiers(new String[]{"Subject ID", "Subject name", "Day", "Time", "Parity", "Form", "Students limit"});
         try {
@@ -90,7 +92,7 @@ public class ProfessorController implements IController {
 
     private void showGroups() {
         view.dataTable.setModel(view.tableModel);
-
+        view.saveButton.setVisible(false);
         view.getTableModel().setRowCount(0);
         view.getTableModel().setColumnIdentifiers(new String[]{"Group ID", "Subject ID", "Subject name", "Day", "Time", "Parity", "Form"});
         try {
@@ -113,7 +115,7 @@ public class ProfessorController implements IController {
 
     private void showStudents() {
         view.dataTable.setModel(view.tableModel2);
-
+        view.saveButton.setVisible(true);
         view.getTableModel2().setRowCount(0);
         view.getTableModel2().setColumnIdentifiers(new String[]{"Student ID", "Student name", "Email", "Grade"});
         try {
@@ -129,5 +131,9 @@ public class ProfessorController implements IController {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
+    }
+
+    private void updateGrades() {
+
     }
 }

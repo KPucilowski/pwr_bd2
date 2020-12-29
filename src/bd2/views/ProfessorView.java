@@ -44,8 +44,6 @@ public class ProfessorView extends Component {
         dataTable.setModel(tableModel);
     }
 
-
-
     public JButton getLogOutButton() {
         return logOutButton;
     }
@@ -67,12 +65,10 @@ public class ProfessorView extends Component {
     }
 
     public JButton getPersonalDataButton() {
-
         return personalDataButton;
     }
 
     public JButton getTimetableButton() {
-
         return timetableButton;
     }
     
@@ -81,7 +77,6 @@ public class ProfessorView extends Component {
     }
 
     public JButton getSaveButton() {
-
         return saveButton;
     }
 }

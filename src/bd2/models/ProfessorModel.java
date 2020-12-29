@@ -11,7 +11,6 @@ public class ProfessorModel extends UserModel {
     private ResultSet groups;
     private ResultSet groupsStudent;
 
-
     public ProfessorModel(int id, String type) {
         super(id, type);
     }
