@@ -38,7 +38,6 @@ public class ProfessorController implements IController {
     }
 
 
-
     @Override
     public void dispose() {
         view.dispose();
@@ -59,7 +58,7 @@ public class ProfessorController implements IController {
                 var email = rs.getString("EMAIL");
                 var faculty = rs.getString("FACULTY");
                 var degree = rs.getString("DEGREE");
-                view.getTableModel().addRow(new String[]{first_name, last_name, email, faculty, degree });
+                view.getTableModel().addRow(new String[]{first_name, last_name, email, faculty, degree});
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -117,15 +116,16 @@ public class ProfessorController implements IController {
         view.dataTable.setModel(view.tableModel2);
         view.saveButton.setVisible(true);
         view.getTableModel2().setRowCount(0);
-        view.getTableModel2().setColumnIdentifiers(new String[]{"Student ID", "Student name", "Email", "Grade"});
+        view.getTableModel2().setColumnIdentifiers(new String[]{"Student ID", "Group ID","Grade", "Student name", "Email"});
         try {
             var rs = model.getStudents();
             while (rs.next()) {
                 var student_id = rs.getString("STUDENT_ID");
+                var group_id = rs.getString("GROUP_ID");
                 var student = rs.getString("STUDENT");
                 var email = rs.getString("EMAIL");
                 var grade = rs.getString("GRADE");
-                view.getTableModel2().addRow(new String[]{student_id, student, email, grade});
+                view.getTableModel2().addRow(new String[]{student_id, group_id, grade, student, email});
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -134,6 +134,17 @@ public class ProfessorController implements IController {
     }
 
     private void updateGrades() {
+        view.dataTable.setModel(view.tableModel2);
+        try {
+            var rs = model.getStudents();
+            while (rs.next()) {
+                //????
+                //model.addGrade(student_id,group_id, grade);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
 
     }
 }

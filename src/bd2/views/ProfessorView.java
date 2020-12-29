@@ -30,7 +30,7 @@ public class ProfessorView extends Component {
     {
         @Override
         public boolean isCellEditable(int row, int column){
-            return column == 3;
+            return column == 2;
         };
     };
 

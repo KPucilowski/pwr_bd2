@@ -19,7 +19,7 @@ public class ProfessorModel extends UserModel {
         super(loginModel.getId(), loginModel.getType());
     }
 
-    private void removeGrade(int student_id, int group_id) throws SQLException {
+    public void removeGrade(int student_id, int group_id) throws SQLException {
         CallableStatement stmt = App.cn.prepareCall("{call BD.REMOVE_GRADE(?, ?)}");
         stmt.setInt(1, student_id);
         stmt.setInt(2, group_id);
@@ -27,7 +27,7 @@ public class ProfessorModel extends UserModel {
     }
 
     /* Can also use to edit grade */
-    private void addGrade(int student_id, int group_id, double grade) throws SQLException {
+    public void addGrade(int student_id, int group_id, Double grade) throws SQLException {
         CallableStatement stmt = App.cn.prepareCall("{call BD.ADD_GRADE(?, ?, ?)}");
         stmt.setInt(1, student_id);
         stmt.setInt(2, group_id);
