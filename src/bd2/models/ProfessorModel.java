@@ -36,7 +36,6 @@ public class ProfessorModel extends UserModel {
     }
 
     public ResultSet getStudents() throws SQLException {
-        int group_id;
         if (groupsStudent != null)
             groupsStudent.beforeFirst();
         else
