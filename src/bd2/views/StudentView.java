@@ -34,6 +34,10 @@ public class StudentView extends Component {
         return logOutButton;
     }
 
+    public JButton getTimetableButton() {
+        return timetableButton;
+    }
+
     public void dispose() {
         frame.dispose();
     }

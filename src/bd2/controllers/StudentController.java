@@ -31,6 +31,7 @@ public class StudentController implements IController {
         showPersonalData();
         view.getIdField().setText(String.valueOf(model.getId()));
         view.getPersonalDataButton().addActionListener(e -> showPersonalData());
+        view.getTimetableButton().addActionListener(e -> showTimetable());
         view.getGradesButton().addActionListener(e -> showGrades());
         view.getEnrollButton().addActionListener(e -> showRecords());
         view.getLogOutButton().addActionListener(e -> dispose());
@@ -65,6 +66,28 @@ public class StudentController implements IController {
             e.printStackTrace();
         }
     }
+
+    private void showTimetable() {
+        view.getTableModel().setRowCount(0);
+        view.getTableModel().setColumnIdentifiers(new String[]{"Professor", "Subject", "Day", "Time", "Parity", "Form", "Grade"});
+        try {
+            var rs = model.getRecords();
+            while (rs.next()) {
+                var professor = rs.getString("PROFESSOR");
+                var subject= rs.getString("SUBJECT_NAME");
+                var day = rs.getString("DAY");
+                var time = rs.getString("TIME");
+                var parity = rs.getString("PARITY");
+                var form = rs.getString("FORM");
+                var grade = rs.getString("GRADE");
+                view.getTableModel().addRow(new String[]{professor, subject, day, time, parity, form, grade});
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }
+
 
     private void showGrades() {
         view.getTableModel().setRowCount(0);
