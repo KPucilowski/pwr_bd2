@@ -6,6 +6,7 @@ import bd2.models.ProfessorModel;
 import bd2.views.ProfessorView;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.sql.SQLException;
 
@@ -31,7 +32,8 @@ public class ProfessorController implements IController {
         view.getIdField().setText(String.valueOf(model.getId()));
         view.getPersonalDataButton().addActionListener(e -> showPersonalData());
         view.getTimetableButton().addActionListener(e -> showTimetable());
-        view.getGroupsButton().addActionListener(e -> showGroups());
+        view.getGroupsButton().addActionListener(e -> showStudents());
+
         view.getLogOutButton().addActionListener(e -> dispose());
     }
 
@@ -43,6 +45,8 @@ public class ProfessorController implements IController {
     }
 
     private void showPersonalData() {
+        view.dataTable.setModel(view.tableModel);
+
         view.getTableModel().setRowCount(0);
         view.getTableModel().setColumnIdentifiers(new String[]{"First name", "Last name", "Email", "Faculty", "Degree"});
         try {
@@ -62,6 +66,8 @@ public class ProfessorController implements IController {
     }
 
     private void showTimetable() {
+        view.dataTable.setModel(view.tableModel);
+
         view.getTableModel().setRowCount(0);
         view.getTableModel().setColumnIdentifiers(new String[]{"Subject ID", "Subject name", "Day", "Time", "Parity", "Form", "Students limit"});
         try {
@@ -83,6 +89,8 @@ public class ProfessorController implements IController {
     }
 
     private void showGroups() {
+        view.dataTable.setModel(view.tableModel);
+
         view.getTableModel().setRowCount(0);
         view.getTableModel().setColumnIdentifiers(new String[]{"Group ID", "Subject ID", "Subject name", "Day", "Time", "Parity", "Form"});
         try {
@@ -104,8 +112,10 @@ public class ProfessorController implements IController {
     }
 
     private void showStudents() {
-        view.getTableModel().setRowCount(0);
-        view.getTableModel().setColumnIdentifiers(new String[]{"Student ID", "Student name", "Email", "Grade"});
+        view.dataTable.setModel(view.tableModel2);
+
+        view.getTableModel2().setRowCount(0);
+        view.getTableModel2().setColumnIdentifiers(new String[]{"Student ID", "Student name", "Email", "Grade"});
         try {
             var rs = model.getStudents();
             while (rs.next()) {
@@ -113,7 +123,7 @@ public class ProfessorController implements IController {
                 var student = rs.getString("STUDENT");
                 var email = rs.getString("EMAIL");
                 var grade = rs.getString("GRADE");
-                view.getTableModel().addRow(new String[]{student_id, student, email, grade});
+                view.getTableModel2().addRow(new String[]{student_id, student, email, grade});
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

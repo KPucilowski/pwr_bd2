@@ -7,7 +7,6 @@ import java.awt.*;
 public class StudentView extends Component {
 
     private final JFrame frame;
-    DefaultTableModel tableModel = new DefaultTableModel();
     private JPanel studentPanel;
     private JTextField idField;
     private JTable dataTable;
@@ -18,6 +17,14 @@ public class StudentView extends Component {
     private JButton logOutButton;
     private JScrollPane scrollPane;
     private JLabel loggedAsLabel;
+
+    DefaultTableModel tableModel = new DefaultTableModel()
+    {
+        @Override
+        public boolean isCellEditable(int row, int column){
+            return false;
+        };
+    };
 
     public StudentView() {
         frame = new JFrame("Student menu");
