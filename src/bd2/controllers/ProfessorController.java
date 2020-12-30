@@ -135,16 +135,18 @@ public class ProfessorController implements IController {
 
     private void updateGrades() {
         view.dataTable.setModel(view.tableModel2);
-        try {
+        try{
             var rs = model.getStudents();
             while (rs.next()) {
-                //????
-                //model.addGrade(student_id,group_id, grade);
+                //var student_id = rs.getInt("STUDENT_ID");
+                //var group_id = rs.getInt("GROUP_ID");
+                //Object ob = view.dataTable.getValueAt(view.dataTable.getSelectedRow(), 2);
+                //double obb = Double.parseDouble((String) ob);
+                //model.addGrade(student_id,group_id, obb);
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
-
     }
 }
