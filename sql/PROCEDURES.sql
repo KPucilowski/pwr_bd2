@@ -3,24 +3,24 @@
 --------------------------------------------------------
 
 CREATE OR REPLACE NONEDITIONABLE PROCEDURE "ADD_GRADE" (
-    student_id NUMBER,
-    group_id_n NUMBER,
+    student_id_in NUMBER,
+    group_id_in NUMBER,
     grade_in DOUBLE PRECISION)
 IS
     grade_var NUMBER;
 BEGIN
     SELECT COUNT(*) INTO grade_var FROM "RECORD" rec
-    WHERE 
-        student_id = rec.student_id and
-        group_id_n = rec.group_id;
+    WHERE
+        student_id_in = rec.student_id and
+        group_id_in = rec.group_id;
 
     IF grade_var = 1 THEN
         UPDATE "RECORD" rec
         SET GRADE = grade_in,
             GRADE_DATE = CURRENT_DATE
         WHERE 
-            student_id = rec.student_id and
-            group_id_n = rec.group_id;
+            student_id_in = rec.student_id and
+            group_id_in = rec.group_id;
         dbms_output.put_line('Student grade has been added.');
   ELSE
         dbms_output.put_line('Student record does not exist.');

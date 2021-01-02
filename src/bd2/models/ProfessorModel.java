@@ -36,10 +36,7 @@ public class ProfessorModel extends UserModel {
     }
 
     public ResultSet getStudents() throws SQLException {
-        if (groupsStudent != null)
-            groupsStudent.beforeFirst();
-        else
-            fetchStudents();
+        fetchStudents();
 
         return groupsStudent;
     }
@@ -51,10 +48,7 @@ public class ProfessorModel extends UserModel {
     }
 
     public ResultSet getGroups() throws SQLException {
-        if (groups != null)
-            groups.beforeFirst();
-        else
-            fetchGroups();
+        fetchGroups();
 
         return groups;
     }
