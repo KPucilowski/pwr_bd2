@@ -116,12 +116,12 @@ public class ProfessorController implements IController {
         }
 
         view.dataTable.addMouseListener(new MouseAdapter() {
-        public void mouseClicked(MouseEvent me) {
+            public void mouseClicked(MouseEvent me) {
                 if (me.getClickCount() == 2) {
                     JTable target = (JTable)me.getSource();
                     String string_group_id = (String) view.dataTable.getValueAt(target.getSelectedRow(), 0);
-                    int group_id = Integer.parseInt(string_group_id);
-                    System.out.println(group_id);
+                    int cliked_group_id = Integer.parseInt(string_group_id);
+                    System.out.println(cliked_group_id);
                     showStudents();
                 }
             }
@@ -152,24 +152,24 @@ public class ProfessorController implements IController {
 
     private void updateGrades() {
         view.dataTable.setModel(view.tableModel2);
-            try {
-                var rs = model.getStudents();
-                while (rs.next()) {
-                    int row =  view.dataTable.getSelectedRow();
-                    if (row >= 0) {
-                        System.out.println(row);
-                        String string_student_id = (String) view.tableModel2.getValueAt(row, 0);
-                        String string_group_id = (String) view.tableModel2.getValueAt(row, 1);
-                        String string_grade = (String) view.tableModel2.getValueAt(row, 2);
-                        int student_id = Integer.parseInt(string_student_id);
-                        int group_id = Integer.parseInt(string_group_id);
-                        double grade = Double.parseDouble(string_grade);
-                        model.addGrade(student_id, group_id, grade);
-                    }
+        try {
+            var rs = model.getStudents();
+            while (rs.next()) {
+                int row =  view.dataTable.getSelectedRow();
+                if (row >= 0) {
+                    System.out.println(row);
+                    String string_student_id = (String) view.tableModel2.getValueAt(row, 0);
+                    String string_group_id = (String) view.tableModel2.getValueAt(row, 1);
+                    String string_grade = (String) view.tableModel2.getValueAt(row, 2);
+                    int student_id = Integer.parseInt(string_student_id);
+                    int group_id = Integer.parseInt(string_group_id);
+                    double grade = Double.parseDouble(string_grade);
+                    model.addGrade(student_id, group_id, grade);
                 }
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-                e.printStackTrace();
             }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
     }
 }
