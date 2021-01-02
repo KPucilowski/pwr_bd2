@@ -8,7 +8,11 @@ import bd2.views.ProfessorView;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.sql.SQLException;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.swing.table.*;
 
 public class ProfessorController implements IController {
     private final ProfessorView view;
@@ -32,7 +36,7 @@ public class ProfessorController implements IController {
         view.getIdField().setText(String.valueOf(model.getId()));
         view.getPersonalDataButton().addActionListener(e -> showPersonalData());
         view.getTimetableButton().addActionListener(e -> showTimetable());
-        view.getGroupsButton().addActionListener(e -> showStudents());
+        view.getGroupsButton().addActionListener(e -> showGroups());
         view.getSaveButton().addActionListener(e -> updateGrades());
         view.getLogOutButton().addActionListener(e -> dispose());
     }
@@ -110,6 +114,18 @@ public class ProfessorController implements IController {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
+
+        view.dataTable.addMouseListener(new MouseAdapter() {
+        public void mouseClicked(MouseEvent me) {
+                if (me.getClickCount() == 2) {
+                    JTable target = (JTable)me.getSource();
+                    String string_group_id = (String) view.dataTable.getValueAt(target.getSelectedRow(), 0);
+                    int group_id = Integer.parseInt(string_group_id);
+                    System.out.println(group_id);
+                    showStudents();
+                }
+            }
+        });
     }
 
     private void showStudents() {
@@ -156,5 +172,4 @@ public class ProfessorController implements IController {
                 e.printStackTrace();
             }
     }
-
 }

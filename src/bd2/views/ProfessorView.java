@@ -13,7 +13,7 @@ public class ProfessorView extends Component {
     private JButton personalDataButton;
     private JButton logOutButton;
     private JTextField idField;
-    public JTable dataTable;
+    public  JTable dataTable;
     private JScrollPane scrollPane;
     private JLabel loggedAsLabel;
     public JButton saveButton;
