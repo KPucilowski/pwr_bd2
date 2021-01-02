@@ -113,9 +113,10 @@ public class ProfessorController implements IController {
     }
 
     private void showStudents() {
+        view.dataTable.repaint();
+        view.getTableModel2().setRowCount(0);
         view.dataTable.setModel(view.tableModel2);
         view.saveButton.setVisible(true);
-        view.getTableModel2().setRowCount(0);
         view.getTableModel2().setColumnIdentifiers(new String[]{"Student ID", "Group ID","Grade", "Student name", "Email"});
         try {
             var rs = model.getStudents();
@@ -135,18 +136,25 @@ public class ProfessorController implements IController {
 
     private void updateGrades() {
         view.dataTable.setModel(view.tableModel2);
-        try{
-            var rs = model.getStudents();
-            while (rs.next()) {
-                //var student_id = rs.getInt("STUDENT_ID");
-                //var group_id = rs.getInt("GROUP_ID");
-                //Object ob = view.dataTable.getValueAt(view.dataTable.getSelectedRow(), 2);
-                //double obb = Double.parseDouble((String) ob);
-                //model.addGrade(student_id,group_id, obb);
+            try {
+                var rs = model.getStudents();
+                while (rs.next()) {
+                    int row =  view.dataTable.getSelectedRow();
+                    if (row >= 0) {
+                        System.out.println(row);
+                        String string_student_id = (String) view.tableModel2.getValueAt(row, 0);
+                        String string_group_id = (String) view.tableModel2.getValueAt(row, 1);
+                        String string_grade = (String) view.tableModel2.getValueAt(row, 2);
+                        int student_id = Integer.parseInt(string_student_id);
+                        int group_id = Integer.parseInt(string_group_id);
+                        double grade = Double.parseDouble(string_grade);
+                        model.addGrade(student_id, group_id, grade);
+                    }
+                }
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            e.printStackTrace();
-        }
     }
+
 }
