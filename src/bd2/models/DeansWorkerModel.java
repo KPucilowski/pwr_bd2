@@ -12,8 +12,14 @@ import java.time.DayOfWeek;
 
 
 public class DeansWorkerModel extends UserModel {
-    public DeansWorkerModel(int id, String type) {
+    private ResultSet groups;
+    private ResultSet groupsStudent;
+    public DeansWorkerModel(int id, String type)
+    {
         super(id, type);
+    }
+    public DeansWorkerModel(LoginModel loginModel) {
+        super(loginModel.getId(), loginModel.getType());
     }
 
     public void addGroup(
@@ -58,6 +64,19 @@ public class DeansWorkerModel extends UserModel {
         stmt.execute();
     }
 
+
+    public ResultSet getStudents() throws SQLException {
+        fetchStudents();
+
+        return groupsStudent;
+    }
+
+    private void fetchStudents() throws SQLException {
+        Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        //groupsStudent = st.executeQuery("select * from BD.GROUP_STUDENTS_VIEW where professor_id = " + this.id  + "and group_id = " + this.group_id);
+        groupsStudent = st.executeQuery("select * from BD.GROUP_STUDENTS_VIEW where professor_id = " + this.id);
+    }
+
     private void addStudentToGroup(int student_id, int group_id) throws SQLException {
         CallableStatement stmt = App.cn.prepareCall("{call BD.ADD_STUDENT_TO_GROUP(?, ?)}");
         stmt.setInt(1, student_id);
@@ -65,7 +84,7 @@ public class DeansWorkerModel extends UserModel {
         stmt.execute();
     }
 
-    private void removeGroup(int group_id) throws SQLException {
+    public void removeGroup(int group_id) throws SQLException {
         CallableStatement stmt = App.cn.prepareCall("{call BD.REMOVE_GROUP(?)}");
         stmt.setInt(1, group_id);
         stmt.execute();
@@ -99,4 +118,6 @@ public class DeansWorkerModel extends UserModel {
         Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         return st.executeQuery("select * from BD.SUBJECT");
     }
+
+
 }
