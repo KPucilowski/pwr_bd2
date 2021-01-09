@@ -35,7 +35,7 @@ public class WorkerView extends Component {
             return column == 2;
         };
     };
-    public WorkerView(){
+    public WorkerView() {
         frame = new JFrame("Deans Worker menu");
         frame.setContentPane(workerPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,7 +45,7 @@ public class WorkerView extends Component {
         dataTable.setModel(tableModel);
     }
 
-    public void dispose(){
+    public void dispose() {
         frame.dispose();
     }
 
@@ -61,35 +61,35 @@ public class WorkerView extends Component {
         return idField;
     }
 
-    public JButton getLogOutButton(){
+    public JButton getLogOutButton() {
         return logOutButton;
     }
 
-    public JButton getEditGroupButton(){
+    public JButton getEditGroupButton() {
         return editGroupButton;
     }
 
-    public JButton getDeleteGroupButton(){
+    public JButton getDeleteGroupButton() {
         return deleteGroupButton;
     }
 
-    public JButton getOpenNewGroupButton(){
+    public JButton getOpenNewGroupButton() {
         return openNewGroupButton;
     }
 
-    public JButton getAddStudentToGroupButton(){
+    public JButton getAddStudentToGroupButton() {
         return addStudentToGroupButton;
     }
 
-    public JButton getDeleteStudentFromGroupButton(){
+    public JButton getDeleteStudentFromGroupButton() {
         return deleteStudentFromGroupButton;
     }
 
-    public JButton getAddStudentsToListButton(){
+    public JButton getAddStudentsToListButton() {
         return addStudentsToListButton;
     }
 
-    public JButton getDeleteStudentsFromListButton(){
+    public JButton getDeleteStudentsFromListButton() {
         return deleteStudentsFromListButton;
     }
 }
