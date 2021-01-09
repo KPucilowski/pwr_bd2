@@ -128,7 +128,7 @@ public class DeansWorkerController implements IController {
         view.dataTable.repaint();
         view.getTableModel2().setRowCount(0);
         view.dataTable.setModel(view.tableModel2);
-        view.getTableModel2().setColumnIdentifiers(new String[]{"Student ID", "Group ID","Grade", "Student name", "Email"});
+        view.getTableModel2().setColumnIdentifiers(new String[]{"Student ID", "Group ID", "Grade", "Student name", "Email"});
         try {
             var rs = model.getStudents(clicked_group_id);
             while (rs.next()) {
@@ -169,7 +169,7 @@ public class DeansWorkerController implements IController {
         view.dataTable.repaint();
         view.getTableModel2().setRowCount(0);
         view.dataTable.setModel(view.tableModel2);
-        view.getTableModel2().setColumnIdentifiers(new String[]{"Student ID", "Group ID","Grade", "Student name", "Email"});
+        view.getTableModel2().setColumnIdentifiers(new String[]{"Student ID", "Group ID", "Grade", "Student name", "Email"});
         try {
             var rs = model.getAllStudents();
             while (rs.next()) {
@@ -212,7 +212,7 @@ public class DeansWorkerController implements IController {
         view.dataTable.repaint();
         view.getTableModel2().setRowCount(0);
         view.dataTable.setModel(view.tableModel2);
-        view.getTableModel2().setColumnIdentifiers(new String[]{"Student ID", "Group ID","Grade", "Student name", "Email"});
+        view.getTableModel2().setColumnIdentifiers(new String[]{"Student ID", "Group ID", "Grade", "Student name", "Email"});
         try {
             var rs = model.getAllStudents();
             while (rs.next()) {
