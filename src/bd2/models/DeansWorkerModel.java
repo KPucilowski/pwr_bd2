@@ -65,19 +65,28 @@ public class DeansWorkerModel extends UserModel {
     }
 
 
-    public ResultSet getStudents() throws SQLException {
-        fetchStudents();
+    public ResultSet getStudents(int clicked_group_id) throws SQLException {
+        fetchStudents(clicked_group_id);
 
         return groupsStudent;
     }
-
-    private void fetchStudents() throws SQLException {
-        Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        //groupsStudent = st.executeQuery("select * from BD.GROUP_STUDENTS_VIEW where professor_id = " + this.id  + "and group_id = " + this.group_id);
-        groupsStudent = st.executeQuery("select * from BD.GROUP_STUDENTS_VIEW where professor_id = " + this.id);
+    public ResultSet getAllStudents() throws SQLException{
+        fetchAllStudents();
+        return groupsStudent;
     }
 
-    private void addStudentToGroup(int student_id, int group_id) throws SQLException {
+    private void fetchAllStudents() throws SQLException{
+        Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        groupsStudent = st.executeQuery("select * from BD.GROUP_STUDENTS_VIEW");
+    }
+
+    private void fetchStudents(int clicked_group_id) throws SQLException {
+        Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        //groupsStudent = st.executeQuery("select * from BD.GROUP_STUDENTS_VIEW where professor_id = " + this.id  + "and group_id = " + this.group_id);
+        groupsStudent = st.executeQuery("select * from BD.GROUP_STUDENTS_VIEW where group_id = " +clicked_group_id);
+    }
+
+    public void addStudentToGroup(int student_id, int group_id) throws SQLException {
         CallableStatement stmt = App.cn.prepareCall("{call BD.ADD_STUDENT_TO_GROUP(?, ?)}");
         stmt.setInt(1, student_id);
         stmt.setInt(2, group_id);
@@ -90,13 +99,13 @@ public class DeansWorkerModel extends UserModel {
         stmt.execute();
     }
 
-    private void removeStudent(int student_id) throws SQLException {
+    public void removeStudent(int student_id) throws SQLException {
         CallableStatement stmt = App.cn.prepareCall("{call BD.REMOVE_STUDENT(?)}");
         stmt.setInt(1, student_id);
         stmt.execute();
     }
 
-    private void removeStudentFromGroup(int student_id, int group_id) throws SQLException {
+    public void removeStudentFromGroup(int student_id, int group_id) throws SQLException {
         CallableStatement stmt = App.cn.prepareCall("{call BD.REMOVE_STUDENT_FROM_GROUP(?, ?)}");
         stmt.setInt(1, student_id);
         stmt.setInt(2, group_id);
