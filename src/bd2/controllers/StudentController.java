@@ -15,14 +15,12 @@ public class StudentController implements IController {
     public StudentController(StudentView view, LoginModel model) {
         this.view = view;
         this.model = new StudentModel(model);
-
         init();
     }
 
     public StudentController(StudentView view, StudentModel model) {
         this.view = view;
         this.model = model;
-
         init();
     }
 

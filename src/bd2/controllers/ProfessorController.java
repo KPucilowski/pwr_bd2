@@ -13,7 +13,7 @@ import java.awt.event.*;
 public class ProfessorController implements IController {
     private final ProfessorView view;
     private final ProfessorModel model;
-    public int group_id;
+
     public ProfessorController(ProfessorView view, LoginModel model) {
         this.view = view;
         this.model = new ProfessorModel(model);
@@ -36,7 +36,6 @@ public class ProfessorController implements IController {
         view.getSaveButton().addActionListener(e -> updateGrades());
         view.getLogOutButton().addActionListener(e -> dispose());
     }
-
 
     @Override
     public void dispose() {

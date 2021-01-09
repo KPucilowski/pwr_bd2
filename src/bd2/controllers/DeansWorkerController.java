@@ -15,24 +15,21 @@ public class DeansWorkerController implements IController {
     private final DeansWorkerModel model;
     public int group_id;
     public int student_id;
+
     public DeansWorkerController(WorkerView view, LoginModel model) {
         this.view = view;
         this.model = new DeansWorkerModel(model);
-
         init();
     }
 
     public DeansWorkerController(WorkerView view, DeansWorkerModel model) {
         this.view = view;
         this.model = model;
-
         init();
     }
 
-
     @Override
     public void init() {
-
         view.getIdField().setText(String.valueOf(model.getId()));
         view.getLogOutButton().addActionListener(e -> dispose());
         view.getAddStudentsToListButton().addActionListener(e -> addStudentToList());
@@ -42,6 +39,13 @@ public class DeansWorkerController implements IController {
         view.getDeleteGroupButton().addActionListener(e -> deleteGroup());
         view.getEditGroupButton().addActionListener(e -> editGroup());
         view.getOpenNewGroupButton().addActionListener(e -> openNewGroup());
+    }
+
+    @Override
+    public void dispose() {
+        view.dispose();
+        App.reconnect();
+        new LoginController();
     }
 
     private void editGroup() {
@@ -280,12 +284,7 @@ public class DeansWorkerController implements IController {
     }
 
 
-    @Override
-    public void dispose() {
-        view.dispose();
-        App.reconnect();
-        new LoginController();
-    }
+
 
 
     private void openNewGroup() {
