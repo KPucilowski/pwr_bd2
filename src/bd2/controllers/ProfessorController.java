@@ -6,18 +6,14 @@ import bd2.models.ProfessorModel;
 import bd2.views.ProfessorView;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.sql.SQLException;
 import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.table.*;
 
 public class ProfessorController implements IController {
     private final ProfessorView view;
     private final ProfessorModel model;
-
+    public int group_id;
     public ProfessorController(ProfessorView view, LoginModel model) {
         this.view = view;
         this.model = new ProfessorModel(model);
@@ -120,22 +116,21 @@ public class ProfessorController implements IController {
                 if (me.getClickCount() == 2) {
                     JTable target = (JTable)me.getSource();
                     String string_group_id = (String) view.dataTable.getValueAt(target.getSelectedRow(), 0);
-                    int cliked_group_id = Integer.parseInt(string_group_id);
-                    System.out.println(cliked_group_id);
-                    showStudents();
+                    int clicked_group_id = Integer.parseInt(string_group_id);
+                    showStudents(clicked_group_id);
                 }
             }
         });
     }
 
-    private void showStudents() {
+    private void showStudents(int clicked_group_id) {
         view.dataTable.repaint();
         view.getTableModel2().setRowCount(0);
         view.dataTable.setModel(view.tableModel2);
         view.saveButton.setVisible(true);
         view.getTableModel2().setColumnIdentifiers(new String[]{"Student ID", "Group ID","Grade", "Student name", "Email"});
         try {
-            var rs = model.getStudents();
+            var rs = model.getStudents(clicked_group_id);
             while (rs.next()) {
                 var student_id = rs.getString("STUDENT_ID");
                 var group_id = rs.getString("GROUP_ID");
@@ -153,11 +148,10 @@ public class ProfessorController implements IController {
     private void updateGrades() {
         view.dataTable.setModel(view.tableModel2);
         try {
-            var rs = model.getStudents();
+            var rs = model.getStudentsGrades();
             while (rs.next()) {
                 int row =  view.dataTable.getSelectedRow();
                 if (row >= 0) {
-                    System.out.println(row);
                     String string_student_id = (String) view.tableModel2.getValueAt(row, 0);
                     String string_group_id = (String) view.tableModel2.getValueAt(row, 1);
                     String string_grade = (String) view.tableModel2.getValueAt(row, 2);
