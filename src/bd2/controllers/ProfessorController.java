@@ -44,6 +44,17 @@ public class ProfessorController implements IController {
         new LoginController();
     }
 
+    MouseListener mouseListener = new MouseAdapter() {
+        public void mouseClicked(MouseEvent me) {
+            if (me.getClickCount() == 2) {
+                JTable target = (JTable)me.getSource();
+                String string_group_id = (String) view.dataTable.getValueAt(target.getSelectedRow(), 0);
+                int clicked_group_id = Integer.parseInt(string_group_id);
+                showStudents(clicked_group_id);
+            }
+        }
+    };
+
     private void showPersonalData() {
         view.dataTable.setModel(view.tableModel);
         view.saveButton.setVisible(false);
@@ -90,6 +101,7 @@ public class ProfessorController implements IController {
 
     private void showGroups() {
         view.dataTable.setModel(view.tableModel);
+        view.dataTable.addMouseListener(mouseListener);
         view.saveButton.setVisible(false);
         view.getTableModel().setRowCount(0);
         view.getTableModel().setColumnIdentifiers(new String[]{"Group ID", "Subject ID", "Subject name", "Day", "Time", "Parity", "Form"});
@@ -109,20 +121,10 @@ public class ProfessorController implements IController {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
-
-        view.dataTable.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent me) {
-                if (me.getClickCount() == 2) {
-                    JTable target = (JTable)me.getSource();
-                    String string_group_id = (String) view.dataTable.getValueAt(target.getSelectedRow(), 0);
-                    int clicked_group_id = Integer.parseInt(string_group_id);
-                    showStudents(clicked_group_id);
-                }
-            }
-        });
     }
 
     private void showStudents(int clicked_group_id) {
+        view.dataTable.removeMouseListener(mouseListener);
         view.dataTable.repaint();
         view.getTableModel2().setRowCount(0);
         view.dataTable.setModel(view.tableModel2);
