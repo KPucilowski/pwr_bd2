@@ -49,6 +49,7 @@ public class DeansWorkerController implements IController {
     }
 
     private void editGroup() {
+
     }
 
     private void deleteGroup() {
@@ -90,7 +91,6 @@ public class DeansWorkerController implements IController {
         });
     }
 
-
     private void deleteStudentsFromGroup() {
         view.dataTable.setModel(view.tableModel);
         view.getTableModel().setRowCount(0);
@@ -124,6 +124,7 @@ public class DeansWorkerController implements IController {
             }
         });
     }
+
     private void showStudents(int clicked_group_id) {
         view.dataTable.repaint();
         view.getTableModel2().setRowCount(0);
@@ -143,6 +144,7 @@ public class DeansWorkerController implements IController {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
+
         view.dataTable.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent me) {
                 if (me.getClickCount() == 2) {
@@ -163,7 +165,6 @@ public class DeansWorkerController implements IController {
             }
         });
     }
-
 
     private void deleteStudentsFromList() {
         view.dataTable.repaint();
@@ -205,9 +206,6 @@ public class DeansWorkerController implements IController {
         });
     }
 
-
-
-
     private void addStudentToGroup() {
         view.dataTable.repaint();
         view.getTableModel2().setRowCount(0);
@@ -227,6 +225,7 @@ public class DeansWorkerController implements IController {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
+
         view.dataTable.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent me) {
                 if (me.getClickCount() == 2) {
@@ -239,8 +238,8 @@ public class DeansWorkerController implements IController {
                 }
             }
         });
-
     }
+
     private void showGroups(){
         view.dataTable.setModel(view.tableModel);
         view.getTableModel().setRowCount(0);
@@ -279,14 +278,12 @@ public class DeansWorkerController implements IController {
             }
         });
     }
+
     private void addStudentToList() {
 
     }
 
-
-
-
-
     private void openNewGroup() {
+
     }
 }
