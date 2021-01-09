@@ -121,7 +121,7 @@ public class StudentController implements IController {
                 var professor = rs.getString("PROFESSOR");
                 var subject_name = rs.getString("SUBJECT_NAME");
                 var parity = rs.getString("PARITY");
-                var time = rs.getTime("TIME").toString();
+                var time = rs.getString("TIME");
                 var day = String.valueOf(rs.getInt("DAY"));
                 var form = rs.getString("FORM");
                 var student_limit = String.valueOf(rs.getInt("STUDENT_LIMIT"));
