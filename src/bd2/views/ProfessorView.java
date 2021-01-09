@@ -8,15 +8,15 @@ public class ProfessorView extends Component {
 
     private final JFrame frame;
     public JPanel professorPanel;
+    private JScrollPane scrollPane;
+    public  JTable dataTable;
+    private JTextField idField;
+    private JLabel loggedAsLabel;
     private JButton groupsButton;
     private JButton timetableButton;
     private JButton personalDataButton;
-    private JButton logOutButton;
-    private JTextField idField;
-    public  JTable dataTable;
-    private JScrollPane scrollPane;
-    private JLabel loggedAsLabel;
     public JButton saveButton;
+    private JButton logOutButton;
 
     public DefaultTableModel tableModel = new DefaultTableModel()
     {
@@ -42,10 +42,6 @@ public class ProfessorView extends Component {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         dataTable.setModel(tableModel);
-    }
-
-    public JButton getLogOutButton() {
-        return logOutButton;
     }
 
     public void dispose() {
@@ -78,5 +74,9 @@ public class ProfessorView extends Component {
 
     public JButton getSaveButton() {
         return saveButton;
+    }
+
+    public JButton getLogOutButton() {
+        return logOutButton;
     }
 }

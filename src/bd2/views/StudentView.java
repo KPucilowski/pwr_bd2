@@ -8,15 +8,15 @@ public class StudentView extends Component {
 
     private final JFrame frame;
     private JPanel studentPanel;
-    private JTextField idField;
+    private JScrollPane scrollPane;
+    private JLabel loggedAsLabel;
     private JTable dataTable;
+    private JTextField idField;
     private JButton enrollButton;
     private JButton gradesButton;
     private JButton timetableButton;
     private JButton personalDataButton;
     private JButton logOutButton;
-    private JScrollPane scrollPane;
-    private JLabel loggedAsLabel;
 
     DefaultTableModel tableModel = new DefaultTableModel()
     {
@@ -33,16 +33,7 @@ public class StudentView extends Component {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-
         dataTable.setModel(tableModel);
-    }
-
-    public JButton getLogOutButton() {
-        return logOutButton;
-    }
-
-    public JButton getTimetableButton() {
-        return timetableButton;
     }
 
     public void dispose() {
@@ -57,6 +48,10 @@ public class StudentView extends Component {
         return idField;
     }
 
+    public JButton getTimetableButton() {
+        return timetableButton;
+    }
+
     public JButton getPersonalDataButton() {
         return personalDataButton;
     }
@@ -67,5 +62,9 @@ public class StudentView extends Component {
 
     public JButton getEnrollButton() {
         return enrollButton;
+    }
+
+    public JButton getLogOutButton() {
+        return logOutButton;
     }
 }
