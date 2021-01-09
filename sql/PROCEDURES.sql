@@ -1,3 +1,12 @@
+DROP PROCEDURE "BD"."ADD_GRADE";
+DROP PROCEDURE "BD"."ADD_GROUP";
+DROP PROCEDURE "BD"."ADD_STUDENT";
+DROP PROCEDURE "BD"."ADD_STUDENT_TO_GROUP";
+DROP PROCEDURE "BD"."REMOVE_GRADE";
+DROP PROCEDURE "BD"."REMOVE_GROUP";
+DROP PROCEDURE "BD"."REMOVE_STUDENT";
+DROP PROCEDURE "BD"."REMOVE_STUDENT_FROM_GROUP";
+
 --------------------------------------------------------
 --  DDL for Procedure ADD_GRADE
 --------------------------------------------------------
