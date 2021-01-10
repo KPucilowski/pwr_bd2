@@ -3,6 +3,7 @@ package bd2.controllers;
 import bd2.App;
 import bd2.models.LoginModel;
 import bd2.models.DeansWorkerModel;
+import bd2.views.NewGroupView;
 import bd2.views.WorkerView;
 
 import javax.swing.*;
@@ -13,6 +14,7 @@ import java.sql.SQLException;
 
 public class DeansWorkerController implements IController {
     private final WorkerView view;
+    private NewGroupView newGroupView;
     private final DeansWorkerModel model;
     public int group_id;
     public int student_id;
@@ -49,7 +51,6 @@ public class DeansWorkerController implements IController {
         view.getOpenNewGroupButton().addActionListener(e -> openNewGroup());
         view.getAccept_button().addActionListener(e->accept());
         view.getAddStudentToGroup().addActionListener(e->accept_modification());
-
         view.getFirst_name().setVisible(false);
         view.getLast_name().setVisible(false);
         view.getFaculty().setVisible(false);
@@ -372,7 +373,13 @@ public class DeansWorkerController implements IController {
 
     private void openNewGroup() {
         notVisible();
-        new WorkerView.addNewGroupView(model);
+
+        /*try {
+            model.addGroup(group_id, subject_id, professor_id,parity, day, time, form, student_limit);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }*/
     }
+
 
 }
