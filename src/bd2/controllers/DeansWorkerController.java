@@ -373,13 +373,29 @@ public class DeansWorkerController implements IController {
 
     private void openNewGroup() {
         notVisible();
+        new NewGroupView();
+        newGroupView.getOkButton().addActionListener(e->makeNewGroup());
+    }
 
-        /*try {
+    public void makeNewGroup()
+    {
+        String string_group_id = newGroupView.txtGroupID.getText();
+        String string_subject_id = newGroupView.txtSubjectID.getText();
+        String string_professor_id = newGroupView.txtProfessorID.getText();
+        String parity = newGroupView.txtParity.getText();
+        String string_day = newGroupView.txtDay.getText();
+        String time = newGroupView.txtTime.getText();
+        String form = newGroupView.txtForm.getText();
+        String string_student_limit = newGroupView.txtStudentLimit.getText();
+        int group_id = Integer.parseInt(string_group_id);
+        int subject_id = Integer.parseInt(string_subject_id);
+        int professor_id = Integer.parseInt(string_professor_id);
+        int student_limit = Integer.parseInt(string_student_limit);
+        int day = Integer.parseInt(string_day);
+        try {
             model.addGroup(group_id, subject_id, professor_id,parity, day, time, form, student_limit);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        }*/
+        }
     }
-
-
 }
