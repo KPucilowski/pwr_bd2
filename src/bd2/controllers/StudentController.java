@@ -15,14 +15,12 @@ public class StudentController implements IController {
     public StudentController(StudentView view, LoginModel model) {
         this.view = view;
         this.model = new StudentModel(model);
-
         init();
     }
 
     public StudentController(StudentView view, StudentModel model) {
         this.view = view;
         this.model = model;
-
         init();
     }
 
@@ -100,7 +98,7 @@ public class StudentController implements IController {
                 var form = rs.getString("FORM");
                 var grade = rs.getString("GRADE");
                 var professor = rs.getString("PROFESSOR");
-                var total_months = rs.getInt("TOTAL_MONTHS");
+                var total_months = rs.getInt("TOTAL_MONTHS"); //<------error
                 var year = String.valueOf(calcYear(total_months));
                 var semester = String.valueOf(calcSemester(total_months));
                 view.getTableModel().addRow(new String[]{year, semester, subject_name, form, grade, professor});
@@ -121,7 +119,7 @@ public class StudentController implements IController {
                 var professor = rs.getString("PROFESSOR");
                 var subject_name = rs.getString("SUBJECT_NAME");
                 var parity = rs.getString("PARITY");
-                var time = rs.getTime("TIME").toString();
+                var time = rs.getString("TIME");
                 var day = String.valueOf(rs.getInt("DAY"));
                 var form = rs.getString("FORM");
                 var student_limit = String.valueOf(rs.getInt("STUDENT_LIMIT"));

@@ -32,22 +32,22 @@ insert into SUBJECT (subject_id, subject_name, faculty_id) values (000004, 'Coil
 insert into SUBJECT (subject_id, subject_name, faculty_id) values (000005, 'Ruth''s Sedge', 'W4');
 
 insert into "USER" (user_id, login, password, type) values (STUDENT_SEQ.NEXTVAL, '1', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'STUDENT');
-insert into "USER" (user_id, login, password, type) values (STUDENT_SEQ.NEXTVAL, 'cguymer1', '5Kx5yb', 'STUDENT');
-insert into "USER" (user_id, login, password, type) values (STUDENT_SEQ.NEXTVAL, 'astanney2', 'nzUm97YKX', 'STUDENT');
-insert into "USER" (user_id, login, password, type) values (STUDENT_SEQ.NEXTVAL, 'amanilove3', 'H2skaHM0uC', 'STUDENT');
-insert into "USER" (user_id, login, password, type) values (STUDENT_SEQ.NEXTVAL, 'ncarnow4', 'jxr5fy', 'STUDENT');
+insert into "USER" (user_id, login, password, type) values (STUDENT_SEQ.NEXTVAL, 's2', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'STUDENT');
+insert into "USER" (user_id, login, password, type) values (STUDENT_SEQ.NEXTVAL, 's3', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'STUDENT');
+insert into "USER" (user_id, login, password, type) values (STUDENT_SEQ.NEXTVAL, 's4', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'STUDENT');
+insert into "USER" (user_id, login, password, type) values (STUDENT_SEQ.NEXTVAL, 's5', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'STUDENT');
 
-insert into "USER" (user_id, login, password, type) values (PROFESSOR_SEQ.NEXTVAL, 'hhaz1eman0', 'sqy1XQd', 'PROFESSOR');
-insert into "USER" (user_id, login, password, type) values (PROFESSOR_SEQ.NEXTVAL, 'cguym1er1', '5Kx15yb', 'PROFESSOR');
-insert into "USER" (user_id, login, password, type) values (PROFESSOR_SEQ.NEXTVAL, 'ast1anney2', 'nzUm97Y1KX', 'PROFESSOR');
-insert into "USER" (user_id, login, password, type) values (PROFESSOR_SEQ.NEXTVAL, 'amani1love3', 'H2sk1aHM0uC', 'PROFESSOR');
-insert into "USER" (user_id, login, password, type) values (PROFESSOR_SEQ.NEXTVAL, 'nc1arnow4', 'jx1r5fy', 'PROFESSOR');
+insert into "USER" (user_id, login, password, type) values (PROFESSOR_SEQ.NEXTVAL, 'p1', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'PROFESSOR');
+insert into "USER" (user_id, login, password, type) values (PROFESSOR_SEQ.NEXTVAL, '2', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'PROFESSOR');
+insert into "USER" (user_id, login, password, type) values (PROFESSOR_SEQ.NEXTVAL, 'p3', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'PROFESSOR');
+insert into "USER" (user_id, login, password, type) values (PROFESSOR_SEQ.NEXTVAL, 'p4', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'PROFESSOR');
+insert into "USER" (user_id, login, password, type) values (PROFESSOR_SEQ.NEXTVAL, 'p5', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'PROFESSOR');
 
-insert into "USER" (user_id, login, password, type) values (DEANS_WORKER_SEQ.NEXTVAL, 'hhaz2eman0', 'sq2yXQd', 'DEANS_WORKER');
-insert into "USER" (user_id, login, password, type) values (DEANS_WORKER_SEQ.NEXTVAL, 'cguy3mer1', '5Kx45yb', 'DEANS_WORKER');
-insert into "USER" (user_id, login, password, type) values (DEANS_WORKER_SEQ.NEXTVAL, 'ast3anney2', 'nzU4m947YKX', 'DEANS_WORKER');
-insert into "USER" (user_id, login, password, type) values (DEANS_WORKER_SEQ.NEXTVAL, 'aman4ilove3', 'H26skaHM0uC', 'DEANS_WORKER');
-insert into "USER" (user_id, login, password, type) values (DEANS_WORKER_SEQ.NEXTVAL, 'ncar5now4', 'jx6r5fy', 'DEANS_WORKER');
+insert into "USER" (user_id, login, password, type) values (DEANS_WORKER_SEQ.NEXTVAL, 'w1', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'DEANS_WORKER');
+insert into "USER" (user_id, login, password, type) values (DEANS_WORKER_SEQ.NEXTVAL, 'w2', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'DEANS_WORKER');
+insert into "USER" (user_id, login, password, type) values (DEANS_WORKER_SEQ.NEXTVAL, '3', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'DEANS_WORKER');
+insert into "USER" (user_id, login, password, type) values (DEANS_WORKER_SEQ.NEXTVAL, 'w4', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'DEANS_WORKER');
+insert into "USER" (user_id, login, password, type) values (DEANS_WORKER_SEQ.NEXTVAL, 'w5', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', 'DEANS_WORKER');
 
 insert into PERSONAL_DATA (user_id, first_name, last_name, email, faculty_id) values (200001, 'Alice', 'Leroux', 'aleroux0@cdc.gov', 'W1');
 insert into PERSONAL_DATA (user_id, first_name, last_name, email, faculty_id) values (200002, 'Tillie', 'Vigrass', 'tvigrass1@berkeley.edu', 'W2');
