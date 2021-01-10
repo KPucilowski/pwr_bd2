@@ -27,17 +27,19 @@ public class DeansWorkerModel extends UserModel {
             int subject_id,
             int professor_id,
             String parity,
-            DayOfWeek day,
+            int day,
             String time,
             String form,
             int student_limit
+
+
     ) throws SQLException {
         CallableStatement stmt = App.cn.prepareCall("{call BD.ADD_GROUP(?, ?, ?, ?, ?, ?, ?, ?)}");
         stmt.setInt(1, group_id);
         stmt.setInt(2, subject_id);
         stmt.setInt(3, professor_id);
         stmt.setString(4, parity);
-        stmt.setInt(5, day.getValue());
+        stmt.setInt(5, day);
         stmt.setString(6, time);
         stmt.setString(7, form);
         stmt.setInt(8, student_limit);

@@ -49,6 +49,7 @@ public class DeansWorkerController implements IController {
         view.getOpenNewGroupButton().addActionListener(e -> openNewGroup());
         view.getAccept_button().addActionListener(e->accept());
         view.getAddStudentToGroup().addActionListener(e->accept_modification());
+
         view.getFirst_name().setVisible(false);
         view.getLast_name().setVisible(false);
         view.getFaculty().setVisible(false);
@@ -369,11 +370,9 @@ public class DeansWorkerController implements IController {
         view.getPeselField().setVisible(true);
     }
 
-
-
-
-
     private void openNewGroup() {
         notVisible();
+        new WorkerView.addNewGroupView(model);
     }
+
 }
