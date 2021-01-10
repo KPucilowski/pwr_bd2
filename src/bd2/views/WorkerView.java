@@ -29,6 +29,8 @@ public class WorkerView extends Component {
     private JLabel last_name;
     private JLabel faculty;
     private JLabel pesel;
+    private JLabel IDStudenta;
+    private JButton addStudentToGroup;
     public DefaultTableModel tableModel = new DefaultTableModel()
     {
         @Override
@@ -80,6 +82,8 @@ public class WorkerView extends Component {
     public JButton getDeleteStudentFromGroupButton(){return deleteStudentFromGroupButton;}
     public JButton getAddStudentsToListButton(){return addStudentsToListButton;}
     public JButton getDeleteStudentsFromListButton(){return deleteStudentsFromListButton;}
+    public JButton getAddStudentToGroup(){return addStudentToGroup;}
+    public JLabel getIDStudenta(){return IDStudenta;}
     public DefaultTableModel getTableModel2() {
         return tableModel2;
     }
