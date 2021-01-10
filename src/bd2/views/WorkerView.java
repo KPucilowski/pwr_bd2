@@ -67,6 +67,10 @@ public class WorkerView extends Component {
     public JTextField getLastNameField(){return LastNameField;}
     public JTextField getFacultyField(){return FacultyField;}
     public JTextField getPeselField(){return PeselField;}
+    public JLabel getFirst_name(){return first_name;}
+    public JLabel getLast_name(){return last_name;}
+    public JLabel getFaculty(){return faculty;}
+    public JLabel getPesel(){return pesel;}
     public JButton getAccept_button(){return accept_button;}
     public JButton getLogOutButton(){return logOutButton;}
     public JButton getEditGroupButton(){return editGroupButton;}
@@ -79,8 +83,4 @@ public class WorkerView extends Component {
     public DefaultTableModel getTableModel2() {
         return tableModel2;
     }
-    public JTextField getFirst_name(){return FirstNameField;}
-    public JTextField getLast_name(){return LastNameField;}
-    public JTextField getFaculty(){return FacultyField;}
-    public JTextField getPesel(){return PeselField;}
 }
