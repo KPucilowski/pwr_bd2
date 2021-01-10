@@ -82,7 +82,7 @@ BEGIN
     values (TEMP_ID, FIRST_NAME_IN, LAST_NAME_IN, TEMP_ID || '@edu.meme', FACULTY_ID_IN);
 
     insert into STUDENT (student_id, pesel, admission_date, year, semester, specialization_id)
-    values (TEMP_ID, PESEL_IN, SYSDATE, 1, 1, null);
+    values (TEMP_ID, PESEL_IN, SYSDATE, 1, 1, 1);
 END ADD_STUDENT;
 --------------------------------------------------------
 --  DDL for Procedure ADD_STUDENT_TO_GROUP
