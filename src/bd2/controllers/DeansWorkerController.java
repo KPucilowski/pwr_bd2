@@ -8,6 +8,7 @@ import bd2.views.WorkerView;
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 public class DeansWorkerController implements IController {
@@ -42,6 +43,43 @@ public class DeansWorkerController implements IController {
         view.getDeleteGroupButton().addActionListener(e -> deleteGroup());
         view.getEditGroupButton().addActionListener(e -> editGroup());
         view.getOpenNewGroupButton().addActionListener(e -> openNewGroup());
+        view.getAccept_button().addActionListener(e->accept());
+        view.getFirst_name().setVisible(false);
+        view.getLast_name().setVisible(false);
+        view.getFaculty().setVisible(false);
+        view.getPesel().setVisible(false);
+        view.getPeselField().setVisible(false);
+        view.getLastNameField().setVisible(false);
+        view.getFacultyField().setVisible(false);
+        view.getFirstNameField().setVisible(false);
+        view.getAccept_button().setVisible(false);
+    }
+
+    private void accept() {
+        String first_name;
+        String last_name;
+        String faculty_id;
+        String pesel;
+        first_name = view.getFirst_name().getText();
+        last_name = view.getLastNameField().getText();
+        faculty_id = view.getFacultyField().getText();
+        pesel = view.getPesel().getText();
+        try {
+            model.addStudent(first_name,last_name,faculty_id,pesel);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        view.getFirst_name().setVisible(false);
+        view.getLast_name().setVisible(false);
+        view.getFaculty().setVisible(false);
+        view.getPesel().setVisible(false);
+        view.getPeselField().setVisible(false);
+        view.getLastNameField().setVisible(false);
+        view.getFacultyField().setVisible(false);
+        view.getFirstNameField().setVisible(false);
+        view.getAccept_button().setVisible(false);
     }
 
     private void editGroup() {
@@ -267,7 +305,7 @@ public class DeansWorkerController implements IController {
                     System.out.println(clicked_group_id);
                     group_id = clicked_group_id;
                     try {
-                        model.addStudentToGroup(group_id,clicked_group_id);
+                        model.addStudentToGroup(student_id,clicked_group_id);
                     } catch (SQLException throwables) {
                         throwables.printStackTrace();
                     }
@@ -276,7 +314,15 @@ public class DeansWorkerController implements IController {
         });
     }
     private void addStudentToList() {
-
+        view.getFirst_name().setVisible(true);
+        view.getLast_name().setVisible(true);
+        view.getFaculty().setVisible(true);
+        view.getPesel().setVisible(true);
+        view.getAccept_button().setVisible(true);
+        view.getLastNameField().setVisible(true);
+        view.getFirstNameField().setVisible(true);
+        view.getFacultyField().setVisible(true);
+        view.getPeselField().setVisible(true);
     }
 
 

@@ -20,6 +20,15 @@ public class WorkerView extends Component {
     private JButton addStudentsToListButton;
     private JButton deleteStudentsFromListButton;
     private JPanel workerPanel;
+    private JTextField FirstNameField;
+    private JTextField LastNameField;
+    private JTextField FacultyField;
+    private JTextField PeselField;
+    private JLabel first_name;
+    private JButton accept_button;
+    private JLabel last_name;
+    private JLabel faculty;
+    private JLabel pesel;
     public DefaultTableModel tableModel = new DefaultTableModel()
     {
         @Override
@@ -54,7 +63,11 @@ public class WorkerView extends Component {
     public DefaultTableModel getTableModel() {
         return tableModel;
     }
-
+    public JTextField getFirstNameField(){return FirstNameField;}
+    public JTextField getLastNameField(){return LastNameField;}
+    public JTextField getFacultyField(){return FacultyField;}
+    public JTextField getPeselField(){return PeselField;}
+    public JButton getAccept_button(){return accept_button;}
     public JButton getLogOutButton(){return logOutButton;}
     public JButton getEditGroupButton(){return editGroupButton;}
     public JButton getDeleteGroupButton(){return deleteGroupButton;}
@@ -66,4 +79,8 @@ public class WorkerView extends Component {
     public DefaultTableModel getTableModel2() {
         return tableModel2;
     }
+    public JLabel getFirst_name(){return first_name;}
+    public JLabel getLast_name(){return last_name;}
+    public JLabel getFaculty(){return faculty;}
+    public JLabel getPesel(){return pesel;}
 }
