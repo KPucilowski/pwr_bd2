@@ -98,7 +98,7 @@ public class StudentController implements IController {
                 var form = rs.getString("FORM");
                 var grade = rs.getString("GRADE");
                 var professor = rs.getString("PROFESSOR");
-                var total_months = rs.getInt("TOTAL_MONTHS"); //<------error
+                var total_months = rs.getInt("TOTAL_MONTHS");
                 var year = String.valueOf(calcYear(total_months));
                 var semester = String.valueOf(calcSemester(total_months));
                 view.getTableModel().addRow(new String[]{year, semester, subject_name, form, grade, professor});
