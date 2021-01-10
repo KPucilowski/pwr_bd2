@@ -379,14 +379,14 @@ public class DeansWorkerController implements IController {
 
     public void makeNewGroup()
     {
-        String string_group_id = newGroupView.txtGroupID.getText();
-        String string_subject_id = newGroupView.txtSubjectID.getText();
-        String string_professor_id = newGroupView.txtProfessorID.getText();
-        String parity = newGroupView.txtParity.getText();
-        String string_day = newGroupView.txtDay.getText();
-        String time = newGroupView.txtTime.getText();
-        String form = newGroupView.txtForm.getText();
-        String string_student_limit = newGroupView.txtStudentLimit.getText();
+        String string_group_id = newGroupView.getTxtGroupID().getText();
+        String string_subject_id = newGroupView.getTxtSubjectID().getText();
+        String string_professor_id = newGroupView.getTxtProfessorID().getText();
+        String parity = newGroupView.getTxtParity().getText();
+        String string_day = newGroupView.getTxtDay().getText();
+        String time = newGroupView.getTxtTime().getText();
+        String form = newGroupView.getTxtForm().getText();
+        String string_student_limit = newGroupView.getTxtStudentLimit().getText();
         int group_id = Integer.parseInt(string_group_id);
         int subject_id = Integer.parseInt(string_subject_id);
         int professor_id = Integer.parseInt(string_professor_id);
