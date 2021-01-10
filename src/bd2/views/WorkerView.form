@@ -22,7 +22,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <editable value="false"/>
+        </properties>
       </component>
       <scrollpane id="3cb0b" binding="scrollPane">
         <constraints>
@@ -39,7 +41,9 @@
       </scrollpane>
       <component id="6a999" class="javax.swing.JButton" binding="editGroupButton">
         <constraints>
-          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="120" height="24"/>
+          </grid>
         </constraints>
         <properties>
           <text value="Edit Group"/>
@@ -47,7 +51,9 @@
       </component>
       <component id="dc31c" class="javax.swing.JButton" binding="deleteGroupButton">
         <constraints>
-          <grid row="1" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="120" height="24"/>
+          </grid>
         </constraints>
         <properties>
           <text value="Delete Group"/>
@@ -55,7 +61,9 @@
       </component>
       <component id="4250" class="javax.swing.JButton" binding="openNewGroupButton" default-binding="true">
         <constraints>
-          <grid row="1" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="120" height="24"/>
+          </grid>
         </constraints>
         <properties>
           <text value="Open New Group"/>
@@ -63,7 +71,9 @@
       </component>
       <component id="28d10" class="javax.swing.JButton" binding="addStudentToGroupButton" default-binding="true">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="120" height="24"/>
+          </grid>
         </constraints>
         <properties>
           <text value="Add Student to Group"/>
@@ -71,7 +81,9 @@
       </component>
       <component id="4a8e8" class="javax.swing.JButton" binding="deleteStudentFromGroupButton" default-binding="true">
         <constraints>
-          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="120" height="24"/>
+          </grid>
         </constraints>
         <properties>
           <text value="Delete Student from Group"/>
@@ -79,7 +91,9 @@
       </component>
       <component id="aec79" class="javax.swing.JButton" binding="addStudentsToListButton" default-binding="true">
         <constraints>
-          <grid row="2" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="120" height="24"/>
+          </grid>
         </constraints>
         <properties>
           <text value="Add Students to List"/>
@@ -87,7 +101,9 @@
       </component>
       <component id="dec18" class="javax.swing.JButton" binding="deleteStudentsFromListButton" default-binding="true">
         <constraints>
-          <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="120" height="24"/>
+          </grid>
         </constraints>
         <properties>
           <text value="Delete Students from List"/>
@@ -173,7 +189,9 @@
       </component>
       <component id="5d152" class="javax.swing.JButton" binding="logOutButton" default-binding="true">
         <constraints>
-          <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="120" height="24"/>
+          </grid>
         </constraints>
         <properties>
           <text value="Log out"/>
