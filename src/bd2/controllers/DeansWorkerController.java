@@ -68,6 +68,10 @@ public class DeansWorkerController implements IController {
         last_name = view.getLastNameField().getText();
         faculty_id = view.getFacultyField().getText();
         pesel = view.getPesel().getText();
+        System.out.println(first_name);
+        System.out.println(last_name);
+        System.out.println(faculty_id);
+        System.out.println(pesel);
         try {
             model.addStudent(first_name,last_name,faculty_id,pesel);
         } catch (SQLException throwables) {
