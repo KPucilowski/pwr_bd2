@@ -99,12 +99,14 @@ select
     sbj.subject_name,
     grp."FORM",
     rec.grade,
+    round(MONTHS_BETWEEN(rec.grade_date, st.admission_date)) as TOTAL_MONTHS,
     pd.first_name || ' ' || pd.last_name as PROFESSOR
 from
     "RECORD" rec join
     "GROUP" grp on grp."GROUP_ID" = rec."GROUP_ID" join
     subject sbj on grp.subject_id = sbj.subject_id join
-    personal_data pd on grp.professor_id = pd.user_id;
+    personal_data pd on grp.professor_id = pd.user_id join
+    student st on st.student_id = rec.student_id;
 --------------------------------------------------------
 --  DDL for View RECORD_VIEW
 --------------------------------------------------------
