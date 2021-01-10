@@ -14,7 +14,7 @@ import java.sql.SQLException;
 
 public class DeansWorkerController implements IController {
     private final WorkerView view;
-    private NewGroupView newGroupView;
+    public  NewGroupView newGroupView;
     private final DeansWorkerModel model;
     public int group_id;
     public int student_id;
@@ -30,6 +30,7 @@ public class DeansWorkerController implements IController {
         this.model = model;
         init();
     }
+
 
     @Override
     public void dispose() {
@@ -373,8 +374,9 @@ public class DeansWorkerController implements IController {
 
     private void openNewGroup() {
         notVisible();
-        new NewGroupView();
-        newGroupView.getOkButton().addActionListener(e->makeNewGroup());
+        NewGroupView newGroupViewX = new NewGroupView();
+        newGroupView = newGroupViewX;
+        this.newGroupView.getOkButton().addActionListener(e->makeNewGroup());
     }
 
     public void makeNewGroup()

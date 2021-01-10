@@ -2,7 +2,7 @@ package bd2.views;
 
 import javax.swing.*;
 import java.awt.*;
-import bd2.controllers.DeansWorkerController;
+
 public class NewGroupView extends Component {
     private JFrame frame;
     private JPanel newGroupPanel;
@@ -31,7 +31,6 @@ public class NewGroupView extends Component {
     private void dispose() {
         frame.dispose();
     }
-
 
     public JButton getOkButton() {
         return okButton;
