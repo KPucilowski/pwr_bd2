@@ -28,8 +28,8 @@ public class NewGroupView extends Component {
         getCancelButton().addActionListener(e->dispose());
     }
 
-    private void dispose() {
-        frame.dispose();
+    public void dispose() {
+        frame.dispose(); ;
     }
 
     public JButton getOkButton() {

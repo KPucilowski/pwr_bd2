@@ -231,6 +231,8 @@ public class DeansWorkerController implements IController {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        editGroup();
+        newGroupView.dispose();
     }
 
     private void deleteGroup() {
@@ -467,5 +469,6 @@ public class DeansWorkerController implements IController {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        newGroupView.dispose();
     }
 }
