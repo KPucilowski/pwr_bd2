@@ -227,12 +227,7 @@ public class DeansWorkerController implements IController {
         int student_limit = Integer.parseInt(string_student_limit);
         int day = Integer.parseInt(string_day);
         try {
-            //TUTAJ SQL!!!!!!!!!
-            //TUTAJ SQL!!!!!!!!!
-            model.addGroup(group_id, subject_id, professor_id,parity, day, time, form, student_limit);//TUTAJ SQL!!!!!!!!!
-            //TUTAJ SQL!!!!!!!!!
-            //TUTAJ SQL!!!!!!!!!
-            //TUTAJ SQL!!!!!!!!!
+            model.editGroup(group_id, subject_id, professor_id, parity, day, time, form, student_limit);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
