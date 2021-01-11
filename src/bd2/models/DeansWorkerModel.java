@@ -31,8 +31,6 @@ public class DeansWorkerModel extends UserModel {
             String time,
             String form,
             int student_limit
-
-
     ) throws SQLException {
         CallableStatement stmt = App.cn.prepareCall("{call BD.ADD_GROUP(?, ?, ?, ?, ?, ?, ?, ?)}");
         stmt.setInt(1, group_id);

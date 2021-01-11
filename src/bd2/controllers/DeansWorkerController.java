@@ -164,7 +164,6 @@ public class DeansWorkerController implements IController {
     private void editGroup() {
         notVisible();
         view.dataTable.setModel(view.tableModel);
-
         view.getTableModel().setRowCount(0);
         view.getTableModel().setColumnIdentifiers(new String[]{"Group ID", "Subject ID", "Professor id", "Parity", "Day", "Time", "Form", "Student limit"});
         try {
