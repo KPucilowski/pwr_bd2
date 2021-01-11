@@ -6,6 +6,7 @@ import bd2.controllers.dialogs.NewStudentController;
 import bd2.models.DeansWorkerModel;
 import bd2.models.LoginModel;
 import bd2.views.WorkerView;
+import bd2.views.dialogs.NewGroupView;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -16,7 +17,6 @@ import java.sql.SQLException;
 public class DeansWorkerController implements IController {
     private final WorkerView view;
     private final DeansWorkerModel model;
-
     private int current_table_model;
     private int current_group;
 
@@ -96,6 +96,13 @@ public class DeansWorkerController implements IController {
     }
 
     private void editGroup() {
+        NewGroupController ct = new NewGroupController();
+        try {
+            var group = ct.getModel();
+            model.editGroup(group.group_id, group.subject_id, group.professor_id, group.parity, group.day, group.time, group.form, group.student_limit);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void removeStudent() {
