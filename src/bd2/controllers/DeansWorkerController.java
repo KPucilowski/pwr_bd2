@@ -54,13 +54,20 @@ public class DeansWorkerController implements IController {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    switch (current_table_model) {
-                        case 0 -> editStudent();
-                        case 1 -> showGroup(getIdFromSelectedRow());
+                    if (current_table_model == 1) {
+                        showGroup(getIdFromSelectedRow());
                     }
                 }
             }
         });
+    }
+
+    private void update() {
+        switch (current_table_model) {
+            case 0 -> showStudents();
+            case 1 -> showGroups();
+            case 2 -> showGroup(current_group);
+        }
     }
 
     private void addButtonListener() {
@@ -69,13 +76,14 @@ public class DeansWorkerController implements IController {
             case 1 -> addGroup();
             case 2 -> addStudentToGroup();
         }
+        update();
     }
 
     private void editButtonListener() {
-        switch (current_table_model) {
-            case 0 -> editStudent();
-            case 1 -> editGroup();
+        if (current_table_model == 1) {
+            editGroup();
         }
+        update();
     }
 
     private void removeButtonListener() {
@@ -84,6 +92,7 @@ public class DeansWorkerController implements IController {
             case 1 -> removeGroup();
             case 2 -> removeStudentFromGroup();
         }
+        update();
     }
 
     private void editStudent() {
@@ -202,7 +211,7 @@ public class DeansWorkerController implements IController {
         setButtonsDefaultVisibility();
         view.getEditButton().setVisible(true);
         view.setTableModel(current_table_model);
-        
+
         try {
             var rs = model.getGroups();
             while (rs.next()) {

@@ -94,7 +94,7 @@
         </constraints>
         <properties>
           <enabled value="true"/>
-          <text value="Show perosonal data"/>
+          <text value="Show personal data"/>
         </properties>
       </component>
     </children>
