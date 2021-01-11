@@ -14,6 +14,9 @@ public class WorkerView extends Component {
     private JButton studentsButton;
     private JButton groupsButton;
     private JTable dataTable;
+    private JButton removeButton;
+    private JButton editButton;
+    private JButton addButton;
 
     DefaultTableModel tableModel = new DefaultTableModel(){
         @Override
@@ -67,5 +70,17 @@ public class WorkerView extends Component {
 
     public JButton getGroupsButton() {
         return groupsButton;
+    }
+
+    public JButton getRemoveButton() {
+        return removeButton;
+    }
+
+    public JButton getEditButton() {
+        return editButton;
+    }
+
+    public JButton getAddButton() {
+        return addButton;
     }
 }

@@ -9,7 +9,6 @@ import bd2.views.WorkerView;
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.sql.SQLException;
 
 public class DeansWorkerController implements IController {
@@ -47,6 +46,9 @@ public class DeansWorkerController implements IController {
         view.getLogOutButton().addActionListener(e -> dispose());
         view.getStudentsButton().addActionListener(e -> showStudents());
         view.getGroupsButton().addActionListener(e -> showGroups());
+        view.getAddButton().addActionListener(e -> addButtonListener());
+        view.getEditButton().addActionListener(e -> editButtonListener());
+        view.getRemoveButton().addActionListener(e -> removeButtonListener());
         view.getDataTable().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -57,14 +59,66 @@ public class DeansWorkerController implements IController {
                             break;
 
                         case 1:
-                            var test = view.getDataTable().getSelectedRow();
-                            var group_id = Integer.parseInt((String) view.getTableModel().getValueAt(test,0));
-                            showGroup(group_id);
+                            showGroup(getIdFromSelectedRow());
                             break;
                     }
                 }
             }
         });
+    }
+
+    private void addButtonListener() {
+        switch (currently_showing) {
+            case 0 -> addStudent();
+            case 1 -> addGroup();
+            case 2 -> addStudentToGroup();
+        }
+    }
+
+    private void editButtonListener() {
+        switch (currently_showing) {
+            case 0 -> editStudent();
+            case 1 -> editGroup();
+        }
+    }
+
+    private void editStudent() {
+    }
+
+    private void editGroup() {
+    }
+
+    private void removeButtonListener() {
+        switch (currently_showing) {
+            case 0 -> removeStudent();
+            case 1 -> removeGroup();
+            case 2 -> removeStudentFromGroup();
+        }
+    }
+
+    private void removeStudent() {
+    }
+
+    private void removeGroup() {
+    }
+
+    private void removeStudentFromGroup() {
+    }
+
+    private int getIdFromSelectedRow() {
+        var test = view.getDataTable().getSelectedRow();
+        return Integer.parseInt((String) view.getTableModel().getValueAt(test,0));
+    }
+
+    private void addGroup() {
+
+    }
+
+    private void addStudent() {
+
+    }
+
+    private void addStudentToGroup() {
     }
 
     private void showStudents() {
