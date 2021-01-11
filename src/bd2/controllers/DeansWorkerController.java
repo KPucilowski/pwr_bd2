@@ -3,7 +3,6 @@ package bd2.controllers;
 import bd2.App;
 import bd2.models.LoginModel;
 import bd2.models.DeansWorkerModel;
-import bd2.models.NewStudentModel;
 import bd2.views.NewGroupView;
 import bd2.views.WorkerView;
 
@@ -18,7 +17,8 @@ public class DeansWorkerController implements IController {
     public NewGroupView newGroupView;
     private final DeansWorkerModel model;
 
-    private int currently_showing;
+    private int current_table_model;
+    private int current_group;
 
     public DeansWorkerController(WorkerView view, LoginModel model) {
         this.view = view;
@@ -55,7 +55,7 @@ public class DeansWorkerController implements IController {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    switch (currently_showing) {
+                    switch (current_table_model) {
                         case 0:
                             //editStudent
                             break;
@@ -70,7 +70,7 @@ public class DeansWorkerController implements IController {
     }
 
     private void addButtonListener() {
-        switch (currently_showing) {
+        switch (current_table_model) {
             case 0 -> addStudent();
             case 1 -> addGroup();
             case 2 -> addStudentToGroup();
@@ -78,7 +78,7 @@ public class DeansWorkerController implements IController {
     }
 
     private void editButtonListener() {
-        switch (currently_showing) {
+        switch (current_table_model) {
             case 0 -> editStudent();
             case 1 -> editGroup();
         }
@@ -91,7 +91,7 @@ public class DeansWorkerController implements IController {
     }
 
     private void removeButtonListener() {
-        switch (currently_showing) {
+        switch (current_table_model) {
             case 0 -> removeStudent();
             case 1 -> removeGroup();
             case 2 -> removeStudentFromGroup();
@@ -99,12 +99,30 @@ public class DeansWorkerController implements IController {
     }
 
     private void removeStudent() {
+        var id = getIdFromSelectedRow();
+        try {
+            model.removeStudent(id);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     private void removeGroup() {
+        var id = getIdFromSelectedRow();
+        try {
+            model.removeGroup(id);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     private void removeStudentFromGroup() {
+        var id = getIdFromSelectedRow();
+        try {
+            model.removeStudentFromGroup(id, current_group);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     private int getIdFromSelectedRow() {
@@ -133,12 +151,18 @@ public class DeansWorkerController implements IController {
     }
 
     private void addStudentToGroup() {
+        String id = JOptionPane.showInputDialog("Enter Student ID:");
+        try {
+            model.addStudentToGroup(Integer.parseInt(id), current_group);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     private void showStudents() {
-        currently_showing = 0;
+        current_table_model = 0;
         setButtonsVisible();
-        view.setTableModel(currently_showing);
+        view.setTableModel(current_table_model);
 
         try {
             var rs = model.getStudents();
@@ -166,9 +190,10 @@ public class DeansWorkerController implements IController {
     }
 
     private void showGroup(int group_id) {
-        currently_showing = 2;
+        current_table_model = 2;
+        current_group = group_id;
         view.getEditButton().setVisible(false);
-        view.setTableModel(currently_showing);
+        view.setTableModel(current_table_model);
 
         try {
             var rs = model.getStudentsFromGroup(group_id);
@@ -187,9 +212,9 @@ public class DeansWorkerController implements IController {
     }
 
     private void showGroups() {
-        currently_showing = 1;
+        current_table_model = 1;
         setButtonsVisible();
-        view.setTableModel(currently_showing);
+        view.setTableModel(current_table_model);
         try {
             var rs = model.getGroups();
             while (rs.next()) {
