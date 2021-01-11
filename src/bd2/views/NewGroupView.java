@@ -32,19 +32,6 @@ public class NewGroupView extends Component {
         frame.dispose();
     }
 
-    public Object[] getData() {
-        var group_id = txtGroupID.getText();
-        var professor_id = txtProfessorID.getText();
-        var subject_id = txtSubjectID.getText();
-        var parity = txtParity.getText();
-        var day = txtDay.getText();
-        var time = txtTime.getText();
-        var form = txtForm.getText();
-        var student_limit = txtStudentLimit.getText();
-
-        return new Object[]{group_id, professor_id, subject_id, parity, day, time, form, student_limit};
-    }
-
     public JButton getOkButton() {
         return okButton;
     }

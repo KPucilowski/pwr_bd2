@@ -1,6 +1,7 @@
 package bd2.controllers;
 
 import bd2.App;
+import bd2.models.GroupModel;
 import bd2.models.LoginModel;
 import bd2.models.DeansWorkerModel;
 import bd2.views.NewGroupView;
@@ -111,17 +112,10 @@ public class DeansWorkerController implements IController {
     }
 
     private void addGroup() {
-        Object[] arr = new NewGroupView().getData();
+        GroupController ct = new GroupController();
         try {
-            int group_id = (int) arr[0];
-            int professor_id = (int) arr[1];
-            int subject_id = (int) arr[2];
-            String parity = (String) arr[3];
-            int day = (int) arr[4];
-            String time = (String) arr[5];
-            String form = (String) arr[6];
-            int student_limit = (int) arr[7];
-            model.addGroup(group_id, subject_id, professor_id, parity, day, time, form, student_limit);
+            var group = ct.getModel();
+            model.addGroup(group.group_id, group.subject_id, group.professor_id, group.parity, group.day, group.time, group.form, group.student_limit);
         } catch (SQLException e) {
             e.printStackTrace();
         }
