@@ -193,6 +193,23 @@ public class DeansWorkerController implements IController {
 
                     String string_group_id = (String) view.dataTable.getValueAt(target.getSelectedRow(), 0);
                     newGroupView.getTxtGroupID().setText(string_group_id);
+                    String string_subject_id = (String) view.dataTable.getValueAt(target.getSelectedRow(), 1);
+                    newGroupView.getTxtSubjectID().setText(string_subject_id);
+                    String string_professor_id = (String) view.dataTable.getValueAt(target.getSelectedRow(), 2);
+                    newGroupView.getTxtProfessorID().setText(string_professor_id);
+                    String parity = (String) view.dataTable.getValueAt(target.getSelectedRow(), 3);
+                    newGroupView.getTxtParity().setText(parity);
+                    String string_day = (String) view.dataTable.getValueAt(target.getSelectedRow(), 4);
+                    newGroupView.getTxtDay().setText(string_day);
+                    String time = (String) view.dataTable.getValueAt(target.getSelectedRow(), 5);
+                    newGroupView.getTxtTime().setText(time);
+                    String form = (String) view.dataTable.getValueAt(target.getSelectedRow(), 6);
+                    newGroupView.getTxtForm().setText(form);
+                    String string_student_limit = (String) view.dataTable.getValueAt(target.getSelectedRow(), 7);
+                    newGroupView.getTxtStudentLimit().setText(string_student_limit);
+
+
+
                     group_id = Integer.parseInt(string_group_id);
                     System.out.println(group_id);
                 }
