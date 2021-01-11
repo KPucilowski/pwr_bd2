@@ -193,3 +193,31 @@ BEGIN
     student_in = rec.student_id;
 
 END REMOVE_STUDENT_FROM_GROUP;
+
+--------------------------------------------------------
+--  DDL for Procedure MODIFY_GROUP
+--------------------------------------------------------
+
+create or replace NONEDITIONABLE PROCEDURE "MODIFY_GROUP"
+(GROUP_ID_IN IN NUMBER
+    , SUBJECT_ID_IN IN NUMBER
+    , PROFESSOR_ID_IN IN NUMBER
+    , PARITY_IN IN VARCHAR2
+    , DAY_IN IN NUMBER
+    , TIME_STR_IN IN VARCHAR2
+    , FORM_IN IN VARCHAR2
+    , STUDENT_LIMIT_IN IN NUMBER
+) AS
+    TIME_IN TIMESTAMP;
+BEGIN
+    TIME_IN := TO_TIMESTAMP(TIME_STR_IN, 'HH24:MI');
+
+UPDATE "GROUP" SET "SUBJECT_ID" = subject_id_in,
+    "PROFESSOR_ID" = professor_id_in,
+    "PARITY" = parity_in,
+    "DAY" = day_in,
+    "TIME" = time_in,
+    "FORM" = form_in,
+    "STUDENT_LIMIT" = student_limit_in
+    WHERE "GROUP_ID" = group_id_in;
+END;
