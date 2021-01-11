@@ -111,7 +111,20 @@ public class DeansWorkerController implements IController {
     }
 
     private void addGroup() {
-
+        Object[] arr = new NewGroupView().getData();
+        try {
+            int group_id = (int) arr[0];
+            int professor_id = (int) arr[1];
+            int subject_id = (int) arr[2];
+            String parity = (String) arr[3];
+            int day = (int) arr[4];
+            String time = (String) arr[5];
+            String form = (String) arr[6];
+            int student_limit = (int) arr[7];
+            model.addGroup(group_id, subject_id, professor_id, parity, day, time, form, student_limit);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void addStudent() {
@@ -123,6 +136,7 @@ public class DeansWorkerController implements IController {
 
     private void showStudents() {
         currently_showing = 0;
+        setButtonsVisible();
         view.setTableModel(currently_showing);
 
         try {
@@ -144,8 +158,15 @@ public class DeansWorkerController implements IController {
         }
     }
 
+    private void setButtonsVisible() {
+        view.getAddButton().setVisible(true);
+        view.getEditButton().setVisible(true);
+        view.getRemoveButton().setVisible(true);
+    }
+
     private void showGroup(int group_id) {
         currently_showing = 2;
+        view.getEditButton().setVisible(false);
         view.setTableModel(currently_showing);
 
         try {
@@ -166,6 +187,7 @@ public class DeansWorkerController implements IController {
 
     private void showGroups() {
         currently_showing = 1;
+        setButtonsVisible();
         view.setTableModel(currently_showing);
         try {
             var rs = model.getGroups();
