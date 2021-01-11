@@ -143,7 +143,8 @@ public class DeansWorkerController implements IController {
     private void addStudentToGroup() {
         String id = JOptionPane.showInputDialog("Enter Student ID:");
         try {
-            model.addStudentToGroup(Integer.parseInt(id), current_group);
+            if (id != null && !id.equals(""))
+                model.addStudentToGroup(Integer.parseInt(id), current_group);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
