@@ -192,6 +192,7 @@ public class DeansWorkerController implements IController {
                     newGroupView = newGroupViewX;
 
                     String string_group_id = (String) view.dataTable.getValueAt(target.getSelectedRow(), 0);
+                    newGroupView.getTxtGroupID().setText(string_group_id);
                     group_id = Integer.parseInt(string_group_id);
                     System.out.println(group_id);
                 }
