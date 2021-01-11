@@ -1,17 +1,15 @@
 package bd2.controllers;
 
-import bd2.models.GroupModel;
-import bd2.models.LoginModel;
-import bd2.views.LoginView;
+import bd2.models.NewGroupModel;
 import bd2.views.NewGroupView;
 
-public class GroupController {
+public class NewGroupController {
     private final NewGroupView view;
-    private final GroupModel model;
+    private final NewGroupModel model;
 
-    public GroupController() {
+    public NewGroupController() {
         this.view = new NewGroupView();
-        this.model = new GroupModel();
+        this.model = new NewGroupModel();
 
         init();
     }
@@ -21,7 +19,7 @@ public class GroupController {
         view.getCancelButton().addActionListener(e -> view.dispose());
     }
 
-    public GroupModel getModel() {
+    public NewGroupModel getModel() {
         return model;
     }
 

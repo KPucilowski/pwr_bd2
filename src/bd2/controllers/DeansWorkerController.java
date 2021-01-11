@@ -1,15 +1,16 @@
 package bd2.controllers;
 
 import bd2.App;
-import bd2.models.GroupModel;
 import bd2.models.LoginModel;
 import bd2.models.DeansWorkerModel;
+import bd2.models.NewStudentModel;
 import bd2.views.NewGroupView;
 import bd2.views.WorkerView;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 public class DeansWorkerController implements IController {
@@ -112,7 +113,7 @@ public class DeansWorkerController implements IController {
     }
 
     private void addGroup() {
-        GroupController ct = new GroupController();
+        NewGroupController ct = new NewGroupController();
         try {
             var group = ct.getModel();
             model.addGroup(group.group_id, group.subject_id, group.professor_id, group.parity, group.day, group.time, group.form, group.student_limit);
@@ -122,7 +123,13 @@ public class DeansWorkerController implements IController {
     }
 
     private void addStudent() {
-
+        NewStudentController ct = new NewStudentController();
+        try {
+            var student = ct.getModel();
+            model.addStudent(student.firstName, student.lastName, student.facultyID, student.pesel);
+        } catch (SQLException | NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
     }
 
     private void addStudentToGroup() {
