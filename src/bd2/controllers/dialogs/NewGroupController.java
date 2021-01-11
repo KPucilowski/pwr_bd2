@@ -17,7 +17,6 @@ public class NewGroupController {
     private void init() {
         view.getOkButton().addActionListener(e -> getData());
         view.getCancelButton().addActionListener(e -> view.dispose());
-
         view.setModal(true);
         view.pack();
         view.setVisible(true);
@@ -25,6 +24,10 @@ public class NewGroupController {
 
     public NewGroupModel getModel() {
         return model;
+    }
+
+    public NewGroupView getView() {
+        return view;
     }
 
     private void getData() {
@@ -36,7 +39,6 @@ public class NewGroupController {
         model.time = view.getTxtTime().getText();
         model.form = view.getTxtForm().getText();
         model.student_limit = Integer.parseInt(view.getTxtStudentLimit().getText());
-
         view.dispose();
     }
 }
