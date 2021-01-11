@@ -1,9 +1,8 @@
 package bd2.controllers;
 
 import bd2.App;
-import bd2.models.LoginModel;
 import bd2.models.DeansWorkerModel;
-import bd2.views.NewGroupView;
+import bd2.models.LoginModel;
 import bd2.views.WorkerView;
 
 import javax.swing.*;
@@ -14,7 +13,6 @@ import java.sql.SQLException;
 
 public class DeansWorkerController implements IController {
     private final WorkerView view;
-    public NewGroupView newGroupView;
     private final DeansWorkerModel model;
 
     private int current_table_model;
@@ -32,7 +30,6 @@ public class DeansWorkerController implements IController {
         this.model = model;
         init();
     }
-
 
     @Override
     public void dispose() {
@@ -56,13 +53,8 @@ public class DeansWorkerController implements IController {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     switch (current_table_model) {
-                        case 0:
-                            //editStudent
-                            break;
-
-                        case 1:
-                            showGroup(getIdFromSelectedRow());
-                            break;
+                        case 0 -> editStudent();
+                        case 1 -> showGroup(getIdFromSelectedRow());
                     }
                 }
             }
@@ -84,18 +76,18 @@ public class DeansWorkerController implements IController {
         }
     }
 
-    private void editStudent() {
-    }
-
-    private void editGroup() {
-    }
-
     private void removeButtonListener() {
         switch (current_table_model) {
             case 0 -> removeStudent();
             case 1 -> removeGroup();
             case 2 -> removeStudentFromGroup();
         }
+    }
+
+    private void editStudent() {
+    }
+
+    private void editGroup() {
     }
 
     private void removeStudent() {
@@ -123,11 +115,6 @@ public class DeansWorkerController implements IController {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-    }
-
-    private int getIdFromSelectedRow() {
-        var test = view.getDataTable().getSelectedRow();
-        return Integer.parseInt((String) view.getTableModel().getValueAt(test,0));
     }
 
     private void addGroup() {
@@ -183,12 +170,6 @@ public class DeansWorkerController implements IController {
         }
     }
 
-    private void setButtonsVisible() {
-        view.getAddButton().setVisible(true);
-        view.getEditButton().setVisible(true);
-        view.getRemoveButton().setVisible(true);
-    }
-
     private void showGroup(int group_id) {
         current_table_model = 2;
         current_group = group_id;
@@ -231,5 +212,16 @@ public class DeansWorkerController implements IController {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
+    }
+
+    private void setButtonsVisible() {
+        view.getAddButton().setVisible(true);
+        view.getEditButton().setVisible(true);
+        view.getRemoveButton().setVisible(true);
+    }
+
+    private int getIdFromSelectedRow() {
+        var test = view.getDataTable().getSelectedRow();
+        return Integer.parseInt((String) view.getTableModel().getValueAt(test, 0));
     }
 }
