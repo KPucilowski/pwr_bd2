@@ -152,7 +152,7 @@ public class DeansWorkerController implements IController {
 
     private void showStudents() {
         current_table_model = 0;
-        setButtonsVisible();
+        setButtonsDefaultVisibility();
         view.setTableModel(current_table_model);
 
         try {
@@ -178,7 +178,7 @@ public class DeansWorkerController implements IController {
     private void showGroup(int group_id) {
         current_table_model = 2;
         current_group = group_id;
-        view.getEditButton().setVisible(false);
+        setButtonsDefaultVisibility();
         view.setTableModel(current_table_model);
 
         try {
@@ -199,8 +199,10 @@ public class DeansWorkerController implements IController {
 
     private void showGroups() {
         current_table_model = 1;
-        setButtonsVisible();
+        setButtonsDefaultVisibility();
+        view.getEditButton().setVisible(true);
         view.setTableModel(current_table_model);
+        
         try {
             var rs = model.getGroups();
             while (rs.next()) {
@@ -219,9 +221,9 @@ public class DeansWorkerController implements IController {
         }
     }
 
-    private void setButtonsVisible() {
+    private void setButtonsDefaultVisibility() {
         view.getAddButton().setVisible(true);
-        view.getEditButton().setVisible(true);
+        view.getEditButton().setVisible(false);
         view.getRemoveButton().setVisible(true);
     }
 
