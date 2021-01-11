@@ -8,18 +8,27 @@ import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.DayOfWeek;
 
 
 public class DeansWorkerModel extends UserModel {
     private ResultSet groups;
-    private ResultSet groupsStudent;
+    private ResultSet students;
+    private String faculty_id;
+
     public DeansWorkerModel(int id, String type)
     {
         super(id, type);
     }
     public DeansWorkerModel(LoginModel loginModel) {
         super(loginModel.getId(), loginModel.getType());
+
+        try {
+            var rs = getPersonalData();
+            if(rs.next())
+                faculty_id = rs.getString("FACULTY_ID");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     public void editGroup(
@@ -87,25 +96,32 @@ public class DeansWorkerModel extends UserModel {
     }
 
 
-    public ResultSet getStudents(int clicked_group_id) throws SQLException {
-        fetchStudents(clicked_group_id);
-
-        return groupsStudent;
-    }
-    public ResultSet getAllStudents() throws SQLException{
-        fetchAllStudents();
-        return groupsStudent;
-    }
-
-    private void fetchAllStudents() throws SQLException{
+    public ResultSet getStudentsFromGroup(int group_id) throws SQLException {
         Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        groupsStudent = st.executeQuery("select * from BD.GROUP_STUDENTS_VIEW");
+        return st.executeQuery("select * from BD.GROUP_STUDENTS_VIEW where group_id = " + group_id);
     }
 
-    private void fetchStudents(int clicked_group_id) throws SQLException {
+    public ResultSet getStudents() throws SQLException{
+        if (students != null)
+            students.beforeFirst();
+        else
+            fetchStudents();
+
+        return students;
+    }
+
+    public ResultSet getGroups() throws SQLException {
+        if (groups != null)
+            groups.beforeFirst();
+        else
+            fetchGroups();
+
+        return groups;
+    }
+
+    private void fetchStudents() throws SQLException{
         Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        //groupsStudent = st.executeQuery("select * from BD.GROUP_STUDENTS_VIEW where professor_id = " + this.id  + "and group_id = " + this.group_id);
-        groupsStudent = st.executeQuery("select * from BD.GROUP_STUDENTS_VIEW where group_id = " +clicked_group_id);
+        students = st.executeQuery("select * from BD.STUDENT_VIEW where faculty_id = '" + faculty_id + "'");
     }
 
     public void addStudentToGroup(int student_id, int group_id) throws SQLException {
@@ -134,14 +150,9 @@ public class DeansWorkerModel extends UserModel {
         stmt.execute();
     }
 
-    public ResultSet getGroups() throws SQLException {
+    public void fetchGroups() throws SQLException {
         Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        return st.executeQuery("select * from BD.GROUP_VIEW");
-    }
-
-    public ResultSet getAllGroups() throws SQLException {
-        Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        return st.executeQuery("select * from BD.GROUP");
+        groups = st.executeQuery("select * from BD.GROUP_VIEW where faculty_id = '" + faculty_id + "'");
     }
 
     /* Use to find professors that you can assign to subject/group */
@@ -154,6 +165,4 @@ public class DeansWorkerModel extends UserModel {
         Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         return st.executeQuery("select * from BD.SUBJECT");
     }
-
-
 }

@@ -3,97 +3,69 @@ package bd2.views;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
-import java.time.DayOfWeek;
-
-import bd2.models.DeansWorkerModel;
-
 
 public class WorkerView extends Component {
-    
     private final JFrame frame;
-    private JLabel loggedAsLabel;
-    private JButton logOutButton;
-    private JTextField idField;
-    private JButton showButton;
-    private JScrollPane scrollPane;
-    public JTable dataTable;
-    private JButton editGroupButton;
-    private JButton deleteGroupButton;
-    private JButton openNewGroupButton;
-    private JButton addStudentToGroupButton;
-    private JButton deleteStudentFromGroupButton;
-    private JButton addStudentsToListButton;
-    private JButton deleteStudentsFromListButton;
     private JPanel workerPanel;
-    private JTextField FirstNameField;
-    private JTextField LastNameField;
-    private JTextField FacultyField;
-    private JTextField PeselField;
-    private JLabel first_name;
-    private JButton accept_button;
-    private JLabel last_name;
-    private JLabel faculty;
-    private JLabel pesel;
-    private JLabel IDStudenta;
-    private JButton addStudentToGroup;
-    public DefaultTableModel tableModel = new DefaultTableModel()
-    {
+    private JTextField idField;
+    private JButton logOutButton;
+    private JScrollPane scrollPane;
+    private JLabel loggedAsLabel;
+    private JButton studentsButton;
+    private JButton groupsButton;
+    private JTable dataTable;
+
+    DefaultTableModel tableModel = new DefaultTableModel(){
         @Override
         public boolean isCellEditable(int row, int column){
             return false;
         };
     };
-    public DefaultTableModel tableModel2 = new DefaultTableModel()
-    {
-        @Override
-        public boolean isCellEditable(int row, int column){
-            return column == 2;
-        };
-    };
-    public WorkerView(){
 
-        frame = new JFrame("Deans Worker menu");
+    public WorkerView(){
+        frame = new JFrame("Worker menu");
         frame.setContentPane(workerPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-
         dataTable.setModel(tableModel);
     }
-    public void dispose(){
+
+    public void dispose() {
         frame.dispose();
     }
-    public JTextField getIdField() {
-        return idField;
+
+    public JTable getDataTable() {
+        return dataTable;
     }
+
     public DefaultTableModel getTableModel() {
         return tableModel;
     }
-    public JTextField getFirstNameField(){return FirstNameField;}
-    public JTextField getLastNameField(){return LastNameField;}
-    public JTextField getFacultyField(){return FacultyField;}
-    public JTextField getPeselField(){return PeselField;}
-    public JLabel getFirst_name(){return first_name;}
-    public JLabel getLast_name(){return last_name;}
-    public JLabel getFaculty(){return faculty;}
-    public JLabel getPesel(){return pesel;}
-    public JButton getAccept_button(){return accept_button;}
-    public JButton getLogOutButton(){return logOutButton;}
-    public JButton getEditGroupButton(){return editGroupButton;}
-    public JButton getDeleteGroupButton(){return deleteGroupButton;}
-    public JButton getOpenNewGroupButton(){return openNewGroupButton;}
-    public JButton getAddStudentToGroupButton(){return addStudentToGroupButton;}
-    public JButton getDeleteStudentFromGroupButton(){return deleteStudentFromGroupButton;}
-    public JButton getAddStudentsToListButton(){return addStudentsToListButton;}
-    public JButton getDeleteStudentsFromListButton(){return deleteStudentsFromListButton;}
-    public JButton getAddStudentToGroup(){return addStudentToGroup;}
-    public JLabel getIDStudenta(){return IDStudenta;}
-    public DefaultTableModel getTableModel2() {
-        return tableModel2;
+
+    public void setTableModel(int i) {
+        tableModel.setRowCount(0);
+        switch (i) {
+            case 0 -> tableModel.setColumnIdentifiers(new String[]{"First name", "Last name", "Email", "Faculty", "PESEL", "Year", "Semester", "Specialization"});
+            case 1 -> tableModel.setColumnIdentifiers(new String[]{"Group ID", "Subject ID", "Subject name", "Day", "Time", "Parity", "Form"});
+            case 2 -> tableModel.setColumnIdentifiers(new String[]{"Student ID", "Student", "Email", "Grade", "Record date"});
+        }
+    }
+
+    public JTextField getIdField() {
+        return idField;
+    }
+
+    public JButton getLogOutButton() {
+        return logOutButton;
+    }
+
+    public JButton getStudentsButton() {
+        return studentsButton;
+    }
+
+    public JButton getGroupsButton() {
+        return groupsButton;
     }
 }

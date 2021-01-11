@@ -9,7 +9,6 @@ import java.sql.Statement;
 public class StudentModel extends UserModel {
     private ResultSet grades;
     private ResultSet records;
-    private ResultSet groups;
 
     public StudentModel(LoginModel loginModel) {
         super(loginModel.getId(), loginModel.getType());
