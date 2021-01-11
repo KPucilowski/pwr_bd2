@@ -11,8 +11,6 @@ import java.sql.Statement;
 
 
 public class DeansWorkerModel extends UserModel {
-    private ResultSet groups;
-    private ResultSet students;
     private String faculty_id;
 
     public DeansWorkerModel(int id, String type)
@@ -102,26 +100,13 @@ public class DeansWorkerModel extends UserModel {
     }
 
     public ResultSet getStudents() throws SQLException{
-        if (students != null)
-            students.beforeFirst();
-        else
-            fetchStudents();
-
-        return students;
+        Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        return st.executeQuery("select * from BD.STUDENT_VIEW where faculty_id = '" + faculty_id + "'");
     }
 
     public ResultSet getGroups() throws SQLException {
-        if (groups != null)
-            groups.beforeFirst();
-        else
-            fetchGroups();
-
-        return groups;
-    }
-
-    private void fetchStudents() throws SQLException{
         Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        students = st.executeQuery("select * from BD.STUDENT_VIEW where faculty_id = '" + faculty_id + "'");
+        return st.executeQuery("select * from BD.GROUP_VIEW where faculty_id = '" + faculty_id + "'");
     }
 
     public void addStudentToGroup(int student_id, int group_id) throws SQLException {
@@ -148,11 +133,6 @@ public class DeansWorkerModel extends UserModel {
         stmt.setInt(1, student_id);
         stmt.setInt(2, group_id);
         stmt.execute();
-    }
-
-    public void fetchGroups() throws SQLException {
-        Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        groups = st.executeQuery("select * from BD.GROUP_VIEW where faculty_id = '" + faculty_id + "'");
     }
 
     /* Use to find professors that you can assign to subject/group */
