@@ -1,9 +1,9 @@
 package bd2.views.dialogs;
 
 import javax.swing.*;
+import java.awt.*;
 
-public class NewStudentView {
-    private JFrame frame;
+public class NewStudentView extends JDialog {
     private JPanel newStudentPanel;
     public JButton okButton;
     public JButton cancelButton;
@@ -12,18 +12,11 @@ public class NewStudentView {
     public JTextField txtFacultyID;
     public JTextField txtPESEL;
 
-    public NewStudentView( ){
-        frame = new JFrame("Student menu");
-        frame.setContentPane(newStudentPanel);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-        getCancelButton().addActionListener(e->dispose());
-    }
-
-    public void dispose() {
-        frame.dispose(); ;
+    public NewStudentView(){
+        setTitle("Student menu");
+        setContentPane(newStudentPanel);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
     }
 
     public JButton getOkButton() {
@@ -49,10 +42,4 @@ public class NewStudentView {
     public JTextField getTxtPESEL() {
         return txtPESEL;
     }
-
-
-
-
-
-
 }

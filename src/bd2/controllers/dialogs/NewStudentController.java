@@ -17,6 +17,10 @@ public class NewStudentController {
     private void init() {
         view.getOkButton().addActionListener(e -> getData());
         view.getCancelButton().addActionListener(e -> view.dispose());
+
+        view.setModal(true);
+        view.pack();
+        view.setVisible(true);
     }
 
     private void getData() {

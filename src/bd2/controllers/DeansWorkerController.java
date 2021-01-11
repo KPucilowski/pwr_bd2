@@ -137,6 +137,7 @@ public class DeansWorkerController implements IController {
         } catch (SQLException | NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
+        showStudents();
     }
 
     private void addStudentToGroup() {

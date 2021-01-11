@@ -3,8 +3,7 @@ package bd2.views.dialogs;
 import javax.swing.*;
 import java.awt.*;
 
-public class NewGroupView extends Component {
-    private JFrame frame;
+public class NewGroupView extends JDialog {
     private JPanel newGroupPanel;
     public JButton okButton;
     public JButton cancelButton;
@@ -18,18 +17,11 @@ public class NewGroupView extends Component {
     public JTextField txtStudentLimit;
 
 
-    public NewGroupView( ){
-        frame = new JFrame("New group menu");
-        frame.setContentPane(newGroupPanel);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-        getCancelButton().addActionListener(e->dispose());
-    }
-
-    public void dispose() {
-        frame.dispose();
+    public NewGroupView(){
+        setTitle("New group menu");
+        setContentPane(newGroupPanel);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
     }
 
     public JButton getOkButton() {
