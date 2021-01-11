@@ -18,12 +18,13 @@ public class StudentView extends Component {
     private JButton personalDataButton;
     private JButton logOutButton;
 
-    DefaultTableModel tableModel = new DefaultTableModel()
-    {
+    DefaultTableModel tableModel = new DefaultTableModel() {
         @Override
-        public boolean isCellEditable(int row, int column){
+        public boolean isCellEditable(int row, int column) {
             return false;
-        };
+        }
+
+        ;
     };
 
     public StudentView() {

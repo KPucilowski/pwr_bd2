@@ -1,10 +1,8 @@
 package bd2.views.dialogs;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class NewGroupView extends JDialog {
-    private JPanel newGroupPanel;
     public JButton okButton;
     public JButton cancelButton;
     public JTextField txtGroupID;
@@ -15,9 +13,10 @@ public class NewGroupView extends JDialog {
     public JTextField txtTime;
     public JTextField txtForm;
     public JTextField txtStudentLimit;
+    private JPanel newGroupPanel;
 
 
-    public NewGroupView(){
+    public NewGroupView() {
         setTitle("New group menu");
         setContentPane(newGroupPanel);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -27,6 +26,7 @@ public class NewGroupView extends JDialog {
     public JButton getOkButton() {
         return okButton;
     }
+
     public JButton getCancelButton() {
         return cancelButton;
     }

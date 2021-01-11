@@ -6,6 +6,13 @@ import java.awt.*;
 
 public class WorkerView extends Component {
     private final JFrame frame;
+    DefaultTableModel tableModel = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+
+    };
     private JPanel workerPanel;
     private JTextField idField;
     private JButton logOutButton;
@@ -18,14 +25,7 @@ public class WorkerView extends Component {
     private JButton editButton;
     private JButton addButton;
 
-    DefaultTableModel tableModel = new DefaultTableModel(){
-        @Override
-        public boolean isCellEditable(int row, int column){
-            return false;
-        };
-    };
-
-    public WorkerView(){
+    public WorkerView() {
         frame = new JFrame("Worker menu");
         frame.setContentPane(workerPanel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class LoginView {
+    private final JFrame frame;
     private JPanel contentPane;
     private JPanel loginPane;
     private JPanel passwordPane;
@@ -18,7 +19,6 @@ public class LoginView {
     private JLabel descLabel;
     private JPanel systemNamePane;
     private String userType;
-    private final JFrame frame;
 
     public LoginView() {
         frame = new JFrame("SBO");
