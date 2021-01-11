@@ -163,6 +163,41 @@ public class DeansWorkerController implements IController {
 
     private void editGroup() {
         notVisible();
+        view.dataTable.setModel(view.tableModel);
+
+        view.getTableModel().setRowCount(0);
+        view.getTableModel().setColumnIdentifiers(new String[]{"Group ID", "Subject ID", "Professor id", "Parity", "Day", "Time", "Form", "Student limit"});
+        try {
+            var rs = model.getGroups();
+            while (rs.next()) {
+                var group_id = rs.getString("GROUP_ID");
+                var subject_id = rs.getString("SUBJECT_ID");
+                var professor_id = rs.getString("PROFESSOR_ID");
+                var parity = rs.getString("PARITY");
+                var day = rs.getString("DAY");
+                var time = rs.getString("TIME");
+                var form = rs.getString("FORM");
+                var student_limit = rs.getString("STUDENT_LIMIT");
+                view.getTableModel().addRow(new String[]{group_id, subject_id, professor_id, parity, day, time, form, student_limit});
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+        view.dataTable.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent me) {
+                if (me.getClickCount() == 2) {
+                    JTable target = (JTable)me.getSource();
+                    NewGroupView newGroupViewX = new NewGroupView();
+                    newGroupView = newGroupViewX;
+
+                    String string_group_id = (String) view.dataTable.getValueAt(target.getSelectedRow(), 0);
+                    group_id = Integer.parseInt(string_group_id);
+                    System.out.println(group_id);
+                }
+            }
+        });
+
     }
 
     private void deleteGroup() {

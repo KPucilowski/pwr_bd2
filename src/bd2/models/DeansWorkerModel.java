@@ -119,6 +119,11 @@ public class DeansWorkerModel extends UserModel {
         return st.executeQuery("select * from BD.GROUP_VIEW");
     }
 
+    public ResultSet getAllGroups() throws SQLException {
+        Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        return st.executeQuery("select * from BD.GROUP");
+    }
+
     /* Use to find professors that you can assign to subject/group */
     public ResultSet getProfessorsOfFaculty(String faculty_id) throws SQLException {
         Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
