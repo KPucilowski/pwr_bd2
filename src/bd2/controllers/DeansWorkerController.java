@@ -95,9 +95,6 @@ public class DeansWorkerController implements IController {
         update();
     }
 
-    private void editStudent() {
-    }
-
     private void editGroup() {
     }
 
