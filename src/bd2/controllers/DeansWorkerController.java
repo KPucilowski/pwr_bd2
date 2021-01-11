@@ -190,7 +190,7 @@ public class DeansWorkerController implements IController {
                     JTable target = (JTable)me.getSource();
                     NewGroupView newGroupViewX = new NewGroupView();
                     newGroupView = newGroupViewX;
-
+                    newGroupView.getOkButton().addActionListener(e->editSelGroup());
                     String string_group_id = (String) view.dataTable.getValueAt(target.getSelectedRow(), 0);
                     newGroupView.getTxtGroupID().setText(string_group_id);
                     String string_subject_id = (String) view.dataTable.getValueAt(target.getSelectedRow(), 1);
@@ -207,15 +207,36 @@ public class DeansWorkerController implements IController {
                     newGroupView.getTxtForm().setText(form);
                     String string_student_limit = (String) view.dataTable.getValueAt(target.getSelectedRow(), 7);
                     newGroupView.getTxtStudentLimit().setText(string_student_limit);
-
-
-
-                    group_id = Integer.parseInt(string_group_id);
-                    System.out.println(group_id);
                 }
             }
         });
+    }
 
+    public void editSelGroup()
+    {
+        String string_group_id = newGroupView.getTxtGroupID().getText();
+        String string_subject_id = newGroupView.getTxtSubjectID().getText();
+        String string_professor_id = newGroupView.getTxtProfessorID().getText();
+        String parity = newGroupView.getTxtParity().getText();
+        String string_day = newGroupView.getTxtDay().getText();
+        String time = newGroupView.getTxtTime().getText();
+        String form = newGroupView.getTxtForm().getText();
+        String string_student_limit = newGroupView.getTxtStudentLimit().getText();
+        int group_id = Integer.parseInt(string_group_id);
+        int subject_id = Integer.parseInt(string_subject_id);
+        int professor_id = Integer.parseInt(string_professor_id);
+        int student_limit = Integer.parseInt(string_student_limit);
+        int day = Integer.parseInt(string_day);
+        try {
+            //TUTAJ SQL!!!!!!!!!
+            //TUTAJ SQL!!!!!!!!!
+            model.addGroup(group_id, subject_id, professor_id,parity, day, time, form, student_limit);//TUTAJ SQL!!!!!!!!!
+            //TUTAJ SQL!!!!!!!!!
+            //TUTAJ SQL!!!!!!!!!
+            //TUTAJ SQL!!!!!!!!!
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     private void deleteGroup() {
