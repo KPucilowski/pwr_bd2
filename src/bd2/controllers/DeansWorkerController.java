@@ -158,6 +158,7 @@ public class DeansWorkerController implements IController {
         try {
             var rs = model.getStudents();
             while (rs.next()) {
+                var id = rs.getString("STUDENT_ID");
                 var first_name = rs.getString("FIRST_NAME");
                 var last_name = rs.getString("LAST_NAME");
                 var email = rs.getString("EMAIL");
@@ -166,7 +167,7 @@ public class DeansWorkerController implements IController {
                 var pesel = rs.getString("PESEL");
                 var semester = rs.getString("SEMESTER");
                 var specialization = rs.getString("SPECIALIZATION");
-                view.getTableModel().addRow(new String[]{first_name, last_name, email, faculty, pesel, year, semester, specialization});
+                view.getTableModel().addRow(new String[]{id, first_name, last_name, email, faculty, pesel, year, semester, specialization});
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
