@@ -1,4 +1,4 @@
-package bd2.models;
+package bd2.models.dialogs;
 
 public class NewGroupModel {
     public int group_id;

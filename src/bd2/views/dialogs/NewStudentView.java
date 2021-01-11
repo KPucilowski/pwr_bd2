@@ -1,4 +1,4 @@
-package bd2.views;
+package bd2.views.dialogs;
 
 import javax.swing.*;
 

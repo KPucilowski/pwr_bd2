@@ -1,7 +1,7 @@
-package bd2.controllers;
+package bd2.controllers.dialogs;
 
-import bd2.models.NewGroupModel;
-import bd2.views.NewGroupView;
+import bd2.models.dialogs.NewGroupModel;
+import bd2.views.dialogs.NewGroupView;
 
 public class NewGroupController {
     private final NewGroupView view;

@@ -1,9 +1,7 @@
-package bd2.controllers;
+package bd2.controllers.dialogs;
 
-import bd2.models.NewGroupModel;
-import bd2.models.NewStudentModel;
-import bd2.views.NewGroupView;
-import bd2.views.NewStudentView;
+import bd2.models.dialogs.NewStudentModel;
+import bd2.views.dialogs.NewStudentView;
 
 public class NewStudentController {
     private final NewStudentView view;

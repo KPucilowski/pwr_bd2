@@ -1,6 +1,8 @@
 package bd2.controllers;
 
 import bd2.App;
+import bd2.controllers.dialogs.NewGroupController;
+import bd2.controllers.dialogs.NewStudentController;
 import bd2.models.DeansWorkerModel;
 import bd2.models.LoginModel;
 import bd2.views.WorkerView;
