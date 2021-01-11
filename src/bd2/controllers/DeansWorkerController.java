@@ -60,8 +60,8 @@ public class DeansWorkerController implements IController {
                             var test = view.getDataTable().getSelectedRow();
                             var group_id = Integer.parseInt((String) view.getTableModel().getValueAt(test,0));
                             showGroup(group_id);
+                            break;
                     }
-
                 }
             }
         });
