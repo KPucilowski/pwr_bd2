@@ -158,7 +158,10 @@ public class ProfessorController implements IController {
                     String string_grade = (String) view.tableModel2.getValueAt(row, 2);
                     int student_id = Integer.parseInt(string_student_id);
                     int group_id = Integer.parseInt(string_group_id);
-                    double grade = Double.parseDouble(string_grade);
+                    Double grade = null;
+                    if (string_grade != null && !string_grade.equals("")) {
+                        grade = Double.parseDouble(string_grade);
+                    }
                     model.addGrade(student_id, group_id, grade);
                 }
             }

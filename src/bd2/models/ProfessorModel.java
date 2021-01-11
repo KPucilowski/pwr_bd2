@@ -2,10 +2,7 @@ package bd2.models;
 
 import bd2.App;
 
-import java.sql.CallableStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class ProfessorModel extends UserModel {
     private ResultSet groups;
@@ -31,7 +28,10 @@ public class ProfessorModel extends UserModel {
         CallableStatement stmt = App.cn.prepareCall("{call BD.ADD_GRADE(?, ?, ?)}");
         stmt.setInt(1, student_id);
         stmt.setInt(2, group_id);
-        stmt.setDouble(3, grade);
+        if (grade == null)
+            stmt.setNull(3, Types.NULL);
+        else
+            stmt.setDouble(3, grade);
         stmt.execute();
     }
 
