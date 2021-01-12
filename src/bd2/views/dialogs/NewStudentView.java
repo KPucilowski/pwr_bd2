@@ -15,6 +15,7 @@ public class NewStudentView extends JDialog {
         setTitle("Student menu");
         setContentPane(newStudentPanel);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        getRootPane().setDefaultButton(okButton);
         setLocationRelativeTo(null);
     }
 
