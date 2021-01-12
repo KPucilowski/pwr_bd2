@@ -3,6 +3,7 @@ package bd2.controllers.dialogs;
 import bd2.models.dialogs.NewGroupModel;
 import bd2.views.dialogs.NewGroupView;
 
+
 public class NewGroupController {
     private final NewGroupView view;
     private final NewGroupModel model;
@@ -24,6 +25,7 @@ public class NewGroupController {
     private void init() {
         view.getOkButton().addActionListener(e -> getData());
         view.getCancelButton().addActionListener(e -> view.dispose());
+
         view.setModal(true);
         view.pack();
         view.setVisible(true);
@@ -55,6 +57,7 @@ public class NewGroupController {
         model.time = view.getTxtTime().getText();
         model.form = view.getTxtForm().getText();
         model.student_limit = Integer.parseInt(view.getTxtStudentLimit().getText());
+
         view.dispose();
     }
 }

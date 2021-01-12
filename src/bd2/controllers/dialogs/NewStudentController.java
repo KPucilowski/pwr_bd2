@@ -5,11 +5,10 @@ import bd2.views.dialogs.NewStudentView;
 
 public class NewStudentController {
     private final NewStudentView view;
-    private final NewStudentModel model;
+    private NewStudentModel model;
 
     public NewStudentController() {
         this.view = new NewStudentView();
-        this.model = new NewStudentModel();
 
         init();
     }
@@ -24,9 +23,9 @@ public class NewStudentController {
     }
 
     private void getData() {
+        model = new NewStudentModel();
         model.firstName = view.getTxtFirstName().getText();
         model.lastName = view.getTxtLastName().getText();
-        model.facultyID = view.getTxtFacultyID().getText();
         model.pesel = view.getTxtPESEL().getText();
 
         view.dispose();

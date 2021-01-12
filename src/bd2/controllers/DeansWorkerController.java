@@ -6,7 +6,6 @@ import bd2.controllers.dialogs.NewStudentController;
 import bd2.models.DeansWorkerModel;
 import bd2.models.LoginModel;
 import bd2.views.WorkerView;
-import bd2.views.dialogs.NewGroupView;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -157,7 +156,9 @@ public class DeansWorkerController implements IController {
         NewStudentController ct = new NewStudentController();
         try {
             var student = ct.getModel();
-            model.addStudent(student.firstName, student.lastName, student.facultyID, student.pesel);
+            if (student != null) {
+                model.addStudent(student.firstName, student.lastName, model.getFacultyId(), student.pesel);
+            }
         } catch (SQLException | NoSuchAlgorithmException e) {
             e.printStackTrace();
         }

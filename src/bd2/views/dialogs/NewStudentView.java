@@ -7,7 +7,6 @@ public class NewStudentView extends JDialog {
     public JButton cancelButton;
     public JTextField txtFirstName;
     public JTextField txtLastName;
-    public JTextField txtFacultyID;
     public JTextField txtPESEL;
     private JPanel newStudentPanel;
 
@@ -32,10 +31,6 @@ public class NewStudentView extends JDialog {
 
     public JTextField getTxtLastName() {
         return txtLastName;
-    }
-
-    public JTextField getTxtFacultyID() {
-        return txtFacultyID;
     }
 
     public JTextField getTxtPESEL() {

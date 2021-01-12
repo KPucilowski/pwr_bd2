@@ -141,8 +141,12 @@ public class DeansWorkerModel extends UserModel {
         return st.executeQuery("select * from BD.PROFESSOR_VIEW where FACULTY_ID = " + faculty_id);
     }
 
-    public ResultSet getSubjects() throws SQLException {
+    public ResultSet getSubjectsOfFaculty(String faculty_id) throws SQLException {
         Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        return st.executeQuery("select * from BD.SUBJECT");
+        return st.executeQuery("select * from BD.SUBJECT where FACULTY_ID = " + faculty_id);
+    }
+
+    public String getFacultyId() {
+        return faculty_id;
     }
 }
