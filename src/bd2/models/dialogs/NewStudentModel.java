@@ -24,15 +24,8 @@ public class NewStudentModel {
         return null;
     }
 
-    public static ArrayList<String> getSpecsOfFaculty(String faculty_id) throws SQLException {
-        ArrayList<String> subjects = new ArrayList<>();
+    public static ResultSet getSpecsOfFaculty(String faculty_id) throws SQLException {
         Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        var rs = st.executeQuery("select * from BD.SPECIALIZATION where FACULTY_ID = '" + faculty_id + "'");
-        while (rs.next()) {
-            var spec_name = rs.getString("NAME");
-            subjects.add(spec_name);
-        }
-
-        return subjects;
+        return st.executeQuery("select NAME from BD.SPECIALIZATION where FACULTY_ID = '" + faculty_id + "'");
     }
 }

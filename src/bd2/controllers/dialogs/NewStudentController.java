@@ -22,14 +22,16 @@ public class NewStudentController {
     private void init() {
         view.getOkButton().addActionListener(e -> getData());
         view.getCancelButton().addActionListener(e -> view.dispose());
+
         try {
             var rs = NewStudentModel.getSpecsOfFaculty(faculty_id);
-            for (String item : rs) {
-                view.getSpecializationCbx().addItem(item);
+            while (rs.next()) {
+                view.getSpecializationCbx().addItem(rs.getString(1));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+
         view.setModal(true);
         view.pack();
         view.setVisible(true);
