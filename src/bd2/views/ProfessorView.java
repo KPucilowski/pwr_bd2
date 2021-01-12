@@ -8,31 +8,27 @@ public class ProfessorView extends Component {
 
     private final JFrame frame;
     public JPanel professorPanel;
+    public JTable dataTable;
+    public JButton saveButton;
+    public DefaultTableModel tableModel = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
+    public DefaultTableModel tableModel2 = new DefaultTableModel() {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return column == 2;
+        }
+    };
     private JScrollPane scrollPane;
-    public  JTable dataTable;
     private JTextField idField;
     private JLabel loggedAsLabel;
     private JButton groupsButton;
     private JButton timetableButton;
     private JButton personalDataButton;
-    public JButton saveButton;
     private JButton logOutButton;
-
-    public DefaultTableModel tableModel = new DefaultTableModel()
-    {
-        @Override
-        public boolean isCellEditable(int row, int column){
-            return false;
-        }
-    };
-
-    public DefaultTableModel tableModel2 = new DefaultTableModel()
-    {
-        @Override
-        public boolean isCellEditable(int row, int column){
-            return column == 2;
-        }
-    };
 
     public ProfessorView() {
         frame = new JFrame("Professor menu");
@@ -67,7 +63,7 @@ public class ProfessorView extends Component {
     public JButton getTimetableButton() {
         return timetableButton;
     }
-    
+
     public JButton getGroupsButton() {
         return groupsButton;
     }

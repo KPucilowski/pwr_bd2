@@ -7,22 +7,27 @@ import bd2.views.ProfessorView;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.sql.SQLException;
-import java.awt.event.*;
 
 public class ProfessorController implements IController {
     private final ProfessorView view;
     private final ProfessorModel model;
+    MouseListener mouseListener = new MouseAdapter() {
+        public void mouseClicked(MouseEvent me) {
+            if (me.getClickCount() == 2) {
+                JTable target = (JTable) me.getSource();
+                String string_group_id = (String) view.dataTable.getValueAt(target.getSelectedRow(), 0);
+                int clicked_group_id = Integer.parseInt(string_group_id);
+                showStudents(clicked_group_id);
+            }
+        }
+    };
 
     public ProfessorController(ProfessorView view, LoginModel model) {
         this.view = view;
         this.model = new ProfessorModel(model);
-        init();
-    }
-
-    public ProfessorController(ProfessorView view, ProfessorModel model) {
-        this.view = view;
-        this.model = model;
         init();
     }
 
@@ -43,17 +48,6 @@ public class ProfessorController implements IController {
         App.reconnect();
         new LoginController();
     }
-
-    MouseListener mouseListener = new MouseAdapter() {
-        public void mouseClicked(MouseEvent me) {
-            if (me.getClickCount() == 2) {
-                JTable target = (JTable)me.getSource();
-                String string_group_id = (String) view.dataTable.getValueAt(target.getSelectedRow(), 0);
-                int clicked_group_id = Integer.parseInt(string_group_id);
-                showStudents(clicked_group_id);
-            }
-        }
-    };
 
     private void showPersonalData() {
         view.dataTable.setModel(view.tableModel);
@@ -129,7 +123,7 @@ public class ProfessorController implements IController {
         view.getTableModel2().setRowCount(0);
         view.dataTable.setModel(view.tableModel2);
         view.saveButton.setVisible(true);
-        view.getTableModel2().setColumnIdentifiers(new String[]{"Student ID", "Group ID","Grade", "Student name", "Email"});
+        view.getTableModel2().setColumnIdentifiers(new String[]{"Student ID", "Group ID", "Grade", "Student name", "Email"});
         try {
             var rs = model.getStudents(clicked_group_id);
             while (rs.next()) {
@@ -151,7 +145,7 @@ public class ProfessorController implements IController {
         try {
             var rs = model.getStudentsGrades();
             while (rs.next()) {
-                int row =  view.dataTable.getSelectedRow();
+                int row = view.dataTable.getSelectedRow();
                 if (row >= 0) {
                     String string_student_id = (String) view.tableModel2.getValueAt(row, 0);
                     String string_group_id = (String) view.tableModel2.getValueAt(row, 1);

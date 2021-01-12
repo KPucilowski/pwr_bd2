@@ -18,12 +18,6 @@ public class StudentController implements IController {
         init();
     }
 
-    public StudentController(StudentView view, StudentModel model) {
-        this.view = view;
-        this.model = model;
-        init();
-    }
-
     @Override
     public void init() {
         showPersonalData();
@@ -72,7 +66,7 @@ public class StudentController implements IController {
             var rs = model.getRecords();
             while (rs.next()) {
                 var professor = rs.getString("PROFESSOR");
-                var subject= rs.getString("SUBJECT_NAME");
+                var subject = rs.getString("SUBJECT_NAME");
                 var day = rs.getString("DAY");
                 var time = rs.getString("TIME");
                 var parity = rs.getString("PARITY");

@@ -1,10 +1,11 @@
 package bd2.controllers.dialogs;
 
+import bd2.controllers.IController;
 import bd2.models.dialogs.NewGroupModel;
 import bd2.views.dialogs.NewGroupView;
 
 
-public class NewGroupController {
+public class NewGroupController implements IController {
     private final NewGroupView view;
     private NewGroupModel model;
 
@@ -20,13 +21,18 @@ public class NewGroupController {
         init(group_id, subject_id, professor_id, parity, day, time, form, student_limit);
     }
 
-    private void init() {
+    public void init() {
         view.getOkButton().addActionListener(e -> getData());
         view.getCancelButton().addActionListener(e -> view.dispose());
 
         view.setModal(true);
         view.pack();
         view.setVisible(true);
+    }
+
+    @Override
+    public void dispose() {
+        view.dispose();
     }
 
     private void init(String group_id, String subject_id, String professor_id, String parity, String day, String time, String form, String student_limit) {

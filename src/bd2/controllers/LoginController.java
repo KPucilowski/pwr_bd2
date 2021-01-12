@@ -13,13 +13,6 @@ public class LoginController implements IController {
     private final LoginView view;
     private final LoginModel model;
 
-    public LoginController(LoginView view, LoginModel model) {
-        this.view = view;
-        this.model = model;
-
-        init();
-    }
-
     public LoginController() {
         this.view = new LoginView();
         this.model = new LoginModel(null);

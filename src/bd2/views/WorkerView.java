@@ -53,7 +53,7 @@ public class WorkerView extends Component {
         switch (i) {
             case 0 -> tableModel.setColumnIdentifiers(new String[]{"Student ID", "First name", "Last name", "Email", "Faculty", "PESEL", "Year", "Semester", "Specialization"});
             //case 1 -> tableModel.setColumnIdentifiers(new String[]{"Group ID", "Subject ID", "Subject name", "Day", "Time", "Parity", "Form"});
-            case 1 -> tableModel.setColumnIdentifiers(new String[]{"Group ID", "Subject ID", "Subject name",  "Professor ID", "Day", "Time", "Parity", "Form", "Student limit"});
+            case 1 -> tableModel.setColumnIdentifiers(new String[]{"Group ID", "Subject ID", "Subject name", "Professor ID", "Day", "Time", "Parity", "Form", "Student limit"});
             case 2 -> tableModel.setColumnIdentifiers(new String[]{"Student ID", "Student", "Email", "Grade", "Record date"});
         }
     }

@@ -27,8 +27,7 @@ public class LoginView {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        JRootPane rootPane = SwingUtilities.getRootPane(loginButton);
-        rootPane.setDefaultButton(loginButton);
+        frame.getRootPane().setDefaultButton(loginButton);
         systemLabel.setFont(new Font("Calibri", Font.BOLD, 24));
     }
 

@@ -13,16 +13,16 @@ import java.sql.Statement;
 public class DeansWorkerModel extends UserModel {
     private String faculty_id;
 
-    public DeansWorkerModel(int id, String type)
-    {
+    public DeansWorkerModel(int id, String type) {
         super(id, type);
     }
+
     public DeansWorkerModel(LoginModel loginModel) {
         super(loginModel.getId(), loginModel.getType());
 
         try {
             var rs = getPersonalData();
-            if(rs.next())
+            if (rs.next())
                 faculty_id = rs.getString("FACULTY_ID");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -99,7 +99,7 @@ public class DeansWorkerModel extends UserModel {
         return st.executeQuery("select * from BD.GROUP_STUDENTS_VIEW where group_id = " + group_id);
     }
 
-    public ResultSet getStudents() throws SQLException{
+    public ResultSet getStudents() throws SQLException {
         Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         return st.executeQuery("select * from BD.STUDENT_VIEW where faculty_id = '" + faculty_id + "'");
     }

@@ -26,12 +26,6 @@ public class DeansWorkerController implements IController {
         init();
     }
 
-    public DeansWorkerController(WorkerView view, DeansWorkerModel model) {
-        this.view = view;
-        this.model = model;
-        init();
-    }
-
     @Override
     public void dispose() {
         view.dispose();
@@ -95,7 +89,7 @@ public class DeansWorkerController implements IController {
     }
 
     private void editGroup() {
-        int row =  view.getDataTable().getSelectedRow();
+        int row = view.getDataTable().getSelectedRow();
         String string_group_id = (String) view.getDataTable().getValueAt(row, 0);
         String string_subject_id = (String) view.getDataTable().getValueAt(row, 1);
         String string_professor_id = (String) view.getDataTable().getValueAt(row, 3);
