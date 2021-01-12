@@ -73,17 +73,30 @@ public class DeansWorkerController implements IController {
     }
 
     private void editButtonListener() {
-        if (current_table_model == 1) {
-            editGroup();
+        if (view.getDataTable().getSelectedRow() >= 0) {
+            if (current_table_model == 1) {
+                editGroup();
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Select item in table first.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         update();
     }
 
     private void removeButtonListener() {
-        switch (current_table_model) {
-            case 0 -> removeStudent();
-            case 1 -> removeGroup();
-            case 2 -> removeStudentFromGroup();
+        if (view.getDataTable().getSelectedRow() >= 0) {
+            int res = JOptionPane.showConfirmDialog(null, "Are you sure?");
+            if (res == JOptionPane.OK_OPTION) {
+                switch (current_table_model) {
+                    case 0 -> removeStudent();
+                    case 1 -> removeGroup();
+                    case 2 -> removeStudentFromGroup();
+                }
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Select item in table first.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         update();
     }
@@ -103,7 +116,8 @@ public class DeansWorkerController implements IController {
 
         try {
             var group = ct.getModel();
-            model.editGroup(group.group_id, group.subject_id, group.professor_id, group.parity, group.day, group.time, group.form, group.student_limit);
+            if (group != null)
+                model.editGroup(group.group_id, group.subject_id, group.professor_id, group.parity, group.day, group.time, group.form, group.student_limit);
         } catch (SQLException e) {
             e.printStackTrace();
         }
