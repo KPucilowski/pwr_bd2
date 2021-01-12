@@ -18,10 +18,9 @@ public class LoginView {
     private JLabel systemLabel;
     private JLabel descLabel;
     private JPanel systemNamePane;
-    private String userType;
 
     public LoginView() {
-        frame = new JFrame("SBO");
+        frame = new JFrame("SBJ");
         frame.setContentPane(contentPane);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
