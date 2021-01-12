@@ -77,8 +77,7 @@ public class DeansWorkerController implements IController {
             if (current_table_model == 1) {
                 editGroup();
             }
-        }
-        else {
+        } else {
             JOptionPane.showMessageDialog(null, "Select item in table first.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         update();
@@ -86,16 +85,14 @@ public class DeansWorkerController implements IController {
 
     private void removeButtonListener() {
         if (view.getDataTable().getSelectedRow() >= 0) {
-            int res = JOptionPane.showConfirmDialog(null, "Are you sure?");
-            if (res == JOptionPane.OK_OPTION) {
+            if (confirmDialog()) {
                 switch (current_table_model) {
                     case 0 -> removeStudent();
                     case 1 -> removeGroup();
                     case 2 -> removeStudentFromGroup();
                 }
             }
-        }
-        else {
+        } else {
             JOptionPane.showMessageDialog(null, "Select item in table first.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         update();
@@ -264,5 +261,12 @@ public class DeansWorkerController implements IController {
     private int getIdFromSelectedRow() {
         var test = view.getDataTable().getSelectedRow();
         return Integer.parseInt((String) view.getTableModel().getValueAt(test, 0));
+    }
+
+    private boolean confirmDialog() {
+        int btnOptions = JOptionPane.YES_NO_OPTION;
+        int res = JOptionPane.showConfirmDialog(view, "Are you sure?", "Warning", btnOptions);
+
+        return res == JOptionPane.OK_OPTION;
     }
 }

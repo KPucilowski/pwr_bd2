@@ -3,14 +3,12 @@ package bd2.controllers.dialogs;
 import bd2.models.dialogs.NewStudentModel;
 import bd2.views.dialogs.NewStudentView;
 
-import javax.swing.*;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class NewStudentController {
     private final NewStudentView view;
     private NewStudentModel model;
-    private String faculty_id;
+    private final String faculty_id;
 
     public NewStudentController(String faculty_id) {
         this.view = new NewStudentView();
