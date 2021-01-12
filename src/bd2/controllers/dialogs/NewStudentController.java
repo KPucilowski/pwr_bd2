@@ -24,6 +24,7 @@ public class NewStudentController {
 
     private void getData() {
         model = new NewStudentModel();
+
         model.firstName = view.getTxtFirstName().getText();
         model.lastName = view.getTxtLastName().getText();
         model.pesel = view.getTxtPESEL().getText();

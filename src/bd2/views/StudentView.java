@@ -18,13 +18,12 @@ public class StudentView extends Component {
     private JButton personalDataButton;
     private JButton logOutButton;
 
-    DefaultTableModel tableModel = new DefaultTableModel() {
+    private final DefaultTableModel tableModel = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int row, int column) {
             return false;
         }
 
-        ;
     };
 
     public StudentView() {
@@ -43,6 +42,16 @@ public class StudentView extends Component {
 
     public DefaultTableModel getTableModel() {
         return tableModel;
+    }
+
+    public void setTableModel(int state) {
+        tableModel.setRowCount(0);
+        switch (state) {
+            case 0 -> tableModel.setColumnIdentifiers(new String[]{"First name", "Last name", "Email", "Faculty", "PESEL", "Year", "Semester", "Specialization", "Average grade"});
+            case 1 -> tableModel.setColumnIdentifiers(new String[]{"Professor", "Subject", "Day", "Time", "Parity", "Form", "Grade"});
+            case 2 -> tableModel.setColumnIdentifiers(new String[]{"Year", "Semester", "Subject", "Form", "Grade", "Professor"});
+            case 3 -> tableModel.setColumnIdentifiers(new String[]{"Professor", "Subject", "Parity", "Time", "Day", "Form", "Student limit", "Grade"});
+        }
     }
 
     public JTextField getIdField() {

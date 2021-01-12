@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class WorkerView extends Component {
     private final JFrame frame;
-    DefaultTableModel tableModel = new DefaultTableModel() {
+    private final DefaultTableModel tableModel = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int row, int column) {
             return false;

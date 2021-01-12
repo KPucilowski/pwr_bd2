@@ -43,8 +43,8 @@ public class StudentController implements IController {
     }
 
     private void showPersonalData() {
-        view.getTableModel().setRowCount(0);
-        view.getTableModel().setColumnIdentifiers(new String[]{"First name", "Last name", "Email", "Faculty", "PESEL", "Year", "Semester", "Specialization", "Average grade"});
+        view.setTableModel(0);
+
         try {
             var rs = model.getPersonalData();
             while (rs.next()) {
@@ -66,8 +66,8 @@ public class StudentController implements IController {
     }
 
     private void showTimetable() {
-        view.getTableModel().setRowCount(0);
-        view.getTableModel().setColumnIdentifiers(new String[]{"Professor", "Subject", "Day", "Time", "Parity", "Form", "Grade"});
+        view.setTableModel(1);
+
         try {
             var rs = model.getRecords();
             while (rs.next()) {
@@ -88,8 +88,7 @@ public class StudentController implements IController {
 
 
     private void showGrades() {
-        view.getTableModel().setRowCount(0);
-        view.getTableModel().setColumnIdentifiers(new String[]{"Year", "Semester", "Subject", "Form", "Grade", "Professor"});
+        view.setTableModel(3);
 
         try {
             var rs = model.getGrades();
@@ -110,8 +109,7 @@ public class StudentController implements IController {
     }
 
     private void showRecords() {
-        view.getTableModel().setRowCount(0);
-        view.getTableModel().setColumnIdentifiers(new String[]{"Professor", "Subject", "Parity", "Time", "Day", "Form", "Student limit", "Grade"});
+        view.setTableModel(3);
 
         try {
             var rs = model.getRecords();

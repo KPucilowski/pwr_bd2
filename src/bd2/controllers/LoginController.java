@@ -6,8 +6,6 @@ import bd2.tools.LoginTools;
 import bd2.views.LoginView;
 
 import javax.swing.*;
-import java.math.BigInteger;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 

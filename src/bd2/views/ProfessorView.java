@@ -23,7 +23,7 @@ public class ProfessorView extends Component {
         @Override
         public boolean isCellEditable(int row, int column){
             return false;
-        };
+        }
     };
 
     public DefaultTableModel tableModel2 = new DefaultTableModel()
@@ -31,7 +31,7 @@ public class ProfessorView extends Component {
         @Override
         public boolean isCellEditable(int row, int column){
             return column == 2;
-        };
+        }
     };
 
     public ProfessorView() {
