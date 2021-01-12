@@ -117,7 +117,7 @@ public class DeansWorkerController implements IController {
         //do etogo mesta vse ok
 
         //a vot tut problemka
-        NewGroupController ct = new NewGroupController();//tut cztoto
+        NewGroupController ct = new NewGroupController(string_group_id, string_subject_id, string_professor_id, parity, string_day, time, form, string_student_limit);//tut cztoto
         ct.getView().getTxtGroupID().setText(string_group_id);
         ct.getView().getTxtSubjectID().setText(string_subject_id);
         ct.getView().getTxtProfessorID().setText(string_professor_id);
