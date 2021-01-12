@@ -146,7 +146,8 @@ public class DeansWorkerController implements IController {
         NewGroupController ct = new NewGroupController();
         try {
             var group = ct.getModel();
-            model.addGroup(group.group_id, group.subject_id, group.professor_id, group.parity, group.day, group.time, group.form, group.student_limit);
+            if (group != null)
+                model.addGroup(group.group_id, group.subject_id, group.professor_id, group.parity, group.day, group.time, group.form, group.student_limit);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -156,13 +157,11 @@ public class DeansWorkerController implements IController {
         NewStudentController ct = new NewStudentController();
         try {
             var student = ct.getModel();
-            if (student != null) {
+            if (student != null)
                 model.addStudent(student.firstName, student.lastName, model.getFacultyId(), student.pesel);
-            }
         } catch (SQLException | NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        showStudents();
     }
 
     private void addStudentToGroup() {

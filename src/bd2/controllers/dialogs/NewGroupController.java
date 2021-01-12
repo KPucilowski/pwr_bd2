@@ -6,17 +6,15 @@ import bd2.views.dialogs.NewGroupView;
 
 public class NewGroupController {
     private final NewGroupView view;
-    private final NewGroupModel model;
+    private NewGroupModel model;
 
     public NewGroupController() {
         this.view = new NewGroupView();
-        this.model = new NewGroupModel();
 
         init();
     }
 
     public NewGroupController(String group_id, String subject_id, String professor_id, String parity, String day, String time, String form, String student_limit) {
-        this.model = new NewGroupModel();
         this.view = new NewGroupView();
 
         init(group_id, subject_id, professor_id, parity, day, time, form, student_limit);
@@ -49,6 +47,8 @@ public class NewGroupController {
     }
 
     private void getData() {
+        model = new NewGroupModel();
+
         model.group_id = Integer.parseInt(view.getTxtGroupID().getText());
         model.professor_id = Integer.parseInt(view.getTxtProfessorID().getText());
         model.subject_id = Integer.parseInt(view.getTxtSubjectID().getText());
