@@ -46,10 +46,6 @@ public class NewGroupController {
         return model;
     }
 
-    public NewGroupView getView() {
-        return view;
-    }
-
     private void getData() {
         model.group_id = Integer.parseInt(view.getTxtGroupID().getText());
         model.professor_id = Integer.parseInt(view.getTxtProfessorID().getText());

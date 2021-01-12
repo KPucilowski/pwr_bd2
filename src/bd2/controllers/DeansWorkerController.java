@@ -96,7 +96,6 @@ public class DeansWorkerController implements IController {
     }
 
     private void editGroup() {
-        //получаем из таблицы, тут все окей
         int row =  view.getDataTable().getSelectedRow();
         String string_group_id = (String) view.getDataTable().getValueAt(row, 0);
         String string_subject_id = (String) view.getDataTable().getValueAt(row, 1);
@@ -106,28 +105,9 @@ public class DeansWorkerController implements IController {
         String parity = (String) view.getDataTable().getValueAt(row, 6);
         String form = (String) view.getDataTable().getValueAt(row, 7);
         String string_student_limit = (String) view.getDataTable().getValueAt(row, 8);
-        System.out.println(string_group_id);
-        System.out.println(string_subject_id);
-        System.out.println(string_professor_id);
-        System.out.println(parity);
-        System.out.println(string_day);
-        System.out.println(time);
-        System.out.println(form);
-        System.out.println(string_student_limit);
-        //do etogo mesta vse ok
 
-        //a vot tut problemka
         NewGroupController ct = new NewGroupController(string_group_id, string_subject_id, string_professor_id, parity, string_day, time, form, string_student_limit);//tut cztoto
-        ct.getView().getTxtGroupID().setText(string_group_id);
-        ct.getView().getTxtSubjectID().setText(string_subject_id);
-        ct.getView().getTxtProfessorID().setText(string_professor_id);
-        ct.getView().getTxtParity().setText(parity);
-        ct.getView().getTxtDay().setText(string_day);
-        ct.getView().getTxtTime().setText(time);
-        ct.getView().getTxtForm().setText(form);
-        ct.getView().getTxtStudentLimit().setText(string_student_limit);
 
-        //dalshe tozhe ok
         try {
             var group = ct.getModel();
             model.editGroup(group.group_id, group.subject_id, group.professor_id, group.parity, group.day, group.time, group.form, group.student_limit);

@@ -35,6 +35,4 @@ public class NewStudentController {
     public NewStudentModel getModel() {
         return model;
     }
-
-
 }
