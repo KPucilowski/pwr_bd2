@@ -77,9 +77,10 @@ public class DeansWorkerModel extends UserModel {
             String first_name,
             String last_name,
             String faculty_id,
+            String specialization_id,
             String pesel
     ) throws SQLException, NoSuchAlgorithmException {
-        CallableStatement stmt = App.cn.prepareCall("{call BD.ADD_STUDENT(?, ?, ?, ?, ?, ?)}");
+        CallableStatement stmt = App.cn.prepareCall("{call BD.ADD_STUDENT(?, ?, ?, ?, ?, ?, ?)}");
 
         var randLogin = LoginTools.randomString(10);
         var randPassword = LoginTools.randomPassword(10);
@@ -87,9 +88,10 @@ public class DeansWorkerModel extends UserModel {
         stmt.setString(1, first_name);
         stmt.setString(2, last_name);
         stmt.setString(3, faculty_id);
-        stmt.setString(4, pesel);
-        stmt.setString(5, randLogin);
-        stmt.setString(6, randPassword);
+        stmt.setString(4, specialization_id);
+        stmt.setString(5, pesel);
+        stmt.setString(6, randLogin);
+        stmt.setString(7, randPassword);
         stmt.execute();
     }
 

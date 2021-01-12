@@ -148,11 +148,11 @@ public class DeansWorkerController implements IController {
     }
 
     private void addStudent() {
-        NewStudentController ct = new NewStudentController();
+        NewStudentController ct = new NewStudentController(model.getFacultyId());
         try {
             var student = ct.getModel();
             if (student != null)
-                model.addStudent(student.firstName, student.lastName, model.getFacultyId(), student.pesel);
+                model.addStudent(student.firstName, student.lastName, model.getFacultyId(), student.specialization_id, student.pesel);
         } catch (SQLException | NoSuchAlgorithmException e) {
             e.printStackTrace();
         }

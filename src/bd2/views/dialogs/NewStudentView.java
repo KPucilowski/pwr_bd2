@@ -9,12 +9,21 @@ public class NewStudentView extends JDialog {
     public JTextField txtLastName;
     public JTextField txtPESEL;
     private JPanel newStudentPanel;
+    private JComboBox<String> specializationCbx;
 
     public NewStudentView() {
         setTitle("Student menu");
         setContentPane(newStudentPanel);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
+    }
+
+    public Object getSpecialization() {
+        return specializationCbx.getSelectedItem();
+    }
+
+    public JComboBox<String> getSpecializationCbx() {
+        return specializationCbx;
     }
 
     public JButton getOkButton() {
