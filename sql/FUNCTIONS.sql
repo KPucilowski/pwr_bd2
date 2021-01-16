@@ -1,4 +1,8 @@
-CREATE OR REPLACE FUNCTION CHECK_LOGIN(
+--------------------------------------------------------
+--  DDL for Function CHECK_LOGIN
+--------------------------------------------------------
+
+CREATE OR REPLACE NONEDITIONABLE FUNCTION "CHECK_LOGIN" (
     LOGIN_INP IN VARCHAR2,
     PASS_INP IN VARCHAR2
 )
@@ -12,7 +16,11 @@ BEGIN
     RETURN user_type;
 END;
 
-CREATE OR REPLACE FUNCTION GET_ID(
+--------------------------------------------------------
+--  DDL for Function GET_ID
+--------------------------------------------------------
+
+CREATE OR REPLACE NONEDITIONABLE FUNCTION "GET_ID" (
     LOGIN_INP IN VARCHAR2,
     PASS_INP IN VARCHAR2
 )
