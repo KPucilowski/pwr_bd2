@@ -1,20 +1,56 @@
 package test;
 
+import bd2.App;
 import bd2.models.LoginModel;
 import bd2.models.StudentModel;
+import bd2.tools.LoginTools;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.security.NoSuchAlgorithmException;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+
 public class StudentTest {
-    private static StudentModel model;
+    private StudentModel model;
+
+    @BeforeEach
+    void login() throws SQLException, NoSuchAlgorithmException {
+        App.reconnect();
+        var loginModel = new LoginModel("STUDENT");
+        var pass = LoginTools.charToSha256(new char[]{'1'});
+        loginModel.login("1", pass);
+        model = new StudentModel(loginModel);
+        App.cn = DriverManager.getConnection(
+                "jdbc:oracle:thin:@146.59.17.101:1521:XE", "STUDENT", "pass");
+    }
 
     @Test
-    @BeforeAll
-    static void login() throws SQLException {
-        var loginModel = new LoginModel(200001, "STUDENT");
-        loginModel.login("1", "1");
-        model = new StudentModel(loginModel);
+    public void testPersonalData() throws SQLException {
+        var rs = model.getPersonalData();
+
+        var id = 200001;
+        var first_name = "Alice";
+        var last_name = "Leroux";
+        var faculty = "Wydział 1";
+
+        int rs_id = 0;
+        String rs_first_name = "", rs_last_name = "", rs_faculty = "";
+
+        if (rs.next()) {
+            rs_id = rs.getInt("STUDENT_ID");
+            rs_first_name = rs.getString("FIRST_NAME");
+            rs_last_name = rs.getString("LAST_NAME");
+            rs_faculty = rs.getString("FACULTY");
+        }
+
+        assertEquals(id, rs_id);
+        assertEquals(first_name, rs_first_name);
+        assertEquals(last_name, rs_last_name);
+        assertEquals(faculty, rs_faculty);
     }
 }
