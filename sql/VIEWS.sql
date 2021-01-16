@@ -1,4 +1,34 @@
 --------------------------------------------------------
+--  DDL for View DEANS_WORKER_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE NONEDITIONABLE VIEW "DEANS_WORKER_VIEW" ("DEANS_WORKER_ID", "USER_ID", "FIRST_NAME", "LAST_NAME", "EMAIL", "FACULTY_ID") AS
+select
+    "DEANS_WORKER_ID","USER_ID","FIRST_NAME","LAST_NAME","EMAIL","FACULTY_ID"
+from
+    deans_worker dw join personal_data pd
+                         on dw.deans_worker_id = pd.user_id
+;
+--------------------------------------------------------
+--  DDL for View GROUP_STUDENTS_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE NONEDITIONABLE VIEW "GROUP_STUDENTS_VIEW" ("PROFESSOR_ID", "GROUP_ID", "STUDENT_ID", "STUDENT", "EMAIL", "GRADE", "GRADE_DATE", "RECORD_DATE") AS
+SELECT
+    grp.professor_id,
+    grp."GROUP_ID",
+    rec.student_id,
+    pd.first_name || ' ' || pd.last_name as "STUDENT",
+    pd.email,
+    rec.grade,
+    rec.grade_date,
+    rec.record_date
+FROM
+    "GROUP" grp inner join
+    "RECORD" rec on grp."GROUP_ID" = rec."GROUP_ID" inner join
+    PERSONAL_DATA pd on rec.student_id = pd.user_id
+;
+--------------------------------------------------------
 --  DDL for View GROUP_VIEW
 --------------------------------------------------------
 
@@ -22,25 +52,8 @@ FROM
     PROFESSOR ON "GROUP".PROFESSOR_ID = PROFESSOR.PROFESSOR_ID INNER JOIN
     PERSONAL_DATA ON PROFESSOR.PROFESSOR_ID = PERSONAL_DATA.USER_ID INNER JOIN
     SUBJECT ON SUBJECT.SUBJECT_ID = "GROUP".SUBJECT_ID
-;
---------------------------------------------------------
---  DDL for View GROUP_STUDENTS_VIEW
---------------------------------------------------------
-
-CREATE OR REPLACE NONEDITIONABLE VIEW "GROUP_STUDENTS_VIEW" ("PROFESSOR_ID", "GROUP_ID", "STUDENT_ID", "STUDENT", "EMAIL", "GRADE", "GRADE_DATE", "RECORD_DATE") AS
-SELECT
-    grp.professor_id,
-    grp."GROUP_ID",
-    rec.student_id,
-    pd.first_name || ' ' || pd.last_name as "STUDENT",
-    pd.email,
-    rec.grade,
-    rec.grade_date,
-    rec.record_date
-FROM
-    "GROUP" grp inner join
-    "RECORD" rec on grp."GROUP_ID" = rec."GROUP_ID" inner join
-    PERSONAL_DATA pd on rec.student_id = pd.user_id
+ORDER BY
+    "GROUP".GROUP_ID
 ;
 --------------------------------------------------------
 --  DDL for View PROFESSOR_VIEW
@@ -59,51 +72,6 @@ FROM
     PROFESSOR INNER JOIN
     PERSONAL_DATA ON PROFESSOR.PROFESSOR_ID = PERSONAL_DATA.USER_ID INNER JOIN
     FACULTY ON faculty.FACULTY_id = personal_data.faculty_id
-;
---------------------------------------------------------
---  DDL for View STUDENT_VIEW
---------------------------------------------------------
-
-CREATE OR REPLACE NONEDITIONABLE VIEW "STUDENT_VIEW" ("STUDENT_ID", "PESEL", "ADMISSION_DATE", "YEAR", "SEMESTER", "FIRST_NAME", "LAST_NAME", "EMAIL", "SPECIALIZATION", "FACULTY_ID", "FACULTY", "AVG_GRADE") AS
-SELECT
-    st.STUDENT_ID,
-    st.PESEL,
-    st.ADMISSION_DATE,
-    st.YEAR,
-    st.SEMESTER,
-    pd.FIRST_NAME,
-    pd.LAST_NAME,
-    pd.EMAIL,
-    spec.NAME AS SPECIALIZATION,
-    fc.FACULTY_ID,
-    fc.NAME as FACULTY,
-    round(avg_grade.grade, 2) as AVG_GRADE
-FROM
-    STUDENT st LEFT JOIN
-    PERSONAL_DATA pd on pd.user_id = st.student_id JOIN
-    SPECIALIZATION spec on spec.specialization_id = st.specialization_id JOIN
-    FACULTY fc on pd.faculty_id = fc.faculty_id join
-    (SELECT AVG(GRADE) as GRADE, student_id from "RECORD" group by student_id)
-        avg_grade on st.student_id = avg_grade.student_id
-;
---------------------------------------------------------
---  DDL for View STUDENT_GRADES_VIEW
---------------------------------------------------------
-
-CREATE OR REPLACE NONEDITIONABLE VIEW "STUDENT_GRADES_VIEW" ("STUDENT_ID", "SUBJECT_NAME", "FORM", "GRADE", "TOTAL_MONTHS", "PROFESSOR") AS
-select
-    rec.student_id,
-    sbj.subject_name,
-    grp."FORM",
-    rec.grade,
-    round(MONTHS_BETWEEN(rec.grade_date, st.admission_date)) as TOTAL_MONTHS,
-    pd.first_name || ' ' || pd.last_name as PROFESSOR
-from
-    "RECORD" rec join
-    "GROUP" grp on grp."GROUP_ID" = rec."GROUP_ID" join
-    subject sbj on grp.subject_id = sbj.subject_id join
-    personal_data pd on grp.professor_id = pd.user_id join
-    student st on st.student_id = rec.student_id
 ;
 --------------------------------------------------------
 --  DDL for View RECORD_VIEW
@@ -130,18 +98,50 @@ FROM
     PERSONAL_DATA ON PROFESSOR.PROFESSOR_ID = PERSONAL_DATA.USER_ID
 ;
 --------------------------------------------------------
---  DDL for View DEANS_WORKER_VIEW
+--  DDL for View STUDENT_GRADES_VIEW
 --------------------------------------------------------
 
-CREATE OR REPLACE NONEDITIONABLE VIEW "DEANS_WORKER_VIEW" ("DEANS_WORKER_ID", "USER_ID", "FIRST_NAME", "LAST_NAME", "EMAIL", "FACULTY_ID") AS
+CREATE OR REPLACE NONEDITIONABLE VIEW "STUDENT_GRADES_VIEW" ("STUDENT_ID", "SUBJECT_NAME", "FORM", "GRADE", "TOTAL_MONTHS", "PROFESSOR") AS
+select
+    rec.student_id,
+    sbj.subject_name,
+    grp."FORM",
+    rec.grade,
+    round(MONTHS_BETWEEN(rec.grade_date, st.admission_date)) as TOTAL_MONTHS,
+    pd.first_name || ' ' || pd.last_name as PROFESSOR
+from
+    "RECORD" rec join
+    "GROUP" grp on grp."GROUP_ID" = rec."GROUP_ID" join
+    subject sbj on grp.subject_id = sbj.subject_id join
+    personal_data pd on grp.professor_id = pd.user_id join
+    student st on st.student_id = rec.student_id
+order by TOTAL_MONTHS
+;
+--------------------------------------------------------
+--  DDL for View STUDENT_VIEW
+--------------------------------------------------------
+
+CREATE OR REPLACE NONEDITIONABLE VIEW "STUDENT_VIEW" ("STUDENT_ID", "PESEL", "ADMISSION_DATE", "YEAR", "SEMESTER", "FIRST_NAME", "LAST_NAME", "EMAIL", "SPECIALIZATION", "FACULTY_ID", "FACULTY", "AVG_GRADE") AS
 SELECT
-    "DEANS_WORKER_ID",
-    "USER_ID",
-    "FIRST_NAME",
-    "LAST_NAME",
-    "EMAIL",
-    "FACULTY_ID"
+    st.STUDENT_ID,
+    st.PESEL,
+    st.ADMISSION_DATE,
+    st.YEAR,
+    st.SEMESTER,
+    pd.FIRST_NAME,
+    pd.LAST_NAME,
+    pd.EMAIL,
+    spec.NAME AS SPECIALIZATION,
+    fc.FACULTY_ID,
+    fc.NAME as FACULTY,
+    round(avg_grade.grade, 2) as AVG_GRADE
 FROM
-    DEANS_WORKER dw JOIN
-    PERSONAL_DATA pd ON dw.deans_worker_id = pd.user_id
+    STUDENT st LEFT JOIN
+    PERSONAL_DATA pd on pd.user_id = st.student_id JOIN
+    SPECIALIZATION spec on spec.specialization_id = st.specialization_id JOIN
+    FACULTY fc on pd.faculty_id = fc.faculty_id left join
+    (SELECT AVG(GRADE) as GRADE, student_id from "RECORD" group by student_id)
+        avg_grade on st.student_id = avg_grade.student_id
+order by
+    st.student_id
 ;

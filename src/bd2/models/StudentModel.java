@@ -38,6 +38,6 @@ public class StudentModel extends UserModel {
 
     private void fetchRecords() throws SQLException {
         Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        records = st.executeQuery("select * from BD.RECORD_VIEW where student_id = " + this.id);
+        records = st.executeQuery("select * from BD.RECORD_VIEW where student_id = " + this.id + " order by day");
     }
 }

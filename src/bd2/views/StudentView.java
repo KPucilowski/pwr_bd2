@@ -47,7 +47,7 @@ public class StudentView extends Component {
         tableModel.setRowCount(0);
         switch (state) {
             case 0 -> tableModel.setColumnIdentifiers(new String[]{"First name", "Last name", "Email", "Faculty", "PESEL", "Year", "Semester", "Specialization", "Average grade"});
-            case 1 -> tableModel.setColumnIdentifiers(new String[]{"Professor", "Subject", "Day", "Time", "Parity", "Form", "Grade"});
+            case 1 -> tableModel.setColumnIdentifiers(new String[]{"Day", "Time", "Parity", "Subject", "Professor", "Form"});
             case 2 -> tableModel.setColumnIdentifiers(new String[]{"Year", "Semester", "Subject", "Form", "Grade", "Professor"});
             case 3 -> tableModel.setColumnIdentifiers(new String[]{"Professor", "Subject", "Parity", "Time", "Day", "Form", "Student limit", "Grade"});
         }

@@ -10,6 +10,7 @@ import oracle.jdbc.logging.annotations.Log;
 
 import javax.swing.*;
 import java.sql.SQLException;
+import java.time.DayOfWeek;
 
 public class StudentController implements IController {
     private final StudentView view;
@@ -67,15 +68,19 @@ public class StudentController implements IController {
 
         try {
             var rs = model.getRecords();
+
             while (rs.next()) {
                 var professor = rs.getString("PROFESSOR");
                 var subject = rs.getString("SUBJECT_NAME");
-                var day = rs.getString("DAY");
+                var day = rs.getInt("DAY");
+                var day_string = DayOfWeek.of(day).toString();
+                var day_string_formatted = day_string.substring(0,1).toUpperCase() + day_string.substring(1).toLowerCase();
                 var time = rs.getString("TIME");
                 var parity = rs.getString("PARITY");
                 var form = rs.getString("FORM");
-                var grade = rs.getString("GRADE");
-                view.getTableModel().addRow(new String[]{professor, subject, day, time, parity, form, grade});
+
+                view.getTableModel().addRow(new String[]{day_string_formatted, time,
+                        parity, subject, professor, form});
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -85,7 +90,7 @@ public class StudentController implements IController {
 
 
     private void showGrades() {
-        view.setTableModel(3);
+        view.setTableModel(2);
 
         try {
             var rs = model.getGrades();
