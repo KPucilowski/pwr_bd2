@@ -77,26 +77,14 @@ SELECT
     spec.NAME AS SPECIALIZATION,
     fc.FACULTY_ID,
     fc.NAME as FACULTY,
-    AVG(rec.GRADE) as AVG_GRADE
+    round(avg_grade.grade, 2) as AVG_GRADE
 FROM
     STUDENT st LEFT JOIN
-    "RECORD" rec ON st.STUDENT_ID = rec.STUDENT_ID JOIN
     PERSONAL_DATA pd on pd.user_id = st.student_id JOIN
     SPECIALIZATION spec on spec.specialization_id = st.specialization_id JOIN
-    FACULTY fc on pd.faculty_id = fc.faculty_id
-GROUP BY
-    rec.GRADE,
-    st.STUDENT_ID,
-    st.PESEL,
-    st.ADMISSION_DATE,
-    st.YEAR,
-    st.SEMESTER,
-    pd.FIRST_NAME,
-    pd.LAST_NAME,
-    pd.EMAIL,
-    spec.NAME,
-    fc.FACULTY_ID,
-    fc.NAME
+    FACULTY fc on pd.faculty_id = fc.faculty_id join
+    (SELECT AVG(GRADE) as GRADE, student_id from "RECORD" group by student_id)
+        avg_grade on st.student_id = avg_grade.student_id
 ;
 --------------------------------------------------------
 --  DDL for View STUDENT_GRADES_VIEW
