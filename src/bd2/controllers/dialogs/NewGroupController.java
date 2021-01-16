@@ -6,6 +6,7 @@ import bd2.tools.ParseTools;
 import bd2.views.dialogs.NewGroupView;
 
 import java.sql.SQLException;
+import java.time.DayOfWeek;
 
 
 public class NewGroupController implements IController {
@@ -44,6 +45,12 @@ public class NewGroupController implements IController {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+
+        view.getSubjectComboBox().setSelectedItem(null);
+
+        for (var day : DayOfWeek.values()) {
+            view.getDayComboBox().addItem(day.toString());
+        }
     }
 
     @Override
@@ -57,7 +64,8 @@ public class NewGroupController implements IController {
         view.getTxtGroupID().setText(group_id);
         view.getTxtProfessorID().setText(professor_id);
         view.getTxtParity().setText(parity);
-        view.getTxtDay().setText(day);
+        var dayOfWeek = DayOfWeek.of(Integer.parseInt(day)).toString();
+        view.getDayComboBox().setSelectedItem(dayOfWeek);
         view.getTxtTime().setText(time);
         view.getTxtForm().setText(form);
         view.getTxtStudentLimit().setText(student_limit);
@@ -90,7 +98,7 @@ public class NewGroupController implements IController {
         var subject_name = (String) view.getSubjectComboBoxItem();
         model.subject_id = Integer.parseInt(ParseTools.extractBetween(subject_name, '(', ')'));
         model.parity = view.getTxtParity().getText();
-        model.day = Integer.parseInt(view.getTxtDay().getText());
+        model.day = DayOfWeek.valueOf(view.getDayComboBoxItem()).getValue();
         model.time = view.getTxtTime().getText();
         model.form = view.getTxtForm().getText();
         model.student_limit = Integer.parseInt(view.getTxtStudentLimit().getText());

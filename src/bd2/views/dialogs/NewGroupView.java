@@ -15,6 +15,7 @@ public class NewGroupView extends JDialog {
     public JTextField txtStudentLimit;
     private JPanel newGroupPanel;
     private JComboBox<String> subjectComboBox;
+    private JComboBox<String> dayComboBox;
 
 
     public NewGroupView() {
@@ -70,5 +71,13 @@ public class NewGroupView extends JDialog {
 
     public Object getSubjectComboBoxItem() {
         return subjectComboBox.getSelectedItem();
+    }
+
+    public JComboBox getDayComboBox() {
+        return dayComboBox;
+    }
+
+    public String getDayComboBoxItem() {
+        return (String) dayComboBox.getSelectedItem();
     }
 }
