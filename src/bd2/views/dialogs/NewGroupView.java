@@ -14,7 +14,7 @@ public class NewGroupView extends JDialog {
     public JTextField txtForm;
     public JTextField txtStudentLimit;
     private JPanel newGroupPanel;
-    private JComboBox subjectComboBox;
+    private JComboBox<String> subjectComboBox;
 
 
     public NewGroupView() {

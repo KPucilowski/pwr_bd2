@@ -62,14 +62,14 @@ public class NewGroupController implements IController {
         view.getTxtForm().setText(form);
         view.getTxtStudentLimit().setText(student_limit);
 
-        String subject_combobox_item = null;
+        String subject_item = null;
         try {
-            subject_combobox_item = String.format(NewGroupModel.findSubjectNameById(Integer.parseInt(subject_id)) + " (%s)", subject_id);
+            subject_item = String.format(NewGroupModel.findSubjectNameById(Integer.parseInt(subject_id)) + " (%s)", subject_id);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-        view.getSubjectComboBox().setSelectedItem(subject_combobox_item);
+        view.getSubjectComboBox().setSelectedItem(subject_item);
     }
 
     private void run() {
