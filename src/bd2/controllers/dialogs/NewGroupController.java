@@ -2,32 +2,48 @@ package bd2.controllers.dialogs;
 
 import bd2.controllers.IController;
 import bd2.models.dialogs.NewGroupModel;
+import bd2.tools.ParseTools;
 import bd2.views.dialogs.NewGroupView;
+
+import java.sql.SQLException;
 
 
 public class NewGroupController implements IController {
     private final NewGroupView view;
     private NewGroupModel model;
+    private String faculty_id;
 
-    public NewGroupController() {
+    public NewGroupController(String faculty_id) {
         this.view = new NewGroupView();
+        this.faculty_id = faculty_id;
 
         init();
+        run();
     }
 
-    public NewGroupController(String group_id, String subject_id, String professor_id, String parity, String day, String time, String form, String student_limit) {
+    public NewGroupController(String faculty_id, String group_id, String subject_id, String professor_id, String parity, String day, String time, String form, String student_limit) {
         this.view = new NewGroupView();
+        this.faculty_id = faculty_id;
 
         init(group_id, subject_id, professor_id, parity, day, time, form, student_limit);
+        run();
     }
 
     public void init() {
         view.getOkButton().addActionListener(e -> getData());
         view.getCancelButton().addActionListener(e -> view.dispose());
 
-        view.setModal(true);
-        view.pack();
-        view.setVisible(true);
+        try {
+            var rs = NewGroupModel.getSubjectsOfFaculty(faculty_id);
+            while (rs.next()) {
+                var subject_name = rs.getString("SUBJECT_NAME");
+                var subject_id = rs.getInt("SUBJECT_ID");
+
+                view.getSubjectComboBox().addItem(String.format("%s (%d)", subject_name, subject_id));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     @Override
@@ -36,8 +52,9 @@ public class NewGroupController implements IController {
     }
 
     private void init(String group_id, String subject_id, String professor_id, String parity, String day, String time, String form, String student_limit) {
+        init();
+
         view.getTxtGroupID().setText(group_id);
-        view.getTxtSubjectID().setText(subject_id);
         view.getTxtProfessorID().setText(professor_id);
         view.getTxtParity().setText(parity);
         view.getTxtDay().setText(day);
@@ -45,7 +62,20 @@ public class NewGroupController implements IController {
         view.getTxtForm().setText(form);
         view.getTxtStudentLimit().setText(student_limit);
 
-        init();
+        String subject_combobox_item = null;
+        try {
+            subject_combobox_item = String.format(NewGroupModel.findSubjectNameById(Integer.parseInt(subject_id)) + " (%s)", subject_id);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        view.getSubjectComboBox().setSelectedItem(subject_combobox_item);
+    }
+
+    private void run() {
+        view.setModal(true);
+        view.pack();
+        view.setVisible(true);
     }
 
     public NewGroupModel getModel() {
@@ -57,7 +87,8 @@ public class NewGroupController implements IController {
 
         model.group_id = Integer.parseInt(view.getTxtGroupID().getText());
         model.professor_id = Integer.parseInt(view.getTxtProfessorID().getText());
-        model.subject_id = Integer.parseInt(view.getTxtSubjectID().getText());
+        var subject_name = (String) view.getSubjectComboBoxItem();
+        model.subject_id = Integer.parseInt(ParseTools.extractBetween(subject_name, '(', ')'));
         model.parity = view.getTxtParity().getText();
         model.day = Integer.parseInt(view.getTxtDay().getText());
         model.time = view.getTxtTime().getText();

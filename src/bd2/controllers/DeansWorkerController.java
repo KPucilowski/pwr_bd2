@@ -110,7 +110,7 @@ public class DeansWorkerController implements IController {
         String form = (String) view.getDataTable().getValueAt(row, 7);
         String string_student_limit = (String) view.getDataTable().getValueAt(row, 8);
 
-        NewGroupController ct = new NewGroupController(string_group_id, string_subject_id, string_professor_id, parity, string_day, time, form, string_student_limit);//tut cztoto
+        NewGroupController ct = new NewGroupController(model.getFacultyId(), string_group_id, string_subject_id, string_professor_id, parity, string_day, time, form, string_student_limit);//tut cztoto
 
         try {
             var group = ct.getModel();
@@ -149,7 +149,7 @@ public class DeansWorkerController implements IController {
     }
 
     private void addGroup() {
-        NewGroupController ct = new NewGroupController();
+        NewGroupController ct = new NewGroupController(model.getFacultyId());
         try {
             var group = ct.getModel();
             if (group != null)

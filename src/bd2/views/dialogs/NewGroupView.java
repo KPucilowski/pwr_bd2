@@ -14,6 +14,7 @@ public class NewGroupView extends JDialog {
     public JTextField txtForm;
     public JTextField txtStudentLimit;
     private JPanel newGroupPanel;
+    private JComboBox subjectComboBox;
 
 
     public NewGroupView() {
@@ -61,5 +62,13 @@ public class NewGroupView extends JDialog {
 
     public JTextField getTxtStudentLimit() {
         return txtStudentLimit;
+    }
+
+    public JComboBox getSubjectComboBox() {
+        return subjectComboBox;
+    }
+
+    public Object getSubjectComboBoxItem() {
+        return subjectComboBox.getSelectedItem();
     }
 }

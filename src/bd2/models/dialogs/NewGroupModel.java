@@ -16,8 +16,18 @@ public class NewGroupModel {
     public String form;
     public int student_limit;
 
-    public ResultSet getSubjectsOfFaculty(String faculty_id) throws SQLException {
+    public static ResultSet getSubjectsOfFaculty(String faculty_id) throws SQLException {
         Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
         return st.executeQuery("select * from BD.SUBJECT where FACULTY_ID = '" + faculty_id + "'");
+    }
+
+    public static String findSubjectNameById(int subject_id) throws SQLException {
+        Statement st = App.cn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+        var rs = st.executeQuery("select * from BD.SUBJECT where SUBJECT_ID = " + subject_id);
+        if (rs.next()) {
+            return rs.getString("SUBJECT_NAME");
+        }
+        return null;
     }
 }
