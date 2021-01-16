@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.security.NoSuchAlgorithmException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -52,5 +53,28 @@ public class StudentTest {
         assertEquals(first_name, rs_first_name);
         assertEquals(last_name, rs_last_name);
         assertEquals(faculty, rs_faculty);
+    }
+
+    @Test
+    public void testAvgGrade() throws SQLException {
+        double rs_avg_grade = 0f;
+
+        var rs = model.getPersonalData();
+
+        if (rs.next())
+            rs_avg_grade = rs.getDouble("AVG_GRADE");
+
+        ArrayList<Float> grades = new ArrayList<>();
+        rs = model.getGrades();
+        while (rs.next()) {
+            var grade = rs.getFloat("GRADE");
+            grades.add(grade);
+        }
+
+        float sum = 0f;
+        for (Float grade : grades) sum += grade;
+        double avg_grade = sum / grades.size();
+
+        assertEquals(rs_avg_grade, avg_grade);
     }
 }
