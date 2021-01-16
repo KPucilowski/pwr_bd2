@@ -15,7 +15,7 @@ public class LoginTest {
     private static LoginModel model;
 
     @BeforeAll
-    static void login(){
+    static void login() {
         App.reconnect();
         model = new LoginModel(null);
     }

@@ -5,7 +5,6 @@ import bd2.models.LoginModel;
 import bd2.models.StudentModel;
 import bd2.tools.LoginTools;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.security.NoSuchAlgorithmException;
@@ -14,13 +13,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
 
 public class StudentTest {
-    private StudentModel model;
+    private static StudentModel model;
 
-    @BeforeEach
-    void login() throws SQLException, NoSuchAlgorithmException {
+    @BeforeAll
+    static void login() throws SQLException, NoSuchAlgorithmException {
         App.reconnect();
         var loginModel = new LoginModel("STUDENT");
         var pass = LoginTools.charToSha256(new char[]{'1'});
@@ -31,7 +29,7 @@ public class StudentTest {
     }
 
     @Test
-    public void testPersonalData() throws SQLException {
+    void testPersonalData() throws SQLException {
         var rs = model.getPersonalData();
 
         var id = 200001;
@@ -56,7 +54,7 @@ public class StudentTest {
     }
 
     @Test
-    public void testAvgGrade() throws SQLException {
+    void testAvgGrade() throws SQLException {
         double rs_avg_grade = 0f;
 
         var rs = model.getPersonalData();
