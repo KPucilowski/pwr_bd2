@@ -75,18 +75,17 @@ public class ProfessorController implements IController {
         view.dataTable.setModel(view.tableModel);
         view.saveButton.setVisible(false);
         view.getTableModel().setRowCount(0);
-        view.getTableModel().setColumnIdentifiers(new String[]{"Subject ID", "Subject name", "Day", "Time", "Parity", "Form", "Students limit"});
+        view.getTableModel().setColumnIdentifiers(new String[]{"Day", "Time", "Parity", "Subject", "Form", "Students limit"});
         try {
             var rs = model.getGroups();
             while (rs.next()) {
-                var subject_id = rs.getString("SUBJECT_ID");
-                var subject_name = rs.getString("SUBJECT_NAME");
                 var day = rs.getString("DAY");
                 var time = rs.getString("TIME");
                 var parity = rs.getString("PARITY");
+                var subject_name = rs.getString("SUBJECT_NAME");
                 var form = rs.getString("FORM");
                 var student_limit = rs.getString("STUDENT_LIMIT");
-                view.getTableModel().addRow(new String[]{subject_id, subject_name, day, time, parity, form, student_limit});
+                view.getTableModel().addRow(new String[]{day, time, parity, subject_name, form, student_limit});
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
