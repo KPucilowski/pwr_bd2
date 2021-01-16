@@ -41,7 +41,10 @@ public class LoginController implements IController {
                 dispose();
             }
         } catch (SQLException | NoSuchAlgorithmException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,
+                    "Wrong login and/or password. Try again.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         }
     }
