@@ -3,6 +3,7 @@ package bd2.controllers;
 import bd2.App;
 import bd2.models.LoginModel;
 import bd2.models.ProfessorModel;
+import bd2.tools.LoginTools;
 import bd2.views.ProfessorView;
 
 import javax.swing.*;
@@ -34,7 +35,7 @@ public class ProfessorController implements IController {
     @Override
     public void init() {
         showPersonalData();
-        view.getIdField().setText(String.valueOf(model.getId()));
+        view.getIdField().setText(LoginTools.getLoginIdText(this.model));
         view.getPersonalDataButton().addActionListener(e -> showPersonalData());
         view.getTimetableButton().addActionListener(e -> showTimetable());
         view.getGroupsButton().addActionListener(e -> showGroups());

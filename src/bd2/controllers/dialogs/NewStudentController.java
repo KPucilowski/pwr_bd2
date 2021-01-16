@@ -7,8 +7,8 @@ import java.sql.SQLException;
 
 public class NewStudentController {
     private final NewStudentView view;
-    private NewStudentModel model;
     private final String faculty_id;
+    private NewStudentModel model;
 
     public NewStudentController(String faculty_id) {
         this.view = new NewStudentView();

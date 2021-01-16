@@ -5,6 +5,7 @@ import bd2.controllers.dialogs.NewGroupController;
 import bd2.controllers.dialogs.NewStudentController;
 import bd2.models.DeansWorkerModel;
 import bd2.models.LoginModel;
+import bd2.tools.LoginTools;
 import bd2.views.WorkerView;
 
 import javax.swing.*;
@@ -36,7 +37,7 @@ public class DeansWorkerController implements IController {
     @Override
     public void init() {
         showStudents();
-        view.getIdField().setText(String.valueOf(model.getId()));
+        view.getIdField().setText(LoginTools.getLoginIdText(this.model));
         view.getLogOutButton().addActionListener(e -> dispose());
         view.getStudentsButton().addActionListener(e -> showStudents());
         view.getGroupsButton().addActionListener(e -> showGroups());

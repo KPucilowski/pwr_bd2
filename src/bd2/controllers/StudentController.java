@@ -3,7 +3,10 @@ package bd2.controllers;
 import bd2.App;
 import bd2.models.LoginModel;
 import bd2.models.StudentModel;
+import bd2.models.UserModel;
+import bd2.tools.LoginTools;
 import bd2.views.StudentView;
+import oracle.jdbc.logging.annotations.Log;
 
 import javax.swing.*;
 import java.sql.SQLException;
@@ -21,7 +24,7 @@ public class StudentController implements IController {
     @Override
     public void init() {
         showPersonalData();
-        view.getIdField().setText(String.valueOf(model.getId()));
+        view.getIdField().setText(LoginTools.getLoginIdText(this.model));
         view.getPersonalDataButton().addActionListener(e -> showPersonalData());
         view.getTimetableButton().addActionListener(e -> showTimetable());
         view.getGradesButton().addActionListener(e -> showGrades());
