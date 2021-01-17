@@ -20,9 +20,13 @@ public class ProfessorController implements IController {
         public void mouseClicked(MouseEvent me) {
             if (me.getClickCount() == 2) {
                 JTable target = (JTable) me.getSource();
-                String string_group_id = (String) view.dataTable.getValueAt(target.getSelectedRow(), 0);
-                int clicked_group_id = Integer.parseInt(string_group_id);
-                showStudents(clicked_group_id);
+                int row = target.getSelectedRow();
+                if(row >= 0)
+                {
+                    String string_group_id = (String) view.dataTable.getValueAt(row, 0);
+                    int clicked_group_id = Integer.parseInt(string_group_id);
+                    showStudents(clicked_group_id);
+                }
             }
         }
     };
