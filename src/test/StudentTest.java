@@ -7,9 +7,12 @@ import bd2.tools.LoginTools;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.security.NoSuchAlgorithmException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -33,9 +36,9 @@ public class StudentTest {
         var rs = model.getPersonalData();
 
         var id = 200001;
-        var first_name = "Alice";
-        var last_name = "Leroux";
-        var faculty = "Wydział 1";
+        var first_name = "test_first_name";
+        var last_name = "test_last_name";
+        var faculty = "Wydział 3";
 
         int rs_id = 0;
         String rs_first_name = "", rs_last_name = "", rs_faculty = "";
@@ -71,7 +74,10 @@ public class StudentTest {
 
         float sum = 0f;
         for (Float grade : grades) sum += grade;
+
         double avg_grade = sum / grades.size();
+        BigDecimal bd = new BigDecimal(avg_grade).setScale(2, RoundingMode.HALF_UP);
+        avg_grade = bd.doubleValue();
 
         assertEquals(rs_avg_grade, avg_grade);
     }
