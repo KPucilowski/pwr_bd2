@@ -12,7 +12,7 @@ import java.time.DayOfWeek;
 public class NewGroupController implements IController {
     private final NewGroupView view;
     private NewGroupModel model;
-    private String faculty_id;
+    private final String faculty_id;
 
     public NewGroupController(String faculty_id) {
         this.view = new NewGroupView();

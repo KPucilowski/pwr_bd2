@@ -13,10 +13,6 @@ import java.sql.Statement;
 public class DeansWorkerModel extends UserModel {
     private String faculty_id;
 
-    public DeansWorkerModel(int id, String type) {
-        super(id, type);
-    }
-
     public DeansWorkerModel(LoginModel loginModel) {
         super(loginModel.getId(), loginModel.getType());
 

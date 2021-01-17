@@ -3,10 +3,8 @@ package bd2.controllers;
 import bd2.App;
 import bd2.models.LoginModel;
 import bd2.models.StudentModel;
-import bd2.models.UserModel;
 import bd2.tools.LoginTools;
 import bd2.views.StudentView;
-import oracle.jdbc.logging.annotations.Log;
 
 import javax.swing.*;
 import java.sql.SQLException;
@@ -74,7 +72,7 @@ public class StudentController implements IController {
                 var subject = rs.getString("SUBJECT_NAME");
                 var day = rs.getInt("DAY");
                 var day_string = DayOfWeek.of(day).toString();
-                var day_string_formatted = day_string.substring(0,1).toUpperCase() + day_string.substring(1).toLowerCase();
+                var day_string_formatted = day_string.substring(0, 1).toUpperCase() + day_string.substring(1).toLowerCase();
                 var time = rs.getString("TIME");
                 var parity = rs.getString("PARITY");
                 var form = rs.getString("FORM");
