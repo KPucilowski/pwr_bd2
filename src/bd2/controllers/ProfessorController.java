@@ -1,6 +1,7 @@
 package bd2.controllers;
 
 import bd2.App;
+import bd2.controllers.dialogs.ProfessorPersonalDataController;
 import bd2.models.LoginModel;
 import bd2.models.ProfessorModel;
 import bd2.tools.LoginTools;
@@ -34,7 +35,7 @@ public class ProfessorController implements IController {
 
     @Override
     public void init() {
-        showPersonalData();
+        showTimetable();
         view.getIdField().setText(LoginTools.getLoginIdText(this.model));
         view.getPersonalDataButton().addActionListener(e -> showPersonalData());
         view.getTimetableButton().addActionListener(e -> showTimetable());
@@ -51,10 +52,6 @@ public class ProfessorController implements IController {
     }
 
     private void showPersonalData() {
-        view.dataTable.setModel(view.tableModel);
-        view.saveButton.setVisible(false);
-        view.getTableModel().setRowCount(0);
-        view.getTableModel().setColumnIdentifiers(new String[]{"First name", "Last name", "Email", "Faculty", "Degree"});
         try {
             var rs = model.getPersonalData();
             while (rs.next()) {
@@ -63,7 +60,7 @@ public class ProfessorController implements IController {
                 var email = rs.getString("EMAIL");
                 var faculty = rs.getString("FACULTY");
                 var degree = rs.getString("DEGREE");
-                view.getTableModel().addRow(new String[]{first_name, last_name, email, faculty, degree});
+                ProfessorPersonalDataController ct = new ProfessorPersonalDataController(first_name, last_name, email, faculty, degree);
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);

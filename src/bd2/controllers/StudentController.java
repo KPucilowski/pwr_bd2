@@ -1,10 +1,12 @@
 package bd2.controllers;
 
 import bd2.App;
+import bd2.controllers.dialogs.StudentPersonalDataController;
 import bd2.models.LoginModel;
 import bd2.models.StudentModel;
 import bd2.tools.LoginTools;
 import bd2.views.StudentView;
+import bd2.views.dialogs.StudentPersonalDataView;
 
 import javax.swing.*;
 import java.sql.SQLException;
@@ -13,6 +15,7 @@ import java.time.DayOfWeek;
 public class StudentController implements IController {
     private final StudentView view;
     private final StudentModel model;
+    private StudentPersonalDataView studentPersonalDataView;
 
     public StudentController(StudentView view, LoginModel model) {
         this.view = view;
@@ -22,7 +25,7 @@ public class StudentController implements IController {
 
     @Override
     public void init() {
-        showPersonalData();
+        showTimetable();
         view.getIdField().setText(LoginTools.getLoginIdText(this.model));
         view.getPersonalDataButton().addActionListener(e -> showPersonalData());
         view.getTimetableButton().addActionListener(e -> showTimetable());
@@ -39,8 +42,6 @@ public class StudentController implements IController {
     }
 
     private void showPersonalData() {
-        view.setTableModel(0);
-
         try {
             var rs = model.getPersonalData();
             while (rs.next()) {
@@ -53,7 +54,7 @@ public class StudentController implements IController {
                 var semester = rs.getString("SEMESTER");
                 var specialization = rs.getString("SPECIALIZATION");
                 var avg_grade = String.valueOf(rs.getDouble("AVG_GRADE"));
-                view.getTableModel().addRow(new String[]{first_name, last_name, email, faculty, pesel, year, semester, specialization, avg_grade});
+                StudentPersonalDataController ct = new StudentPersonalDataController(first_name, last_name, email, faculty, year, pesel, semester, specialization, avg_grade);
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
