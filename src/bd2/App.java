@@ -5,6 +5,7 @@ import bd2.controllers.LoginController;
 import bd2.controllers.ProfessorController;
 import bd2.controllers.StudentController;
 import bd2.models.LoginModel;
+//import bd2.views.NewGroupView;
 import bd2.views.ProfessorView;
 import bd2.views.StudentView;
 import bd2.views.WorkerView;
