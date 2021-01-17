@@ -34,6 +34,7 @@ public class WorkerView extends Component {
         frame.setVisible(true);
         dataTable.setModel(tableModel);
         dataTable.getTableHeader().setReorderingAllowed(false);
+        dataTable.getTableHeader().setResizingAllowed(false);
     }
 
     public void dispose() {
