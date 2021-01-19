@@ -10,7 +10,7 @@ public class ProfessorPersonalDataController {
         init();
     }
 
-    public ProfessorPersonalDataController(String first_name, String last_name, String email, String faculty, String  degree) {
+    public ProfessorPersonalDataController(String first_name, String last_name, String email, String faculty, String degree) {
         this.view = new ProfessorPersonalDataView();
         init(first_name, last_name, email, faculty, degree);
     }
@@ -22,7 +22,7 @@ public class ProfessorPersonalDataController {
         view.setVisible(true);
     }
 
-    private void init(String first_name,String last_name, String email, String faculty, String  degree) {
+    private void init(String first_name, String last_name, String email, String faculty, String degree) {
         view.getFirstNameField().setText(first_name);
         view.getLastNameField().setText(last_name);
         view.getEmailField().setText(email);

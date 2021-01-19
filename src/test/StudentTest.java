@@ -12,7 +12,6 @@ import java.math.RoundingMode;
 import java.security.NoSuchAlgorithmException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

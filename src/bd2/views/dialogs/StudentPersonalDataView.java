@@ -2,7 +2,7 @@ package bd2.views.dialogs;
 
 import javax.swing.*;
 
-public class StudentPersonalDataView extends JDialog{
+public class StudentPersonalDataView extends JDialog {
     private JTextField firstNameField;
     private JTextField lastNameField;
     private JTextField emailField;
@@ -13,11 +13,6 @@ public class StudentPersonalDataView extends JDialog{
     private JTextField specializationField;
     private JTextField averageGradeField;
     private JPanel studentPersonalDataPanel;
-
-    public JButton getCloseButton() {
-        return closeButton;
-    }
-
     private JButton closeButton;
 
     public StudentPersonalDataView() {
@@ -28,6 +23,9 @@ public class StudentPersonalDataView extends JDialog{
         setLocationRelativeTo(null);
     }
 
+    public JButton getCloseButton() {
+        return closeButton;
+    }
 
     public JTextField getFirstNameField() {
         return firstNameField;

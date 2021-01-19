@@ -2,7 +2,7 @@ package bd2.views.dialogs;
 
 import javax.swing.*;
 
-public class ProfessorPersonalDataView extends JDialog{
+public class ProfessorPersonalDataView extends JDialog {
     private JTextField firstNameField;
     private JTextField lastNameField;
     private JTextField emailField;
