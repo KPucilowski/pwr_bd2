@@ -68,7 +68,8 @@ public class StudentTest {
         rs = model.getGrades();
         while (rs.next()) {
             var grade = rs.getFloat("GRADE");
-            grades.add(grade);
+            if (grade != 0f)
+                grades.add(grade);
         }
 
         float sum = 0f;
